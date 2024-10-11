@@ -52,5 +52,11 @@
   "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/tools/object.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/object.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/tools/object.cc",
   "output": "CMakeFiles/tuxvision.dir/src/tools/object.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/tddv/include -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o tddv/CMakeFiles/main.app.dir/main.cc.o -c /home/oldlonecoder/.work/tuxvision/tddv/main.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/tddv/main.cc",
+  "output": "tddv/CMakeFiles/main.app.dir/main.cc.o"
 }
 ]

@@ -96,4 +96,4 @@ set(CPACK_GENERATOR "TGZ")
 # Include CPack
 #include(CPack) # Scrap!! No way to include header files!
 
-#add_subdirectory(tddv)
+add_subdirectory(tddv)

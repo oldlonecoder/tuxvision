@@ -6,3 +6,10 @@
 /home/oldlonecoder/.work/tuxvision/build/CMakeFiles/install.dir
 /home/oldlonecoder/.work/tuxvision/build/CMakeFiles/install/local.dir
 /home/oldlonecoder/.work/tuxvision/build/CMakeFiles/install/strip.dir
+/home/oldlonecoder/.work/tuxvision/build/tddv/CMakeFiles/main.app.dir
+/home/oldlonecoder/.work/tuxvision/build/tddv/CMakeFiles/edit_cache.dir
+/home/oldlonecoder/.work/tuxvision/build/tddv/CMakeFiles/rebuild_cache.dir
+/home/oldlonecoder/.work/tuxvision/build/tddv/CMakeFiles/list_install_components.dir
+/home/oldlonecoder/.work/tuxvision/build/tddv/CMakeFiles/install.dir
+/home/oldlonecoder/.work/tuxvision/build/tddv/CMakeFiles/install/local.dir
+/home/oldlonecoder/.work/tuxvision/build/tddv/CMakeFiles/install/strip.dir
