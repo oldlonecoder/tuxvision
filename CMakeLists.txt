@@ -20,7 +20,7 @@ add_library(${BaseTarget} STATIC  #SHARED
             include/${BaseTarget}/tools/sscan.h src/tools/sscan.cc
             include/${BaseTarget}/tools/object.h src/tools/object.cc
             include/${BaseTarget}/tools/signals.h
-            #include/${BaseTarget}/ui/globals.h src/tui/globals.cc
+            include/${BaseTarget}/ui/globals.h src/ui/globals.cc
             # include/${BaseTarget}/ui/twindc.h src/tui/twindc.cc src/tui/twindc.chr.cc
             # include/${BaseTarget}/ui/terminal.h src/tui/terminal.cc
             # include/${BaseTarget}/ui/element.h src/tui/element.cc src/tui/element.painter.cc
@@ -32,21 +32,22 @@ add_library(${BaseTarget} STATIC  #SHARED
             # include/${BaseTarget}/tui/ansi_to_chr.h  src/tui/ansi_to_chr.cc
             # include/${BaseTarget}/ui/statusbar.h src/tui/statusbar.cc
 
-            # include/${BaseTarget}/lexer/lexer_types.h cc/lexer/lexer_types.cc
-            # include/${BaseTarget}/lexer/token_data.h cc/lexer/token_data.cc
-            # include/${BaseTarget}/lexer/tokens_table.h cc/lexer/tokens_table.cc
-            # include/${BaseTarget}/lexer/lexer.h cc/lexer/lexer.cc
-            # include/${BaseTarget}/est/alu.h cc/est/alu.cc
-            # include/${BaseTarget}/est/node.h cc/est/node.cc
-            # include/${BaseTarget}/est/variable.h cc/est/variable.cc
-            # include/${BaseTarget}/est/bloc.h cc/est/bloc.cc
-            # include/${BaseTarget}/est/expression.h cc/est/expression.cc
+            include/${BaseTarget}/lexer/lexer_types.h src/lexer/lexer_types.cc
+            include/${BaseTarget}/lexer/token_data.h src/lexer/token_data.cc
+            include/${BaseTarget}/lexer/tokens_table.h src/lexer/tokens_table.cc
+            include/${BaseTarget}/lexer/lexer.h src/lexer/lexer.cc
+            include/${BaseTarget}/est/alu.h src/est/alu.cc
+            include/${BaseTarget}/est/node.h src/est/node.cc
+            include/${BaseTarget}/est/variable.h src/est/variable.cc
+            include/${BaseTarget}/est/bloc.h src/est/bloc.cc
+            include/${BaseTarget}/est/expression.h src/est/expression.cc
+            include/tuxvision/ui/widget_base.h src/ui/widget_base.cc
 
 
-            # include/${BaseTarget}/elements/element.h  cc/intui/elements/element.cc
+            # include/${BaseTarget}/elements/element.h  cc/tuxvision/elements/element.cc
 
 
-            # include/intui/elements/screen.h cc/intui/elements/screen.cc
+            # include/tuxvision/elements/screen.h cc/tuxvision/elements/screen.cc
 
 )
 

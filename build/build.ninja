@@ -52,7 +52,7 @@ build cmake_object_order_depends_target_tuxvision: phony || CMakeFiles/tuxvision
 build CMakeFiles/tuxvision.dir/src/tools/colors.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/tools/colors.cc || cmake_object_order_depends_target_tuxvision
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = CMakeFiles/tuxvision.dir/src/tools/colors.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/tools
@@ -60,7 +60,7 @@ build CMakeFiles/tuxvision.dir/src/tools/colors.cc.o: CXX_COMPILER__tuxvision_un
 build CMakeFiles/tuxvision.dir/src/tools/glyphes.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/tools/glyphes.cc || cmake_object_order_depends_target_tuxvision
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = CMakeFiles/tuxvision.dir/src/tools/glyphes.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/tools
@@ -68,7 +68,7 @@ build CMakeFiles/tuxvision.dir/src/tools/glyphes.cc.o: CXX_COMPILER__tuxvision_u
 build CMakeFiles/tuxvision.dir/src/tools/cadres.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/tools/cadres.cc || cmake_object_order_depends_target_tuxvision
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = CMakeFiles/tuxvision.dir/src/tools/cadres.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/tools
@@ -76,7 +76,7 @@ build CMakeFiles/tuxvision.dir/src/tools/cadres.cc.o: CXX_COMPILER__tuxvision_un
 build CMakeFiles/tuxvision.dir/src/tools/string.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/tools/string.cc || cmake_object_order_depends_target_tuxvision
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = CMakeFiles/tuxvision.dir/src/tools/string.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/tools
@@ -84,7 +84,7 @@ build CMakeFiles/tuxvision.dir/src/tools/string.cc.o: CXX_COMPILER__tuxvision_un
 build CMakeFiles/tuxvision.dir/src/tools/geometry.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/tools/geometry.cc || cmake_object_order_depends_target_tuxvision
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = CMakeFiles/tuxvision.dir/src/tools/geometry.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/tools
@@ -92,7 +92,7 @@ build CMakeFiles/tuxvision.dir/src/tools/geometry.cc.o: CXX_COMPILER__tuxvision_
 build CMakeFiles/tuxvision.dir/src/journal/book.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/journal/book.cc || cmake_object_order_depends_target_tuxvision
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = CMakeFiles/tuxvision.dir/src/journal/book.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/journal
@@ -100,7 +100,7 @@ build CMakeFiles/tuxvision.dir/src/journal/book.cc.o: CXX_COMPILER__tuxvision_un
 build CMakeFiles/tuxvision.dir/src/tools/cmdargs.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/tools/cmdargs.cc || cmake_object_order_depends_target_tuxvision
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = CMakeFiles/tuxvision.dir/src/tools/cmdargs.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/tools
@@ -108,7 +108,7 @@ build CMakeFiles/tuxvision.dir/src/tools/cmdargs.cc.o: CXX_COMPILER__tuxvision_u
 build CMakeFiles/tuxvision.dir/src/tools/sscan.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/tools/sscan.cc || cmake_object_order_depends_target_tuxvision
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = CMakeFiles/tuxvision.dir/src/tools/sscan.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/tools
@@ -116,10 +116,98 @@ build CMakeFiles/tuxvision.dir/src/tools/sscan.cc.o: CXX_COMPILER__tuxvision_uns
 build CMakeFiles/tuxvision.dir/src/tools/object.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/tools/object.cc || cmake_object_order_depends_target_tuxvision
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = CMakeFiles/tuxvision.dir/src/tools/object.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/tools
+
+build CMakeFiles/tuxvision.dir/src/ui/globals.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/ui/globals.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/ui/globals.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/ui
+
+build CMakeFiles/tuxvision.dir/src/lexer/lexer_types.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/lexer/lexer_types.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/lexer/lexer_types.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/lexer
+
+build CMakeFiles/tuxvision.dir/src/lexer/token_data.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/lexer/token_data.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/lexer/token_data.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/lexer
+
+build CMakeFiles/tuxvision.dir/src/lexer/tokens_table.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/lexer/tokens_table.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/lexer/tokens_table.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/lexer
+
+build CMakeFiles/tuxvision.dir/src/lexer/lexer.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/lexer/lexer.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/lexer/lexer.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/lexer
+
+build CMakeFiles/tuxvision.dir/src/est/alu.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/est/alu.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/est/alu.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/est
+
+build CMakeFiles/tuxvision.dir/src/est/node.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/est/node.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/est/node.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/est
+
+build CMakeFiles/tuxvision.dir/src/est/variable.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/est/variable.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/est/variable.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/est
+
+build CMakeFiles/tuxvision.dir/src/est/bloc.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/est/bloc.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/est/bloc.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/est
+
+build CMakeFiles/tuxvision.dir/src/est/expression.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/est/expression.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/est/expression.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/est
+
+build CMakeFiles/tuxvision.dir/src/ui/widget_base.cc.o: CXX_COMPILER__tuxvision_unscanned_Debug /home/oldlonecoder/.work/tuxvision/src/ui/widget_base.cc || cmake_object_order_depends_target_tuxvision
+  DEFINES = -Dtuxvision_DEBUG=1
+  DEP_FILE = CMakeFiles/tuxvision.dir/src/ui/widget_base.cc.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/oldlonecoder/.work/tuxvision/include
+  OBJECT_DIR = CMakeFiles/tuxvision.dir
+  OBJECT_FILE_DIR = CMakeFiles/tuxvision.dir/src/ui
 
 
 # =============================================================================
@@ -129,7 +217,7 @@ build CMakeFiles/tuxvision.dir/src/tools/object.cc.o: CXX_COMPILER__tuxvision_un
 #############################################
 # Link the static library libtuxvision.a
 
-build libtuxvision.a: CXX_STATIC_LIBRARY_LINKER__tuxvision_Debug CMakeFiles/tuxvision.dir/src/tools/colors.cc.o CMakeFiles/tuxvision.dir/src/tools/glyphes.cc.o CMakeFiles/tuxvision.dir/src/tools/cadres.cc.o CMakeFiles/tuxvision.dir/src/tools/string.cc.o CMakeFiles/tuxvision.dir/src/tools/geometry.cc.o CMakeFiles/tuxvision.dir/src/journal/book.cc.o CMakeFiles/tuxvision.dir/src/tools/cmdargs.cc.o CMakeFiles/tuxvision.dir/src/tools/sscan.cc.o CMakeFiles/tuxvision.dir/src/tools/object.cc.o
+build libtuxvision.a: CXX_STATIC_LIBRARY_LINKER__tuxvision_Debug CMakeFiles/tuxvision.dir/src/tools/colors.cc.o CMakeFiles/tuxvision.dir/src/tools/glyphes.cc.o CMakeFiles/tuxvision.dir/src/tools/cadres.cc.o CMakeFiles/tuxvision.dir/src/tools/string.cc.o CMakeFiles/tuxvision.dir/src/tools/geometry.cc.o CMakeFiles/tuxvision.dir/src/journal/book.cc.o CMakeFiles/tuxvision.dir/src/tools/cmdargs.cc.o CMakeFiles/tuxvision.dir/src/tools/sscan.cc.o CMakeFiles/tuxvision.dir/src/tools/object.cc.o CMakeFiles/tuxvision.dir/src/ui/globals.cc.o CMakeFiles/tuxvision.dir/src/lexer/lexer_types.cc.o CMakeFiles/tuxvision.dir/src/lexer/token_data.cc.o CMakeFiles/tuxvision.dir/src/lexer/tokens_table.cc.o CMakeFiles/tuxvision.dir/src/lexer/lexer.cc.o CMakeFiles/tuxvision.dir/src/est/alu.cc.o CMakeFiles/tuxvision.dir/src/est/node.cc.o CMakeFiles/tuxvision.dir/src/est/variable.cc.o CMakeFiles/tuxvision.dir/src/est/bloc.cc.o CMakeFiles/tuxvision.dir/src/est/expression.cc.o CMakeFiles/tuxvision.dir/src/ui/widget_base.cc.o
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/tuxvision.dir
   POST_BUILD = :
@@ -231,7 +319,7 @@ build cmake_object_order_depends_target_main.app: phony || cmake_object_order_de
 build tddv/CMakeFiles/main.app.dir/main.cc.o: CXX_COMPILER__main.2eapp_unscanned_Debug /home/oldlonecoder/.work/tuxvision/tddv/main.cc || cmake_object_order_depends_target_main.app
   DEFINES = -Dtuxvision_DEBUG=1
   DEP_FILE = tddv/CMakeFiles/main.app.dir/main.cc.o.d
-  FLAGS = -g -std=gnu++20
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -I/home/oldlonecoder/.work/tuxvision/tddv/include -I/home/oldlonecoder/.work/tuxvision/include
   OBJECT_DIR = tddv/CMakeFiles/main.app.dir
   OBJECT_FILE_DIR = tddv/CMakeFiles/main.app.dir

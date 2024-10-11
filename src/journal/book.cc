@@ -541,7 +541,7 @@ void book::init_header()
     //------------------------------------------------------------------------------------------------------------
     //    if(headercomp.fun)
     //    {
-    //        auto [gh, colors] = book::functionattributes(book::fn::function);
+    //        auto [gh, colors] = book::functionattributes(book::fn::fun);
     //        text << colors << gh << ' ' << location.function_name() << color::reset;
     //    }
     //------------------------------------------------------------------------------------------------------------

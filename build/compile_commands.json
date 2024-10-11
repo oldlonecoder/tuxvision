@@ -1,61 +1,127 @@
 [
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/tools/colors.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/colors.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/tools/colors.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/colors.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/tools/colors.cc",
   "output": "CMakeFiles/tuxvision.dir/src/tools/colors.cc.o"
 },
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/tools/glyphes.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/glyphes.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/tools/glyphes.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/glyphes.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/tools/glyphes.cc",
   "output": "CMakeFiles/tuxvision.dir/src/tools/glyphes.cc.o"
 },
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/tools/cadres.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/cadres.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/tools/cadres.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/cadres.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/tools/cadres.cc",
   "output": "CMakeFiles/tuxvision.dir/src/tools/cadres.cc.o"
 },
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/tools/string.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/string.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/tools/string.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/string.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/tools/string.cc",
   "output": "CMakeFiles/tuxvision.dir/src/tools/string.cc.o"
 },
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/tools/geometry.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/geometry.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/tools/geometry.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/geometry.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/tools/geometry.cc",
   "output": "CMakeFiles/tuxvision.dir/src/tools/geometry.cc.o"
 },
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/journal/book.cc.o -c /home/oldlonecoder/.work/tuxvision/src/journal/book.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/journal/book.cc.o -c /home/oldlonecoder/.work/tuxvision/src/journal/book.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/journal/book.cc",
   "output": "CMakeFiles/tuxvision.dir/src/journal/book.cc.o"
 },
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/tools/cmdargs.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/cmdargs.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/tools/cmdargs.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/cmdargs.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/tools/cmdargs.cc",
   "output": "CMakeFiles/tuxvision.dir/src/tools/cmdargs.cc.o"
 },
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/tools/sscan.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/sscan.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/tools/sscan.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/sscan.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/tools/sscan.cc",
   "output": "CMakeFiles/tuxvision.dir/src/tools/sscan.cc.o"
 },
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o CMakeFiles/tuxvision.dir/src/tools/object.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/object.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/tools/object.cc.o -c /home/oldlonecoder/.work/tuxvision/src/tools/object.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/src/tools/object.cc",
   "output": "CMakeFiles/tuxvision.dir/src/tools/object.cc.o"
 },
 {
   "directory": "/home/oldlonecoder/.work/tuxvision/build",
-  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/tddv/include -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -o tddv/CMakeFiles/main.app.dir/main.cc.o -c /home/oldlonecoder/.work/tuxvision/tddv/main.cc",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/ui/globals.cc.o -c /home/oldlonecoder/.work/tuxvision/src/ui/globals.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/ui/globals.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/ui/globals.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/lexer/lexer_types.cc.o -c /home/oldlonecoder/.work/tuxvision/src/lexer/lexer_types.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/lexer/lexer_types.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/lexer/lexer_types.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/lexer/token_data.cc.o -c /home/oldlonecoder/.work/tuxvision/src/lexer/token_data.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/lexer/token_data.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/lexer/token_data.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/lexer/tokens_table.cc.o -c /home/oldlonecoder/.work/tuxvision/src/lexer/tokens_table.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/lexer/tokens_table.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/lexer/tokens_table.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/lexer/lexer.cc.o -c /home/oldlonecoder/.work/tuxvision/src/lexer/lexer.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/lexer/lexer.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/lexer/lexer.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/est/alu.cc.o -c /home/oldlonecoder/.work/tuxvision/src/est/alu.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/est/alu.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/est/alu.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/est/node.cc.o -c /home/oldlonecoder/.work/tuxvision/src/est/node.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/est/node.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/est/node.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/est/variable.cc.o -c /home/oldlonecoder/.work/tuxvision/src/est/variable.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/est/variable.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/est/variable.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/est/bloc.cc.o -c /home/oldlonecoder/.work/tuxvision/src/est/bloc.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/est/bloc.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/est/bloc.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/est/expression.cc.o -c /home/oldlonecoder/.work/tuxvision/src/est/expression.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/est/expression.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/est/expression.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o CMakeFiles/tuxvision.dir/src/ui/widget_base.cc.o -c /home/oldlonecoder/.work/tuxvision/src/ui/widget_base.cc",
+  "file": "/home/oldlonecoder/.work/tuxvision/src/ui/widget_base.cc",
+  "output": "CMakeFiles/tuxvision.dir/src/ui/widget_base.cc.o"
+},
+{
+  "directory": "/home/oldlonecoder/.work/tuxvision/build",
+  "command": "/usr/bin/g++ -Dtuxvision_DEBUG=1 -I/home/oldlonecoder/.work/tuxvision/tddv/include -I/home/oldlonecoder/.work/tuxvision/include -g -std=gnu++20 -fdiagnostics-color=always -o tddv/CMakeFiles/main.app.dir/main.cc.o -c /home/oldlonecoder/.work/tuxvision/tddv/main.cc",
   "file": "/home/oldlonecoder/.work/tuxvision/tddv/main.cc",
   "output": "tddv/CMakeFiles/main.app.dir/main.cc.o"
 }

@@ -317,3 +317,4 @@ CMakeLists.txt.user*
 .qtc/
 .cmake/
 .qtc_clangd/
+.cache/

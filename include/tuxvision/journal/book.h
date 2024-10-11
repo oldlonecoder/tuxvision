@@ -21,7 +21,7 @@
 
 #include "tuxvision/tools/glyphes.h"
 #include "tuxvision/tools/string.h"
-//#include "intui/book/enums.h"
+//#include "tuxvision/journal/enums.h"
 #include <source_location>
 
 #include <functional>
