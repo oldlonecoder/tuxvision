@@ -1,0 +1,8 @@
+/home/oldlonecoder/.work/tuxvision/build/CMakeFiles/tuxvision.dir
+/home/oldlonecoder/.work/tuxvision/build/CMakeFiles/uninstall.dir
+/home/oldlonecoder/.work/tuxvision/build/CMakeFiles/edit_cache.dir
+/home/oldlonecoder/.work/tuxvision/build/CMakeFiles/rebuild_cache.dir
+/home/oldlonecoder/.work/tuxvision/build/CMakeFiles/list_install_components.dir
+/home/oldlonecoder/.work/tuxvision/build/CMakeFiles/install.dir
+/home/oldlonecoder/.work/tuxvision/build/CMakeFiles/install/local.dir
+/home/oldlonecoder/.work/tuxvision/build/CMakeFiles/install/strip.dir
