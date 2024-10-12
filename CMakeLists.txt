@@ -25,7 +25,7 @@ add_library(${BaseTarget} STATIC  #SHARED
             # include/${BaseTarget}/ui/twindc.h src/tui/twindc.cc src/tui/twindc.chr.cc
             # include/${BaseTarget}/ui/element.h src/tui/element.cc src/tui/element.painter.cc
             include/${BaseTarget}/ui/events.h src/ui/events.cc
-            # include/${BaseTarget}/ui/application.h src/tui/application.cc
+            include/${BaseTarget}/ui/application.h src/ui/application.cc
             # include/${BaseTarget}/ui/input_track.h src/tui/input_track.cc
             # include/${BaseTarget}/ui/window.h src/tui/window.cc
             # include/${BaseTarget}/ui/desktop.h src/tui/desktop.cc

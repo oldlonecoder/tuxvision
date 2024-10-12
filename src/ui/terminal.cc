@@ -14,6 +14,8 @@
 #include <tuxvision/tools/signals.h>
 #include <termios.h>
 #include <unistd.h>
+#include <sys/ioctl.h>
+
 //#include <thread>
 //#include <mutex>
 #include <csignal>
@@ -23,9 +25,17 @@ namespace tux::ui::terminal
 
 static termios  saved_st{}, new_term{};
 
+
+signals::action<rectangle> _winch{};
+
 rectangle _geometry_{};
 signals::action<rectangle>& resize_acton();
 
+
+signals::action<rectangle>& term_resize_signal()
+{
+    return _winch;
+}
 
 
 terminal::caret_shapes _shape_{caret_shapes::def};
@@ -33,6 +43,13 @@ terminal::caret_shapes _shape_{caret_shapes::def};
 
 book::code query_winch()
 {
+    winsize win{};
+    ioctl(fileno(stdout), TIOCGWINSZ, &win);
+    if((!win.ws_col)||(!win.ws_row))
+        return book::code::notexist;
+
+    terminal::_geometry_ = ui::rectangle{{1,1}, ui::size{static_cast<int>(win.ws_col), static_cast<int>(win.ws_row)}};
+    book::info() << book::fn::fun << " terminal resize to:" << color::yellow << std::format("{:>3d}x{:<3d}",_geometry_.dwh.w,_geometry_.dwh.h);
     return book::code::done;
 }
 
@@ -75,7 +92,14 @@ book::code begin()
     return book::code::done;
 }
 
-
+book::code end()
+{
+    switch_back();
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &saved_st);
+    cursor_on();
+    terminal::stop_mouse();
+    return book::code::done;
+}
 
 void switch_alternate()
 {
@@ -88,7 +112,12 @@ void switch_back()
 }
 
 
+/**
+ * @brief Set terminal to report the mouse events.
 
+    @note Execute CSI on each parameters because I realized that "\x1b[?1000;1002;...h" is not working.
+ * 
+ */
 void start_mouse()
 {
     std::cout << CSI << "?1000h";

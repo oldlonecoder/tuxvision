@@ -35,7 +35,7 @@
 #include <cstring>
 #include <sys/types.h>
 
-
+#include <stack>
 
 
 namespace tux::ui
@@ -264,6 +264,8 @@ struct  _TUXVISION_ event
         commandevent    cmdev;
         fileinputevent  fev;
     }data{};
+    
+    using stream = std::stack<event>;
 
     static constexpr u64 noevent                = 0x0000000000000000;
     static constexpr u64 mouse_left_down        = 0x0000000000000001;
