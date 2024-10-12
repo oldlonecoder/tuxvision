@@ -31,10 +31,46 @@ public:
     book::code terminate() override;
 protected:
     book::code setup() override;
-    book::action terminal_resize_signal(rectangle _r) const;
+    book::action terminal_resize_signal(rectangle _r);
     book::code setup_ui() override;
 };
 
+
+
+book::code app::setup()
+{
+    application::setup();
+    terminal::term_resize_signal().connect(this, &app::terminal_resize_signal);
+    //...
+    return book::code::done;
+}
+
+
+book::action app::terminal_resize_signal(rectangle _r)
+{
+    return book::action::leave;
+}
+
+
+
+app::~app(){}
+
+book::code app::run()
+{
+    return book::code::notimplemented;
+}
+
+book::code app::terminate()
+{
+    return application::terminate();
+
+}
+
+
+book::code app::setup_ui()
+{
+    return book::code::notimplemented;
+}
 
 }
 

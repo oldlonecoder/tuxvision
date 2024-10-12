@@ -65,6 +65,12 @@ void application::sig_crash(int)
 }
 
 
+void application::sig_winch(int)
+{
+    terminal::query_winch();
+    //...
+}
+
 
 book::code application::terminate()
 {

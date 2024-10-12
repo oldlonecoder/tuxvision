@@ -24,13 +24,8 @@ namespace tux::ui::terminal
 {
 
 static termios  saved_st{}, new_term{};
-
-
 signals::action<rectangle> _winch{};
-
 rectangle _geometry_{};
-signals::action<rectangle>& resize_acton();
-
 
 signals::action<rectangle>& term_resize_signal()
 {

@@ -28,7 +28,7 @@ rectangle geometry();
 
 
 
-
+book::code query_winch();
 
 //static terminal& instance();
 //terminal();
@@ -162,7 +162,9 @@ struct _TUXVISION_ vchar final
 
     static std::string render(const vchar::string& _string);
     static std::string render(const vchar* _blk, int _width);
-
+    
+    
+    
     vchar&     operator <<(char Ch);
     [[nodiscard]] std::string render_colors() const;
     explicit    operator std::string() const;
