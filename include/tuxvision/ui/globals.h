@@ -19,11 +19,12 @@
 
 #pragma once
 
-#include "tuxvision/journal/book.h"
+
 #include <csignal>
 #include <map>
-#include <vector>
+//#include <vector>
 #include <string_view>
+#include <tuxvision/tools/string.h>
 
 
 using namespace integers;

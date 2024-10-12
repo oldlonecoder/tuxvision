@@ -10,7 +10,7 @@ namespace tux::globals::colors
 
 
 
-attr_db::themes attr_db::s_data = 
+attr_db::themes attr_db::s_data =
 {
     {
         "Default",
