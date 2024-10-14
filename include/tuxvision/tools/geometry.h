@@ -93,7 +93,7 @@ struct _TUXVISION_ rectangle {
 
     cxy a{0, 0};
     cxy b{0, 0};
-    cxy cursor{0,0}; ///< inner cursor coordinates used by the location operations, relative to the rectangle::a (topleft) coord.
+    cxy cursor{0,0}; ///< inner cursor coordinates used by the location operations, relative to rectangle::a (topleft) coord.
 
     size dwh;
     bool nowrap = true;
@@ -151,7 +151,7 @@ struct _TUXVISION_ rectangle {
         else if constexpr (std::is_same_v<T, u16>)          return static_cast<u16>(dwh.w           );
         else if constexpr (std::is_same_v<T, u32>)          return static_cast<u32>(dwh.w           );
         else if constexpr (std::is_same_v<T, i64>)          return static_cast<u64>(dwh.w           );
-        else if constexpr (std::is_same_v<T, std::string>)  return std::to_string(dwh.w             ); 
+        else if constexpr (std::is_same_v<T, std::string>)  return std::to_string(dwh.w             );
         //book::error() << book::code::expected << " compatible left-value type";
         return {};
     }

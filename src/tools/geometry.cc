@@ -475,6 +475,18 @@ bool rectangle::operator == (const rectangle& rhs) const
     return rhs.dwh.w == dwh.w && rhs.dwh.h == dwh.h;
 }
 
+
+
+/*!
+ * \brief rectangle::operator []
+ * Test is the xy coord is within the boundaries. Offset must be from the topleft value.
+ * \param pt
+ * \return true if within, false otherwise.
+
+ * \author oldlonecoder (serge.lussier@oldlonecoder.club; lussier.serge@gmail.com)
+ *
+ * \note to test the internal cursor, pt must be set explicitely to cursor + a.
+ */
 bool rectangle::operator[](const cxy &pt) const
 {
     return ((pt.x >= a.x) && (pt.x <= b.x) && (pt.y >= a.y) && (pt.y <= b.y));

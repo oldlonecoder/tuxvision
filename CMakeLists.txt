@@ -40,7 +40,7 @@ add_library(${BaseTarget} STATIC  #SHARED
             include/${BaseTarget}/est/variable.h src/est/variable.cc
             include/${BaseTarget}/est/bloc.h src/est/bloc.cc
             include/${BaseTarget}/est/expression.h src/est/expression.cc
-            include/tuxvision/ui/widget_base.h src/ui/widget_base.cc
+            include/tuxvision/ui/widget_base.h src/ui/widget_base.cc src/ui/widget_painter.cc
 
 
             # include/${BaseTarget}/elements/element.h  cc/tuxvision/elements/element.cc

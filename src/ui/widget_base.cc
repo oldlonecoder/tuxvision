@@ -190,9 +190,12 @@ book::code widget_base::set_geometry(const rectangle &r)
     else
     {
         _bloc_ = std::make_shared<terminal::vchar::string>(r.dwh.area(), terminal::vchar(_colors_));
-        book::out() << color::blueviolet <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, assigned back_buffer";
-        // _bloc_[widdth* y + x];
+        book::out() << color::blueviolet <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, owns back_buffer";
     }
+    //_bkcrs_ =
+    _iterator_ = _bloc_.get()->begin();
+    auto& cell = _bloc_.get()[0][0];
+    cell << 'A';
 
     return book::code::done;
 }
@@ -218,6 +221,40 @@ book::code widget_base::set_theme(const std::string &theme_id)
 
     book::log() << color::yellow << id() << color::reset << " theme set to '" << _style_[_state_] << " " <<  _theme_id_ << " " << color::reset << "'.";
     return book::code::accepted;
+}
+
+book::code widget_base::peek_xy(cxy xy)
+{
+    if(!_bloc_)
+    {
+        throw book::exception() [
+            book::except() << book::fn::fun << book::code::null_ptr << " undefined backbuffer on: "
+                           << color::blueviolet << class_name()
+                           << color::reset <<"::"
+                           << color::yellow << id()
+        ];
+    }
+
+    if(!_geometry_.tolocal()[xy])
+    {
+        book::error() << book::fn::fun << book::code::oob << " -> " << color::red4 << xy << color::reset << " within rect:" << color::yellow << _geometry_.tolocal();
+        return book::code::oob;
+    }
+    //_bkcrs_= &(*_bloc_)[xy.y * *_geometry_.width() + xy.x];
+    _iterator_ = (*_bloc_).begin() + xy.y * *_geometry_.width() + xy.x;
+
+    return book::code::accepted;
+}
+
+
+/*!
+ * \brief widget_base::operator *
+ * \return the pointer to the  current cell address at the internal cursor position.
+ */
+terminal::vchar::string::iterator widget_base::operator*()
+{
+    //...
+    return _iterator_;
 }
 
 
