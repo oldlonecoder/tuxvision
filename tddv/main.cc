@@ -2,7 +2,7 @@
 
 //-------------------------------------
 //#include "tuxin/tools/sscan.h"
-#include <cstdint>
+//#include <cstdint>
 #include <tuxvision/est/expression.h>
 #include <tuxvision/ui/events.h>
 #include <tuxvision/ui/terminal.h>
@@ -10,11 +10,10 @@
 //=====================================
 
 #include <tuxvision/journal/book.h>
-
 #include <unistd.h>
 
 
-namespace tux::ui 
+namespace tux::ui
 {
 class app : public application
 {
@@ -57,6 +56,9 @@ app::~app(){}
 
 book::code app::run()
 {
+
+    setup();
+
     return book::code::notimplemented;
 }
 
@@ -73,9 +75,6 @@ book::code app::setup_ui()
 }
 
 }
-
-
-
 
 
 
