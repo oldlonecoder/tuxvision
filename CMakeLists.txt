@@ -21,8 +21,7 @@ add_library(${BaseTarget} STATIC  #SHARED
             include/${BaseTarget}/tools/object.h src/tools/object.cc
             include/${BaseTarget}/tools/signals.h
             include/${BaseTarget}/ui/globals.h src/ui/globals.cc
-            include/${BaseTarget}/ui/terminal.h src/ui/terminal.cc
-            # include/${BaseTarget}/ui/twindc.h src/tui/twindc.cc src/tui/twindc.chr.cc
+            include/${BaseTarget}/ui/terminal.h src/ui/terminal.cc  src/ui/terminal.vchar.cc
             # include/${BaseTarget}/ui/element.h src/tui/element.cc src/tui/element.painter.cc
             include/${BaseTarget}/ui/events.h src/ui/events.cc
             include/${BaseTarget}/ui/application.h src/ui/application.cc

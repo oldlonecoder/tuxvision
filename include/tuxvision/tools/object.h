@@ -25,7 +25,8 @@ protected:
 public:
     object(){}
     using list = std::vector<object*>;
-
+    using children = std::shared_ptr<object>;
+    using shared = std::shared_ptr<object>;
     using iterator = object::list::iterator;
     object(object* parent_obj, const std::string& obj_id);
     object(object&&)  = delete;
@@ -43,7 +44,7 @@ public:
     //Book::Enums::Code detach();
     book::code detach(object* obj_ptr=nullptr);
     // -- All does the same, ...as a different name lol!
-    
+
     template<typename T> [[maybe_unused]] T* as() { return dynamic_cast<T*>(this); }
 
     // -----------------------------------------------------------------------------
@@ -98,6 +99,7 @@ public:
         }
     }
     void append_child(object* o);
+    //void append_child(object::shared o);
 
     [[maybe_unused]] object::iterator begin() { return m_children.begin(); }
     [[maybe_unused]] object::iterator end()   { return m_children.end(); }
@@ -105,8 +107,8 @@ public:
 protected:
     object::list m_children = {};
     std::string m_id{};
-    object* m_parent = nullptr;
-
+    object* m_parent{nullptr};
+    children _children_{}; // transition;
 };
 
 } // lsg

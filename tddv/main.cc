@@ -5,7 +5,7 @@
 //#include <cstdint>
 #include <tuxvision/est/expression.h>
 #include <tuxvision/ui/events.h>
-#include <tuxvision/ui/terminal.h>
+#include <tuxvision/ui/widget_base.h>
 #include <tuxvision/ui/application.h>
 //=====================================
 
@@ -63,6 +63,10 @@ book::code app::run()
 {
 
     setup();
+    auto widget = widget_base{nullptr,"test with shared mem"};
+
+    widget.set_geometry(terminal::geometry());
+
     event ev;
     book::code c{};
     while(!!(c = event::get_stdin_event(ev,{65000,0})) && c != book::code::cancel);

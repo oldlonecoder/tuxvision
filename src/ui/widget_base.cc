@@ -3,9 +3,221 @@
 namespace tux::ui
 {
 
+
+using namespace globals;
+
+book::code widget_base::auto_fit(globals::anchor::value anchor_value)
+{
+    if(anchor_value==anchor::fixed)
+    {
+        _ancre_ = anchor_value;
+        return book::code::done;
+    }
+    book::debug() << book::fn::fun << '\'' << color::yellow << id() << color::reset << "' :";
+    cxy off{0,0};
+
+    // need to separate and set a simple access to the rectangle coordinates and its components:
+    auto par = parent<widget_base>();
+    rectangle area; // The geometry on which this element is positionning.
+    if(par)
+    {
+        // if(par == desktop::instance())
+        //     area = terminal::_geometry_;
+        // else
+            area = par->_geometry_.tolocal();
+    }
+    else
+        area = terminal::geometry();
+
+    if(par)
+        if((par->_uistyle_ & uistyle::Frame) && !(par->_uistyle_ & anchor::onframe_fit))
+            off={1,1};
+
+    book::out() << id() << " offset:" << off;
+    //
+    book::debug() << "placement is in this area :" << color::yellow << area << color::reset;
+
+    auto [a,b,sz] = area.components();
+    auto [ea,eb,esz] = _geometry_.components(); // this 'e'lement's geometry components
+
+    if(_ancre_ & anchor::width_fit)
+    {
+        book::out() << " Resize this " << id() <<  " Geometry:" << color::blue4 << _geometry_;
+        resize(ui::size{area.dwh.w - (off.x*2), *_geometry_.height()});
+        _geometry_.moveat({off.x,0});
+        book::out() << "fit width: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset;
+    }
+    else
+    {
+        if(_ancre_ & anchor::fit_right)
+        {
+            book::out() << color::yellow << id() << color::reset << " fit right:";
+            _geometry_.moveat(cxy{b.x - (esz.w + off.x), eb.y});
+            book::out() << _geometry_;
+        }
+        else
+            if(_ancre_ & anchor::fit_left)
+            {
+                book::out() << color::yellow << id() << color::reset << " fit right:";
+                _geometry_.moveat(cxy{a.x+off.x, eb.y});
+                book::out() << _geometry_;
+            }
+        // else center....
+    }
+
+    if(_ancre_ & anchor::height_fit)
+    {
+        resize(ui::size{_geometry_.dwh.w,*area.height()});
+        book::out() << "fit height: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset;
+        _geometry_.moveat({a.x, off.y});
+    }
+    else
+    {
+        if(_ancre_ & anchor::fit_bottom)
+        {
+
+            _geometry_.moveat({_geometry_.a.x, *area.height()-off.y*2});
+            book::out() << "fit bottom: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset;
+        }
+    }
+    // else
+    // {
+    //     if(_ancre_ & anchor::fit_center)
+    //     {
+    //         _geometry_.moveat({(sz.w -_sz.w)/2, (sz.h -_sz.h)/2});
+    //         return book::code::accepted;
+    //     }
+    // }
+    // if(_ancre_ & anchor::fit_vcenter)
+    //     _geometry_.moveat({_a.x,(sz.h -_sz.h)/2});
+    // else
+    // {
+    //     if(_ancre_ & anchor::fit_top)
+    //     {
+    //         if(((_uistyle_ & uistyle::Frame)&&(_ancre_ & anchor::onframe_fit)) || !(_uistyle_ & uistyle::Frame))
+    //             _geometry_.moveat(cxy{a.x,0});
+    //         else
+    //             _geometry_.moveat(cxy{a.x,1});
+    //     }
+    //     else
+    //     {
+    //         if(_ancre_ & anchor::fit_bottom)
+    //         {
+    //             book::out() << color::yellow << id() << " request fit to bottom of...("<< color::chartreuse6 << ar << color::reset << "):";
+    //             if(((_uistyle_ & uistyle::Frame)&&(_ancre_ & anchor::onframe_fit)) || !(_uistyle_ & uistyle::Frame))
+    //                 _geometry_.moveat(cxy{a.x, ar.b.y});
+    //             else
+    //                 _geometry_.moveat(cxy{a.x, ar.b.y});
+    //         }
+    //     }
+    // }
+    // if(_ancre_ & anchor::fit_hcenter)
+    //     _geometry_.moveat({(sz.w - _sz.w)/2, _a.y});
+    // else
+    // {
+    //     book::out() << color::yellow << id() << color::reset << " not centered:";
+    //     if(_ancre_ & anchor::fit_right)
+    //     {
+    //         book::out() << color::yellow << id() << color::reset << " fit right:";
+    //         if(((_uistyle_ & uistyle::Frame)&&(_ancre_ & anchor::onframe_fit)) || !(_uistyle_ & uistyle::Frame))
+    //             _geometry_.moveat(cxy{b.x - _sz.w, b.y});
+    //         else
+    //             _geometry_.moveat(cxy{b.x -_sz.w-1, sz.h});
+    //         book::out() << _geometry_;
+    //     }
+    //     else
+    //         if(_ancre_ & anchor::fit_left)
+    //         {
+    //             if(((_uistyle_ & uistyle::Frame)&&(_ancre_ & anchor::onframe_fit)) || !(_uistyle_ & uistyle::Frame))
+    //                 _geometry_.moveat(cxy{0, _a.y});
+    //             else
+    //                 _geometry_.moveat(cxy{1, _a.y});
+    //         }
+    // }
+    //...
+    book::out() << "applied geometry (fit_width|fit_height only as of Oct 08 '24):" << color::yellow << id() << color::lime << _geometry_ << color::yellow;
+
+    //...
+
+    return book::code::done;
+}
+
+book::code widget_base::resize(size new_sz)
+{
+    if(!_bloc_)
+    {
+        throw book::exception() [
+            book::except() << book::fn::fun << book::code::null_ptr << " undefined backbuffer on: "
+                                            << color::blueviolet << class_name()
+                                            << color::reset <<"::"
+                                            << color::yellow << id()
+        ];
+    }
+
+    _geometry_.resize(new_sz);
+    book::info() << book::fn::fun << "new geometry: " << color::yellow << _geometry_ << color::reset;
+    if(!parent<widget_base>())
+    {
+        _bloc_->resize(new_sz.area(), terminal::vchar(_colors_));
+        book::out() << " bloc reallocation done.";
+    }
+    return book::code::done;
+}
+
 widget_base::widget_base()
 {
 
+}
+
+widget_base::widget_base(object *_parent_obj, const std::string _id, globals::uistyle::Type _ui_style):object(_parent_obj, _id),
+    _uistyle_(_ui_style){}
+
+widget_base::~widget_base(){}
+
+book::code widget_base::set_geometry(const rectangle &r)
+{
+    if(!r)
+    {
+        book::error() << book::fn::fun << book::code::null_ptr << " - " << color::yellow << id() << " invalid rectangle!";
+        return book::code::rejected;
+    }
+
+    if(auto p = parent<widget_base>(); p)
+    {
+        book::out() << "parent(" << color::yellow << p->id() << color::reset << ") bloc assigned to " << id() << ".";
+        _bloc_ = p->_bloc_;
+    }
+    else
+    {
+        _bloc_ = std::make_shared<terminal::vchar::string>(r.dwh.area(), terminal::vchar(_colors_));
+        book::out() << color::blueviolet <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, assigned back_buffer";
+        // _bloc_[widdth* y + x];
+    }
+
+    return book::code::done;
+}
+
+/*!
+ * \brief widget_base::set_theme
+ * \param theme_id
+ * \return book::code value : rejected if the the is does not exist or accepted on succes
+ */
+book::code widget_base::set_theme(const std::string &theme_id)
+{
+    _theme_id_ = theme_id;
+    auto const& comp = globals::colors::attr_db::theme().find(_theme_id_);
+    if (comp == globals::colors::attr_db::theme().end())
+    {
+        book::error() << book::fn::fun << "Theme '" << color::orangered1 <<  _theme_id_ << color::reset << "' not found" << book::fn::endl;
+        return book::code::rejected;
+    }
+
+    _theme_elements_ = globals::colors::attr_db::theme()[_theme_id_];
+    _style_ =  globals::colors::attr_db::theme()[_theme_id_]["Widget"];
+    _colors_ = _style_[globals::wstate::Active];
+
+    book::log() << color::yellow << id() << color::reset << " theme set to '" << _style_[_state_] << " " <<  _theme_id_ << " " << color::reset << "'.";
+    return book::code::accepted;
 }
 
 

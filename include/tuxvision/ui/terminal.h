@@ -80,10 +80,13 @@ constexpr const char* CSI = "\x1b[";
 signals::action<rectangle>& term_resize_signal();
 
 
-struct _TUXVISION_ vchar final 
+struct _TUXVISION_ vchar final
 {
     u32 d{0x8003A020};
     using string = std::vector<vchar>;
+
+    using back_buffer = std::shared_ptr<terminal::vchar::string>;
+
     static constexpr u32 CharMask  = 0x800000FF;
     static constexpr u32 FGMask    = 0x0000FF00;
     static constexpr u32 BGMask    = 0x00FF0000;
@@ -116,6 +119,7 @@ struct _TUXVISION_ vchar final
     explicit vchar(vchar* C);
     vchar(vchar& C){d = C.d;}
     vchar(const vchar& C){d = C.d;}
+    vchar(color::pair cc);
     ~vchar() = default;
 
     vchar& set_fg(color::code fg_);
@@ -162,9 +166,9 @@ struct _TUXVISION_ vchar final
 
     static std::string render(const vchar::string& _string);
     static std::string render(const vchar* _blk, int _width);
-    
-    
-    
+
+
+
     vchar&     operator <<(char Ch);
     [[nodiscard]] std::string render_colors() const;
     explicit    operator std::string() const;
