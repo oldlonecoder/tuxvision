@@ -40,8 +40,8 @@ bloc::~bloc()
     // for(auto* o : m_children)
     // {
     //     node* n = o->as<node>();
-    //     if(n) 
-    //     {    if(!n->mem.ref && n->mem.acc) 
+    //     if(n)
+    //     {    if(!n->mem.ref && n->mem.acc)
     //         {
     //             book::out() << color::reset << " destroy '" << color::yellow << n->attribute() << color::reset << "'.";
     //             delete n;
@@ -69,6 +69,14 @@ alu bloc::JSR()
     return *_a_;
 }
 
+variable::list void_variables{};
+
+const variable::list &bloc::variables()
+{
+    if(!_variables_) return void_variables;
+    return *_variables_;
+}
+
 node *tux::est::bloc::append_instruction(node *_i_)
 {
     if(!_instructions_)
@@ -81,7 +89,7 @@ node *tux::est::bloc::append_instruction(node *_i_)
 
 variable *bloc::query_variable(lex_token *a_token)
 {
-    
+
     if(_variables_)
     {
         for(auto* v : *_variables_) if(v->id() == a_token->text()) return v->as<est::variable>();
@@ -89,7 +97,7 @@ variable *bloc::query_variable(lex_token *a_token)
 
     if(auto* p = parent<est::bloc>())
         return p->query_variable(a_token);
-        
+
     return nullptr;
 }
 
@@ -98,7 +106,7 @@ void bloc::add_local_variable(variable *v)
 {
     if(!_variables_)
         _variables_ = new variable::list{};
-    
+
     _variables_->push_back(v);
 }
 

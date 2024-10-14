@@ -181,6 +181,46 @@ std::string vchar::render(const vchar* _blk, int _width)
     return _o;
 }
 
+std::string vchar::render_line(vchar::string::iterator start, vchar::string::iterator end)
+{
+    std::string str;
+    auto it = start;
+    str = start->colors()();
+    while(it != end)
+    {
+        color::pair curcolors = it->colors();
+        vchar ch;
+        ch = *it++;
+        auto check = ch.colors();
+        if(curcolors.bg != check.bg)
+        {
+            curcolors.bg = check.bg;
+            str += color::render_background(curcolors.bg);
+        }
+        if(curcolors.fg != check.fg)
+        {
+            curcolors.fg = check.fg;
+            str += color::render(curcolors.fg);
+        }
+        if(ch.d& UTFBITS)
+        {
+            if(ch.d & Frame)
+                str += cadre()[ch.frame_id()];
+            else
+                if(ch.d & Accent)
+                    str += accent_fr::data[ch.accent_id()];
+                else
+                    if(ch.d & UGlyph)
+                        str += glyph::data[ch.icon_id()];
+        }
+        else
+            str += ch.ascii();
+    }
+    str += _eol_;
+    book::debug() << book::fn::endl  << str;
+    return str;
+}
+
 
 std::string vchar::details() const
 {

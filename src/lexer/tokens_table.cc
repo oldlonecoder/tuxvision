@@ -706,7 +706,7 @@ namespace tux
         },
         {
             .prim = lex::type::Prefix,
-            .sem = lex::type::I64|lex::type::Unary|lex::type::Keyword|lex::type::Prefix|lex::type::Operator, 
+            .sem = lex::type::I64|lex::type::Unary|lex::type::Keyword|lex::type::Prefix|lex::type::Operator,
             .m = lex::mnemonic::I64,
             .name  = "I64",
             .d = lex::operand::Identifier,
@@ -966,7 +966,6 @@ namespace tux
         }
     };
 
-
     return ref_table.size();
 }
 
@@ -982,7 +981,7 @@ namespace tux
 token_table::~token_table()
 {
     ref_table.clear(); //oops!!!!!!
-    
+
 }
 
 lex_token token_table::scan(const char* C)

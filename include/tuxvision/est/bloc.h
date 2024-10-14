@@ -20,13 +20,13 @@
 #pragma once
 #include "tuxvision/est/variable.h"
 
-namespace tux::est 
+namespace tux::est
 {
 
 class _TUXVISION_ bloc : public node
 {
 
-public: 
+public:
     using list = std::vector<bloc*>;
 protected:
     //node::list* m_operators{nullptr};
@@ -50,7 +50,7 @@ public:
     bloc & operator=(const bloc &&) = delete;
 
     alu JSR() override;
-
+    const variable::list& variables();
     variable* query_variable(lex_token* a_token);
     node*     append_instruction(node* _i_);
 

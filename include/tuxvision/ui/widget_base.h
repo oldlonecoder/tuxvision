@@ -87,9 +87,10 @@ public:
     book::code dirty(const rectangle& dirty_rect={});
     widget_base::painter_dc begin_draw();
     void end_draw(widget_base::painter_dc& edc);
+    void clear();
 
+    book::code render();
 private:
-
 };
 
 

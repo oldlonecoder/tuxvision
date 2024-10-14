@@ -29,7 +29,7 @@ object::~object()
 {
     for(auto* o : m_children)
     {
-        book::info() << book::fn::fun << " destroy ['" << std::format("{:^20s}", o->id()) << "'] @" << o;
+        //book::info() << book::fn::fun << " destroy ['" << std::format("{:^20s}", o->id()) << "'] @" << o;
         delete o;
     }
     m_children.clear();

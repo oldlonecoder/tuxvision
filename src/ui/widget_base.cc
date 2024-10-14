@@ -4,7 +4,146 @@ namespace tux::ui
 {
 
 
+#define CHECK_BLOC \
+if(!_bloc_)\
+{\
+    throw book::exception() [\
+        book::except() << book::fn::fun << book::code::null_ptr << " undefined backbuffer on: "\
+                       << color::blueviolet << class_name()\
+                       << color::reset <<"::"\
+                       << color::yellow << id()\
+    ];\
+}
+
+
+
 using namespace globals;
+
+
+widget_base::widget_base()
+{
+
+}
+
+widget_base::widget_base(object *_parent_obj, const std::string _id, globals::uistyle::Type _ui_style):object(_parent_obj, _id),
+    _uistyle_(_ui_style){}
+
+widget_base::~widget_base(){}
+
+book::code widget_base::set_geometry(const rectangle &r)
+{
+    book::info() << color::yellow << id() << color::reset << " requested geometry:" << r;
+    if(!r)
+    {
+        book::error() << book::fn::fun << book::code::null_ptr << " - " << color::yellow << id() << " invalid rectangle!";
+        return book::code::rejected;
+    }
+    _geometry_ = r;
+    if(auto p = parent<widget_base>(); p)
+    {
+        book::out() << "parent(" << color::yellow << p->id() << color::reset << ") bloc assigned to " << id() << ".";
+        _bloc_ = p->_bloc_;
+    }
+    else
+    {
+        _bloc_ = std::make_shared<terminal::vchar::string>(_geometry_.dwh.area(), terminal::vchar(_colors_));
+        book::out() << color::blueviolet <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, owns back_buffer";
+        book::out() << color::yellow << id() << color::reset << " assisgned geometry:" << _geometry_;
+    }
+    //_bkcrs_ =
+    _iterator_ = _bloc_.get()->begin();
+    auto& cell = _bloc_.get()[0][0];
+    cell << 'A';
+
+    return book::code::done;
+}
+
+/*!
+ * \brief widget_base::set_theme
+ * \param theme_id
+ * \return book::code value : rejected if the the is does not exist or accepted on succes
+ */
+book::code widget_base::set_theme(const std::string &theme_id)
+{
+    _theme_id_ = theme_id;
+    auto const& comp = globals::colors::attr_db::theme().find(_theme_id_);
+    if (comp == globals::colors::attr_db::theme().end())
+    {
+        book::error() << book::fn::fun << "Theme '" << color::orangered1 <<  _theme_id_ << color::reset << "' not found" << book::fn::endl;
+        return book::code::rejected;
+    }
+
+    _theme_elements_ = globals::colors::attr_db::theme()[_theme_id_];
+    _style_ =  globals::colors::attr_db::theme()[_theme_id_]["Widget"];
+    _colors_ = _style_[globals::wstate::Active];
+
+    book::log() << color::yellow << id() << color::reset << " theme set to '" << _style_[_state_] << " " <<  _theme_id_ << " " << color::reset << "'.";
+    return book::code::accepted;
+}
+
+book::code widget_base::peek_xy(cxy xy)
+{
+    CHECK_BLOC
+
+    if(!_geometry_.tolocal()[xy])
+    {
+        book::error() << book::fn::fun << book::code::oob << " -> " << color::red4 << xy << color::reset << " within rect:" << color::yellow << _geometry_.tolocal();
+        return book::code::oob;
+    }
+
+    _iterator_ = _bloc_->begin() + xy.y * *_geometry_.width() + xy.x;
+    book::log() << book::fn::fun << color::yellow << id() << color::reset << " assigned position : " << color::red4 << xy << color::reset << ":";
+    book::out() << _iterator_->details();
+    return book::code::accepted;
+}
+
+
+/*!
+ * \brief widget_base::operator *
+ * \return the pointer to the  current cell address at the internal cursor position.
+ */
+terminal::vchar::string::iterator widget_base::operator*()
+{
+    //...
+    return _iterator_;
+}
+
+book::code widget_base::dirty(const rectangle &dirty_rect)
+{
+    if(!dirty_rect)
+    {
+        book::warning() << book::fn::fun << "attempt to merge dirty area with invalid rectangle on " << color::yellow << id() << color::reset <<book::fn::endl << "- rejected";
+        return book::code::rejected;
+    }
+    if(!_dirty_area_)
+        _dirty_area_ = dirty_rect;
+    else
+        _dirty_area_ = _dirty_area_ | dirty_rect;
+    return book::code::accepted;
+}
+
+
+
+
+void widget_base::clear()
+{
+    CHECK_BLOC
+    std::fill(_bloc_->begin(), _bloc_->end(), terminal::vchar(_colors_));
+}
+
+book::code widget_base::render()
+{
+    _dirty_area_ = {};
+    peek_xy({0,0});
+    auto str = terminal::vchar::render_line(_iterator_, _iterator_ + *_geometry_.width());
+    book::debug() << book::fn::fun << color::yellow << id() << color::reset << "::render() : width:" << (_iterator_ + *_geometry_.width())-_bloc_->begin();
+    terminal::cursor(_geometry_.a);
+    std::cout << str << color::render(color::reset) << std::flush;
+    return book::code::done;
+}
+
+
+
 
 book::code widget_base::auto_fit(globals::anchor::value anchor_value)
 {
@@ -24,7 +163,7 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
         // if(par == desktop::instance())
         //     area = terminal::_geometry_;
         // else
-            area = par->_geometry_.tolocal();
+        area = par->_geometry_.tolocal();
     }
     else
         area = terminal::geometry();
@@ -80,61 +219,6 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
             book::out() << "fit bottom: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset;
         }
     }
-    // else
-    // {
-    //     if(_ancre_ & anchor::fit_center)
-    //     {
-    //         _geometry_.moveat({(sz.w -_sz.w)/2, (sz.h -_sz.h)/2});
-    //         return book::code::accepted;
-    //     }
-    // }
-    // if(_ancre_ & anchor::fit_vcenter)
-    //     _geometry_.moveat({_a.x,(sz.h -_sz.h)/2});
-    // else
-    // {
-    //     if(_ancre_ & anchor::fit_top)
-    //     {
-    //         if(((_uistyle_ & uistyle::Frame)&&(_ancre_ & anchor::onframe_fit)) || !(_uistyle_ & uistyle::Frame))
-    //             _geometry_.moveat(cxy{a.x,0});
-    //         else
-    //             _geometry_.moveat(cxy{a.x,1});
-    //     }
-    //     else
-    //     {
-    //         if(_ancre_ & anchor::fit_bottom)
-    //         {
-    //             book::out() << color::yellow << id() << " request fit to bottom of...("<< color::chartreuse6 << ar << color::reset << "):";
-    //             if(((_uistyle_ & uistyle::Frame)&&(_ancre_ & anchor::onframe_fit)) || !(_uistyle_ & uistyle::Frame))
-    //                 _geometry_.moveat(cxy{a.x, ar.b.y});
-    //             else
-    //                 _geometry_.moveat(cxy{a.x, ar.b.y});
-    //         }
-    //     }
-    // }
-    // if(_ancre_ & anchor::fit_hcenter)
-    //     _geometry_.moveat({(sz.w - _sz.w)/2, _a.y});
-    // else
-    // {
-    //     book::out() << color::yellow << id() << color::reset << " not centered:";
-    //     if(_ancre_ & anchor::fit_right)
-    //     {
-    //         book::out() << color::yellow << id() << color::reset << " fit right:";
-    //         if(((_uistyle_ & uistyle::Frame)&&(_ancre_ & anchor::onframe_fit)) || !(_uistyle_ & uistyle::Frame))
-    //             _geometry_.moveat(cxy{b.x - _sz.w, b.y});
-    //         else
-    //             _geometry_.moveat(cxy{b.x -_sz.w-1, sz.h});
-    //         book::out() << _geometry_;
-    //     }
-    //     else
-    //         if(_ancre_ & anchor::fit_left)
-    //         {
-    //             if(((_uistyle_ & uistyle::Frame)&&(_ancre_ & anchor::onframe_fit)) || !(_uistyle_ & uistyle::Frame))
-    //                 _geometry_.moveat(cxy{0, _a.y});
-    //             else
-    //                 _geometry_.moveat(cxy{1, _a.y});
-    //         }
-    // }
-    //...
     book::out() << "applied geometry (fit_width|fit_height only as of Oct 08 '24):" << color::yellow << id() << color::lime << _geometry_ << color::yellow;
 
     //...
@@ -144,16 +228,7 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
 
 book::code widget_base::resize(size new_sz)
 {
-    if(!_bloc_)
-    {
-        throw book::exception() [
-            book::except() << book::fn::fun << book::code::null_ptr << " undefined backbuffer on: "
-                                            << color::blueviolet << class_name()
-                                            << color::reset <<"::"
-                                            << color::yellow << id()
-        ];
-    }
-
+    CHECK_BLOC
     _geometry_.resize(new_sz);
     book::info() << book::fn::fun << "new geometry: " << color::yellow << _geometry_ << color::reset;
     if(!parent<widget_base>())
@@ -164,98 +239,6 @@ book::code widget_base::resize(size new_sz)
     return book::code::done;
 }
 
-widget_base::widget_base()
-{
-
-}
-
-widget_base::widget_base(object *_parent_obj, const std::string _id, globals::uistyle::Type _ui_style):object(_parent_obj, _id),
-    _uistyle_(_ui_style){}
-
-widget_base::~widget_base(){}
-
-book::code widget_base::set_geometry(const rectangle &r)
-{
-    if(!r)
-    {
-        book::error() << book::fn::fun << book::code::null_ptr << " - " << color::yellow << id() << " invalid rectangle!";
-        return book::code::rejected;
-    }
-
-    if(auto p = parent<widget_base>(); p)
-    {
-        book::out() << "parent(" << color::yellow << p->id() << color::reset << ") bloc assigned to " << id() << ".";
-        _bloc_ = p->_bloc_;
-    }
-    else
-    {
-        _bloc_ = std::make_shared<terminal::vchar::string>(r.dwh.area(), terminal::vchar(_colors_));
-        book::out() << color::blueviolet <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, owns back_buffer";
-    }
-    //_bkcrs_ =
-    _iterator_ = _bloc_.get()->begin();
-    auto& cell = _bloc_.get()[0][0];
-    cell << 'A';
-
-    return book::code::done;
-}
-
-/*!
- * \brief widget_base::set_theme
- * \param theme_id
- * \return book::code value : rejected if the the is does not exist or accepted on succes
- */
-book::code widget_base::set_theme(const std::string &theme_id)
-{
-    _theme_id_ = theme_id;
-    auto const& comp = globals::colors::attr_db::theme().find(_theme_id_);
-    if (comp == globals::colors::attr_db::theme().end())
-    {
-        book::error() << book::fn::fun << "Theme '" << color::orangered1 <<  _theme_id_ << color::reset << "' not found" << book::fn::endl;
-        return book::code::rejected;
-    }
-
-    _theme_elements_ = globals::colors::attr_db::theme()[_theme_id_];
-    _style_ =  globals::colors::attr_db::theme()[_theme_id_]["Widget"];
-    _colors_ = _style_[globals::wstate::Active];
-
-    book::log() << color::yellow << id() << color::reset << " theme set to '" << _style_[_state_] << " " <<  _theme_id_ << " " << color::reset << "'.";
-    return book::code::accepted;
-}
-
-book::code widget_base::peek_xy(cxy xy)
-{
-    if(!_bloc_)
-    {
-        throw book::exception() [
-            book::except() << book::fn::fun << book::code::null_ptr << " undefined backbuffer on: "
-                           << color::blueviolet << class_name()
-                           << color::reset <<"::"
-                           << color::yellow << id()
-        ];
-    }
-
-    if(!_geometry_.tolocal()[xy])
-    {
-        book::error() << book::fn::fun << book::code::oob << " -> " << color::red4 << xy << color::reset << " within rect:" << color::yellow << _geometry_.tolocal();
-        return book::code::oob;
-    }
-    //_bkcrs_= &(*_bloc_)[xy.y * *_geometry_.width() + xy.x];
-    _iterator_ = (*_bloc_).begin() + xy.y * *_geometry_.width() + xy.x;
-
-    return book::code::accepted;
-}
-
-
-/*!
- * \brief widget_base::operator *
- * \return the pointer to the  current cell address at the internal cursor position.
- */
-terminal::vchar::string::iterator widget_base::operator*()
-{
-    //...
-    return _iterator_;
-}
 
 
 } // namespace tux::ui

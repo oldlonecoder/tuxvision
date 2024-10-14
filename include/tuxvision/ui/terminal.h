@@ -166,6 +166,7 @@ struct _TUXVISION_ vchar final
 
     static std::string render(const vchar::string& _string);
     static std::string render(const vchar* _blk, int _width);
+    static std::string render_line(vchar::string::iterator start, vchar::string::iterator end);
 
 
 

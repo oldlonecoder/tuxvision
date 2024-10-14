@@ -43,7 +43,7 @@ book::code query_winch()
     if((!win.ws_col)||(!win.ws_row))
         return book::code::notexist;
 
-    terminal::_geometry_ = ui::rectangle{{1,1}, ui::size{static_cast<int>(win.ws_col), static_cast<int>(win.ws_row)}};
+    _geometry_ = ui::rectangle{{1,1}, ui::size{static_cast<int>(win.ws_col), static_cast<int>(win.ws_row)}};
     book::info() << book::fn::fun << " terminal resize to:" << color::yellow << std::format("{:>3d}x{:<3d}",_geometry_.dwh.w,_geometry_.dwh.h);
     return book::code::done;
 }
@@ -111,7 +111,7 @@ void switch_back()
  * @brief Set terminal to report the mouse events.
 
     @note Execute CSI on each parameters because I realized that "\x1b[?1000;1002;...h" is not working.
- * 
+ *
  */
 void start_mouse()
 {
