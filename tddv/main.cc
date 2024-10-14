@@ -1,7 +1,7 @@
 //#include "tuxvision/journal/book.h"
 
 //-------------------------------------
-//#include "tuxin/tools/sscan.h"
+//#include "tux/tools/sscan.h"
 //#include <cstdint>
 #include <tuxvision/est/expression.h>
 #include <tuxvision/ui/events.h>
@@ -52,20 +52,29 @@ book::action app::terminal_resize_signal(rectangle _r)
 
 
 
+app::app(const std::string &app_name, int argc, char **argv):application(app_name, argc,argv)
+{
+
+}
+
 app::~app(){}
 
 book::code app::run()
 {
 
     setup();
-
-    return book::code::notimplemented;
+    event ev;
+    book::code c{};
+    while(!!(c = event::get_stdin_event(ev,{65000,0})) && c != book::code::cancel);
+    terminate();
+    return book::code::terminate;
 }
 
 book::code app::terminate()
 {
-    return application::terminate();
-
+    application::terminate();
+    book::purge(nullptr);
+    return book::code::terminate;
 }
 
 
@@ -98,23 +107,26 @@ book::code expression()
 
 auto main(int argc, char** argv)->int
 {
-    book::init();
-    tux::string str;
-    str | color::blue4 | "hello" | color::grey100 | ", and welcome to the " | color::blueviolet | "tuxvision " | color::reset | " project!!";
-    std::cout << str() << std::endl;
 
-    expression();
+    tux::ui::app app{"tuxvision tests", argc, argv};
+    app.run();
+    // book::init();
+    // tux::string str;
+    // str | color::blue4 | "hello" | color::grey100 | ", and welcome to the " | color::blueviolet | "tuxvision " | color::reset | " project!!";
+    // std::cout << str() << std::endl;
 
-    book::debug() << book::fn::fun << color::blue4 << "hello" << color::grey100 << ", and welcome to the " << color::blueviolet << "tuxvision " << color::reset << " project!!";
+    // //expression();
 
-    book::purge(nullptr);
+    // book::debug() << book::fn::fun << color::blue4 << "hello" << color::grey100 << ", and welcome to the " << color::blueviolet << "tuxvision " << color::reset << " project!!";
+
+    // book::purge(nullptr);
     return 0;
 }
 
 
 
 /*
-namespace tuxin::ui
+namespace tux::ui
 {
 class app : public application
 {
@@ -200,7 +212,7 @@ book::action app::terminal_resize_signal(rectangle _r) const
 
 book::code app::setup_ui()
 {
-    desk = new desktop{"tuxin::ui Desktop"};
+    desk = new desktop{"tux::ui Desktop"};
     desk->set_theme("Default");
     desk->setup_ui();
 
@@ -242,7 +254,7 @@ book::code app::terminate()
 {
     book::debug() << book::fn::fun << "terminate application:";
     application::terminate();
-    book::out() << "As long as tuxin::ui::application is not derived from object, we delete our stuff here:";
+    book::out() << "As long as tux::ui::application is not derived from object, we delete our stuff here:";
     delete desk;
     delete C64Win;
     // -----------------------------------------------------------------------------------------------------
@@ -252,15 +264,15 @@ book::code app::terminate()
 }
 
 
-}// namespace tuxin::ui
+}// namespace tux::ui
 
 
 
 auto main(int argc, char** argv)->int
 {
-    tuxin::string str = "hello, and welcome to the tuxin API; ...";
+    tux::string str = "hello, and welcome to the tux API; ...";
     std::cout << str() << std::endl;
-    tuxin::ui::app app{"tuxin tddv application", argc, argv};
+    tux::ui::app app{"tux tddv application", argc, argv};
     app.run();
     app.terminate();
     return 0;
