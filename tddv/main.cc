@@ -77,8 +77,6 @@ book::code app::setup_ui()
 }
 
 
-
-
 book::code expression()
 {
 
