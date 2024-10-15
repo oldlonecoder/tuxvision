@@ -13,12 +13,18 @@
 #pragma once
 
 #include <tuxvision/ui/widget_base.h>
-
+#include <list> // Implementing toplevel floating z-oredered widgets management
 
 namespace tux::ui
 {
+
+
+
+
+
 class _TUXVISION_ screen : public widget_base
 {
+    static screen* _screen_;
 public:
     screen(){}
     screen(const std::string& scr_name);
@@ -27,10 +33,37 @@ public:
     // ...
     static book::code start();
     static book::code end();
+    static screen* me();
+    book::code dirty(const rectangle& _r) override;
+
+    book::code render() override;
+    book::code draw() override;
+
+
 protected:
+    friend class widget_base;
 
-    book::code dirty(rectangle _r) override;
+    book::code resize(ui::size new_sz) override;
 
+    book::code show_toplevel(widget_base* wb);
+    book::code draw_toplevel(widget_base* wb);
+    book::code hide_toplevel(widget_base* wb);
+
+    // --- Toplevel widget management. ( ANY widget can be a toplevel widget )
+    book::code toplevel_moved(widget_base* wb);
+    book::code pop_widget(widget_base* wb);
+    book::code put_front(widget_base* wb);
+    book::code push_back(widget_base* wb);
+    book::code push_front(widget_base* wb);
+    rectangle get_exposed(widget_base* wb);
+    //...
+    //--------------------------------------------------------------------------
+private:
+    std::list<widget_base*> _toplevels_{}; ///< toplevels storage in natural z-order
+
+
+
+    auto query(widget_base *wb) -> std::list<widget_base*>::iterator;
 
 };
 

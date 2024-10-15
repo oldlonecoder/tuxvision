@@ -4,6 +4,8 @@
 #include <tuxvision/tools/object.h>
 #include <tuxvision/ui/globals.h>
 #include <tuxvision/ui/terminal.h>
+#include <list>
+
 namespace tux::ui
 {
 
@@ -26,6 +28,8 @@ protected:
     globals::wstate::Type                _state_{globals::wstate::Active};
     globals::anchor::value               _ancre_{globals::anchor::fixed};
     globals::uistyle::Type               _uistyle_{globals::uistyle::Unset};
+    globals::wflags::Type                _uiflags_{globals::wflags::Unset};
+
     // --------------------------------------------
 
     virtual book::code auto_fit(globals::anchor::value anchor_value=globals::anchor::fixed);
@@ -83,14 +87,18 @@ public:
 
     };
 
-    book::code draw();
-    book::code dirty(const rectangle& dirty_rect={});
+    virtual book::code draw();
+    virtual book::code dirty(const rectangle& dirty_rect={});
     widget_base::painter_dc begin_draw();
     void end_draw(widget_base::painter_dc& edc);
     void clear();
 
-    book::code render();
+    virtual book::code render();
+    bool is_toplevel() { return _uiflags_& (globals::wflags::TopLevel|globals::wflags::Floating); }
 private:
+    friend class screen;
+
+    std::list<widget_base*>::iterator _tli_{};
 };
 
 

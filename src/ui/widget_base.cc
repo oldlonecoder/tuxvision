@@ -42,11 +42,14 @@ book::code widget_base::set_geometry(const rectangle &r)
     if(auto p = parent<widget_base>(); p)
     {
         book::out() << "parent(" << color::yellow << p->id() << color::reset << ") bloc assigned to " << id() << ".";
+        if(_uiflags_ & globals::wflags::TopLevel)  goto TOPLVL;
         _bloc_ = p->_bloc_;
     }
     else
     {
+TOPLVL:
         _bloc_ = std::make_shared<terminal::vchar::string>(_geometry_.dwh.area(), terminal::vchar(_colors_));
+        _uiflags_ |= globals::wflags::TopLevel|globals::wflags::Floating;
         book::out() << color::blueviolet <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, owns back_buffer";
         book::out() << color::yellow << id() << color::reset << " assisgned geometry:" << _geometry_;
     }
@@ -107,6 +110,12 @@ terminal::vchar::string::iterator widget_base::operator*()
     //...
     return _iterator_;
 }
+
+book::code widget_base::draw()
+{
+    return book::code::notimplemented;
+}
+
 
 book::code widget_base::dirty(const rectangle &dirty_rect)
 {

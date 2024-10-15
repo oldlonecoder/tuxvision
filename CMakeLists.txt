@@ -40,16 +40,8 @@ add_library(${BaseTarget} STATIC  #SHARED
             include/${BaseTarget}/est/variable.h src/est/variable.cc
             include/${BaseTarget}/est/bloc.h src/est/bloc.cc
             include/${BaseTarget}/est/expression.h src/est/expression.cc
-            include/tuxvision/ui/widget_base.h src/ui/widget_base.cc src/ui/widget_painter.cc
-            include/tuxvision/ui/screen_desk.h
-            src/ui/screen_desk.cc
-
-
-            # include/${BaseTarget}/elements/element.h  cc/tuxvision/elements/element.cc
-
-
-            # include/tuxvision/elements/screen.h cc/tuxvision/elements/screen.cc
-
+            include/${BaseTarget}/ui/widget_base.h src/ui/widget_base.cc src/ui/widget_painter.cc
+            include/${BaseTarget}/ui/screen_desk.h src/ui/screen_desk.cc
 )
 
 target_compile_definitions(${BaseTarget} PUBLIC "${BaseTarget}_DEBUG=$<CONFIG:Debug>")

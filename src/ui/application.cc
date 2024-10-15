@@ -3,6 +3,8 @@
 #include "tuxvision/ui/application.h"
 #include "tuxvision/ui/terminal.h"
 #include <csignal>
+#include <tuxvision/ui/screen_desk.h>
+
 //#include <memory>
 
 
@@ -74,7 +76,7 @@ void application::sig_winch(int)
 
 book::code application::terminate()
 {
-    terminal::end();
+    screen::end();
     return book::code::implemented;
 }
 
@@ -110,9 +112,10 @@ book::code application::install_signals()
 book::code application::setup()
 {
     //...
-    book::init();
+    // book::init();
     install_signals();
-    terminal::begin();
+    screen::start();
+    // terminal::begin();
     //...
     return book::code::done;
 }
