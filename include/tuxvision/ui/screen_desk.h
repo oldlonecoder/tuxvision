@@ -40,6 +40,7 @@ public:
     book::code draw() override;
 
 
+
 protected:
     friend class widget_base;
 
@@ -56,6 +57,7 @@ protected:
     book::code push_back(widget_base* wb);
     book::code push_front(widget_base* wb);
     rectangle get_exposed(widget_base* wb);
+
     //...
     //--------------------------------------------------------------------------
 private:

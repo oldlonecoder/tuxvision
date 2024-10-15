@@ -19,6 +19,7 @@
 #include <tuxvision/ui/globals.h>
 #include <tuxvision/journal/book.h>
 #include <tuxvision/tools/signals.h>
+#include <tuxvision/tools/object.h>
 
 namespace tux::ui::terminal
 {
@@ -84,8 +85,19 @@ struct _TUXVISION_ vchar final
 {
     u32 d{0x8003A020};
     using string = std::vector<vchar>;
-
     using back_buffer = std::shared_ptr<terminal::vchar::string>;
+
+
+    struct _TUXVISION_ bloc final
+    {
+        ui::size                geometry{};
+        terminal::vchar::string  buffer{};
+
+        bloc copy(const ui::rectangle& _area={}); ///< Extraction
+        //book::code copy_object(const ui::rectangle& _sub_area, object* from);
+        book::code pasta(const vchar::bloc& src, ui::cxy _to); ///< Insertion
+
+    };
 
     static constexpr u32 CharMask  = 0x800000FF;
     static constexpr u32 FGMask    = 0x0000FF00;
