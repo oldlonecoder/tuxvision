@@ -142,7 +142,7 @@ void widget_base::clear()
 
 /*!
  * \brief widget_base::render
- * \return
+ * \return  book::code::done or reject if not visible.
  */
 book::code widget_base::render()
 {
