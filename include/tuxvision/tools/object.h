@@ -23,11 +23,12 @@ class  _TUXVISION_ object
 protected:
     u64 event_mask{0};
 public:
+
+    using list      = std::vector<object*>;
+    using iterator  = object::list::iterator;
+
+
     object(){}
-    using list = std::vector<object*>;
-    using children = std::shared_ptr<object>;
-    using shared = std::shared_ptr<object>;
-    using iterator = object::list::iterator;
     object(object* parent_obj, const std::string& obj_id);
     object(object&&)  = delete;
     object(const object&) = delete;
@@ -108,7 +109,6 @@ protected:
     object::list m_children = {};
     std::string m_id{};
     object* m_parent{nullptr};
-    children _children_{}; // transition;
 };
 
 } // lsg

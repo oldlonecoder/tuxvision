@@ -181,7 +181,7 @@ std::string vchar::render(const vchar* _blk, int _width)
     return _o;
 }
 
-std::string vchar::render_line(vchar::string::iterator start, vchar::string::iterator end)
+book::code vchar::render_string(vchar::string::iterator start, vchar::string::iterator end)
 {
     std::string str;
     auto it = start;
@@ -217,8 +217,8 @@ std::string vchar::render_line(vchar::string::iterator start, vchar::string::ite
             str += ch.ascii();
     }
     str += _eol_;
-    book::debug() << book::fn::endl  << str;
-    return str;
+    std::cout << str;
+    return book::code::done;
 }
 
 

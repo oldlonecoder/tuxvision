@@ -92,8 +92,8 @@ book::code widget_base::peek_xy(cxy xy)
     }
 
     _iterator_ = _bloc_->begin() + xy.y * *_geometry_.width() + xy.x;
-    book::log() << book::fn::fun << color::yellow << id() << color::reset << " assigned position : " << color::red4 << xy << color::reset << ":";
-    book::out() << _iterator_->details();
+    //book::log() << book::fn::fun << color::yellow << id() << color::reset << " assigned position : " << color::red4 << xy << color::reset << ":";
+    //book::out() << _iterator_->details();
     return book::code::accepted;
 }
 
@@ -131,14 +131,26 @@ void widget_base::clear()
     std::fill(_bloc_->begin(), _bloc_->end(), terminal::vchar(_colors_));
 }
 
+/*!
+ * \brief widget_base::render
+ * \return
+ */
 book::code widget_base::render()
 {
-    _dirty_area_ = {};
-    peek_xy({0,0});
-    auto str = terminal::vchar::render_line(_iterator_, _iterator_ + *_geometry_.width());
     book::debug() << book::fn::fun << color::yellow << id() << color::reset << "::render() : width:" << (_iterator_ + *_geometry_.width())-_bloc_->begin();
+    _dirty_area_ = {};
+    if(auto* p = parent<widget_base>(); p)
+        return p->dirty(_geometry_);
+
+    std::string out{};
     terminal::cursor(_geometry_.a);
-    std::cout << str << color::render(color::reset) << std::flush;
+    for(int y=0; y < *_geometry_.height(); y++)
+    {
+        peek_xy({0,y});
+        terminal::cursor({_geometry_.a.x,_geometry_.a.y+y});
+        terminal::vchar::render_string(_iterator_, _iterator_ + *_geometry_.width());
+    }
+    std::cout  << std::flush;
     return book::code::done;
 }
 
