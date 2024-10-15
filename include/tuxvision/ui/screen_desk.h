@@ -25,6 +25,12 @@ public:
 
     ~screen();
     // ...
+    static book::code start();
+    static book::code end();
+protected:
+
+    book::code dirty(rectangle _r) override;
+
 
 };
 
