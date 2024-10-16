@@ -30,6 +30,12 @@ screen *screen::me()
     return screen::_screen_;
 }
 
+book::code screen::render_widget(widget_base *wb)
+{
+
+    return book::code::notimplemented;
+}
+
 
 
 
@@ -167,7 +173,7 @@ book::code screen::push_front(widget_base *wb)
     if(it = query(wb); it != _toplevels_.end())
         return book::code::exist;
 
-    if(wb->_uiflags_ & globals::wflags::TopLevel)
+    if(!wb->is_toplevel())
     {
         book::error() << book::fn::fun << book::code::cancel << " widget '" << color::yellow << wb->class_name() << "::" << wb->id() << color::reset << "' is not a top-level widget. Operation Cancelled";
         return book::code::cancel;

@@ -92,11 +92,6 @@ struct _TUXVISION_ vchar final
     {
         ui::size                geometry{};
         terminal::vchar::string  buffer{};
-
-        bloc copy(const ui::rectangle& _area={}); ///< Extraction
-        //book::code copy_object(const ui::rectangle& _sub_area, object* from);
-        book::code pasta(const vchar::bloc& src, ui::cxy _to); ///< Insertion
-
     };
 
     static constexpr u32 CharMask  = 0x800000FF;

@@ -138,7 +138,7 @@ void clear()
 }
 
 
-/**
+/*!
  * @brief Activate the screen cursor.
  *
  */
@@ -166,9 +166,10 @@ void cursor(ui::cxy xy)
 
 void mv(globals::direction::type dir, int d)
 {
-    char ch =dir==globals::direction::right ? 'C': dir==globals::direction::left  ? 'D' : dir==globals::direction::up    ? 'A' : 'B';
+    char ch =dir == globals::direction::right ? 'C': dir==globals::direction::left  ? 'D' : dir==globals::direction::up    ? 'A' : 'B';
     std::cout << "\x1b[" << d << ch;
 }
+
 
 
 }
