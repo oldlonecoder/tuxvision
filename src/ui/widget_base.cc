@@ -100,6 +100,15 @@ book::code widget_base::peek_xy(cxy xy)
     return book::code::accepted;
 }
 
+terminal::vchar::string::iterator widget_base::position(cxy xy)
+{
+    if(!_geometry_.goto_xy(xy))
+        return {};
+
+    peek_xy(xy);
+    return _iterator_;
+}
+
 
 /*!
  * \brief widget_base::operator *

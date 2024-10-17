@@ -68,6 +68,7 @@ protected:
 private:
     std::list<widget_base*> _toplevels_{}; ///< toplevels storage in natural z-order
     auto query(widget_base *wb) -> std::list<widget_base*>::iterator;
+    void commit_screen();
 
 };
 

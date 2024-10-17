@@ -125,6 +125,7 @@ struct _TUXVISION_ rectangle {
     bool operator == (const rectangle& rhs) const;
     rectangle &operator+=(const cxy &dx);
     rectangle &operator-=(const cxy &dx);
+    rectangle &operator|=(const rectangle& rhs);
     void resize(const size &new_sz);
     void moveat(const cxy &p);
     bool in(const cxy &pt) const;

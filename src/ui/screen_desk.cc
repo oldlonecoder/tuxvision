@@ -24,7 +24,7 @@ for(auto it = _toplevels_.begin(); it != _toplevels_.end(); it++)\
 
 
 screen* screen::_screen_{nullptr};
-terminal::vchar::back_buffer screen::_toplevels_bb_{nullptr};
+
 screen *screen::me()
 {
     return screen::_screen_;
@@ -228,14 +228,32 @@ auto screen::query(widget_base *wb) -> std::list<widget_base*>::iterator
     return _toplevels_.end();
 }
 
+void screen::commit_screen()
+{
+    auto r = _dirty_area_;
+    if(!r)
+        r = _geometry_;
+
+
+}
+
 // -----------------------------------------------------
 
 
-
+/*!
+ * \brief Instance public screen::dirty
+ * \param _r  validate boundaries before applying dirty_area union with _r.
+ * \return rejected if _r is invalid; accepted and applied if valid and within _geometry_.
+ */
 book::code screen::dirty(const rectangle &_r)
 {
-    return book::code::notimplemented;
+    auto r = _geometry_ & _r;
+    if(!r) return book::code::rejected;
+    _dirty_area_ |= r;
+
+    return book::code::accepted;
 }
+
 
 book::code screen::render()
 {
@@ -244,6 +262,9 @@ book::code screen::render()
 
 book::code screen::draw()
 {
+    auto writer = begin_draw();
+    writer.clear();
+
     return book::code::notimplemented;
 }
 

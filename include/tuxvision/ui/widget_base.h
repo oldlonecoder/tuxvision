@@ -51,6 +51,7 @@ public:
     std::string theme_name(){ return _theme_id_; };
 
     book::code peek_xy(ui::cxy xy);
+    terminal::vchar::string::iterator position(ui::cxy xy);
     terminal::vchar::string::iterator operator*();
 
 
@@ -60,11 +61,12 @@ public:
         widget_base* _parent_dc_{nullptr};
         color::pair _colors_{};
         //...
+    public:
         painter_dc() = default;
         ~painter_dc() = default;
         painter_dc(widget_base* parent_widget, const rectangle& r);
 
-        painter_dc& clear(const rectangle& r);
+        painter_dc& clear(const rectangle& r={});
         painter_dc& operator << (ui::cxy new_xy);
         painter_dc& operator << (char ch);
         painter_dc& operator << (const char* str);
@@ -77,9 +79,7 @@ public:
         painter_dc& operator << (accent_fr::type fr);
         painter_dc& operator << (terminal::vchar vch);
         painter_dc& operator << (terminal::vchar::string strvch);
-
         painter_dc& set_background_color(color::code bgcol);
-
         painter_dc& draw_frame(const rectangle& r={});
 
 

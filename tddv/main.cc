@@ -53,10 +53,7 @@ book::action app::terminal_resize_signal(rectangle _r)
 
 
 
-app::app(const std::string &app_name, int argc, char **argv):application(app_name, argc,argv)
-{
-
-}
+app::app(const std::string &app_name, int argc, char **argv):application(app_name, argc,argv){}
 
 app::~app(){}
 

@@ -444,6 +444,13 @@ rectangle &rectangle::operator-=(const cxy &dx)
     return *this;
 }
 
+rectangle &rectangle::operator|=(const rectangle &rhs)
+{
+    if(!rhs) return *this;
+    *this = this->operator |(rhs);
+    return *this;
+}
+
 void rectangle::resize(const size &new_sz)
 {
     assign({a.x, a.y}, new_sz);
