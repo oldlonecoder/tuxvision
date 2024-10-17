@@ -473,12 +473,12 @@ event::type event::conio_parser::parse_osc(event& ev)
    \param arguments state, position
    \return event::type::MOUSE
  */
-event::type event::conio_parser::parse_mouse(event& ed, bool /*altered - not using, not needed altered report mode... for now*/, bool /*pressed*/, std::vector<int> arguments)
+event::type event::conio_parser::parse_mouse(event& evnt, bool /*altered - not using, not needed altered report mode... for now*/, bool /*pressed*/, std::vector<int> arguments)
 {
     // pressed 'flag' ignored. Relying on the XTerm Button and meta state byte which reports buttons on the lasts two bits:
 
-    if (arguments.size() != 3) return parse_ss_1_2(ed);
-    ed.event_type = event::type::MOUSE;
+    if (arguments.size() != 3) return parse_ss_1_2(evnt);
+    evnt.event_type = event::type::MOUSE;
 
     event::mouse_data.button = {0,0,0};
     event::mouse_data.button.left   = (arguments[0] & 3) == 0 ? 1 :0;
@@ -499,8 +499,8 @@ event::type event::conio_parser::parse_mouse(event& ed, bool /*altered - not usi
     event::mouse_data.dxy = {event::mouse_data.xy.x-event::mouse_data.oldxy.x, event::mouse_data.xy.y-event::mouse_data.oldxy.y};
 
     event::mouse_data.oldxy = event::mouse_data.xy;
-    ed.data.mev = event::mouse_data; ///< copy mouse state to the event data.
-    return ed.event_type;
+    evnt.data.mev = event::mouse_data; ///< copy mouse state to the event data.
+    return evnt.event_type;
 }
 
 /**
