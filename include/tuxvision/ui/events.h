@@ -330,7 +330,7 @@ private:
             SPECIAL,
             // ---------------------------------------------------
         }parse_type{conio_parser::type::UNCOMPLETED};
-        bool eat();
+        bool next_byte();
         u8 current();
 
         conio_parser() = default;

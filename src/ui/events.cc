@@ -251,7 +251,7 @@ book::code event::init()
 
 
 
-bool event::conio_parser::eat()
+bool event::conio_parser::next_byte()
 {
     it++;
     return it < _seq_.end();
@@ -313,7 +313,7 @@ event::type event::conio_parser::parse_esc(event& evd)
 {
     //book::log() << book::fn::fun;
 
-    if (!eat()) return event::type::UNCOMPLETED;
+    if (!next_byte()) return event::type::UNCOMPLETED;
     switch (*it)
     {
         case 'P':
@@ -333,7 +333,7 @@ event::type event::conio_parser::parse_esc(event& evd)
         case '+':
         case 'O':
         case 'N': {
-            if (!eat()) return event::type::UNCOMPLETED;
+            if (!next_byte()) return event::type::UNCOMPLETED;
             return parse_ss_1_2(evd);
         }
         // Expecting 1 character:
@@ -393,7 +393,7 @@ event::type event::conio_parser::parse_csi(event& evd)
     int argument = 0;
     std::vector<int> arguments;
     while (true) {
-        if (!eat()) {
+        if (!next_byte()) {
             //book::out() << " End of the sequence ";
             return event::type::UNCOMPLETED;
         }
@@ -456,7 +456,7 @@ event::type event::conio_parser::parse_osc(event& ev)
 {
     tux::string str = tux::string::bytes(_seq_);
     book::debug() << book::fn::fun << "rec seq: {" << color::yellow << str << color::reset << "} - not implemented yet";
-    return event::type::UNCOMPLETED;
+    return event::type::DROP;
 }
 
 
@@ -465,24 +465,18 @@ event::type event::conio_parser::parse_osc(event& ev)
        Code and functionnality from the Arthur Sonzogni's FTXUI project:
        https://github.com/ArthurSonzogni/FTXUI. Adapted by me for this events build.
 
+    Modfied by ...me (oldlonecoder).
 
    \param ref to the ed event data instance
    \param altered key
    \param pressed buttons state
    \param arguments state, position
    \return event::type::MOUSE
-
-   \note Start using old_mev bit fields for the new bit field.
  */
 event::type event::conio_parser::parse_mouse(event& ed, bool /*altered - not using, not needed altered report mode... for now*/, bool /*pressed*/, std::vector<int> arguments)
 {
     // pressed 'flag' ignored. Relying on the XTerm Button and meta state byte which reports buttons on the lasts two bits:
-    // 0=left button pressed
-    // 1=right button pressed
-    // 2=middle button pressed
-    // 3=no button pressed.
-    // So I assign button # based on the two bits value to identify button press/release
-    //book::log() << book::fn::fun;
+
     if (arguments.size() != 3) return parse_ss_1_2(ed);
     ed.event_type = event::type::MOUSE;
 
@@ -510,15 +504,12 @@ event::type event::conio_parser::parse_mouse(event& ed, bool /*altered - not usi
 }
 
 /**
- * @brief Not used yet. Don't think I will need it.
+ * @brief Not used. Don't think I will need it. But I still need to acknowledge it, even only to DROP it.
  *
  * @param _args
  * @return event::type
  */
-event::type event::conio_parser::parse_caret_report(std::vector<int> _args)
-{
-    return event::type::DROP;
-}
+event::type event::conio_parser::parse_caret_report(std::vector<int>/* _args*/) { return event::type::DROP; }
 
 
 /**
@@ -579,7 +570,7 @@ event::type event::conio_parser::parse_utf8(event& ev)
 
     // Multi byte UTF-8.
     for (unsigned int i = 2; i <= first_zero; ++i) {
-        if (!eat()) {
+        if (!next_byte()) {
             ev.event_type = event::type::UNCOMPLETED;
             return event::type::UNCOMPLETED;
         }
