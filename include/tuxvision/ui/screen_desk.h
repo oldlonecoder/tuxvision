@@ -12,19 +12,21 @@
 
 #pragma once
 
+
 #include <tuxvision/ui/widget_base.h>
 #include <list> // Implementing toplevel floating z-oredered widgets management
+
 
 namespace tux::ui
 {
 
 
-
-
-
 class _TUXVISION_ screen : public widget_base
 {
+    CLASSNAME(screen)
+
     static screen* _screen_;
+    static terminal::vchar::back_buffer _toplevels_bb_; ///< Prepared screen content buffer.
 public:
     screen(){}
     screen(const std::string& scr_name);

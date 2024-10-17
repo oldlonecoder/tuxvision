@@ -95,6 +95,7 @@ public:
 
     virtual book::code render();
     bool is_toplevel() { return _uiflags_& (globals::wflags::TopLevel|globals::wflags::Floating); }
+    terminal::vchar* vc();
 private:
     friend class screen;
 

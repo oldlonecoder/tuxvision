@@ -24,16 +24,44 @@ for(auto it = _toplevels_.begin(); it != _toplevels_.end(); it++)\
 
 
 screen* screen::_screen_{nullptr};
-
+terminal::vchar::back_buffer screen::_toplevels_bb_{nullptr};
 screen *screen::me()
 {
     return screen::_screen_;
 }
 
+
+
+/*!
+ * \brief Instance public screen::render_widget
+ *     Renders the dirty_area of the given top-level widget's back buffer, into this screen's back buffer.
+ * \param wb
+ * \return rejected or accpeted;
+ */
 book::code screen::render_widget(widget_base *wb)
 {
+    rectangle area = wb->_dirty_area_;
+    if(!area)
+        area = me()->_geometry_ & wb->_geometry_;
+    if(!area)
+    {
+        book::debug() << wb->id() << ": is not 'visible' on the screen's geometry - rendering rejected.";
+        return book::code::rejected;
+    }
 
-    return book::code::notimplemented;
+    for(int y = 0; y < area.dwh.h; y++)
+    {
+        me()->peek_xy(area.a + ui::cxy{0,y});
+        wb->peek_xy((area.a + ui::cxy{0,y}) - wb->_geometry_.a);
+        (void)std::copy(wb->_iterator_, wb->_iterator_ + area.dwh.w, me()->_iterator_);
+        // ignore result iterator (i.e.: the returned value of me()->_iterator_).
+        // Ignorer la nouvelle valeur de l'iterateur retourn&eacute;
+        // -------------------
+        //std::memcpy(&(me()->_iterator_),wb->vc(), area.dwh.w*sizeof(terminal::vchar));
+        //--------------------
+    }
+    me()->dirty(area); // or let's evaluate something like ' push_dirty(area) instead of growing the screen's dirty rectangle... ;)
+    return book::code::accepted;
 }
 
 
@@ -67,9 +95,11 @@ book::code screen::start()
         return book::code::exist;
 
     new screen("screen ios");
-    book::init();
     terminal::begin();
     screen::_screen_->set_geometry(terminal::geometry());
+    screen::_toplevels_bb_ = std::make_shared<terminal::vchar::string>(screen::_screen_->_geometry_.dwh.area(), terminal::vchar(screen::_screen_->_colors_));
+
+    book::out() << color::blueviolet <<  screen::_screen_->class_name() << color::grey100 << "::" << color::yellow << screen::_screen_->id() << color::reset << " double back_buffer setup complete.";
     //...
     return book::code::ready;
 }

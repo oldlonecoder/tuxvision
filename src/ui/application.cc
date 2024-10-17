@@ -74,13 +74,6 @@ void application::sig_winch(int)
 }
 
 
-book::code application::terminate()
-{
-    screen::end();
-    return book::code::implemented;
-}
-
-
 
 application& application::app()
 {
@@ -99,25 +92,38 @@ book::code application::install_signals()
 {
 
     std::signal(SIGSEGV, &application::sig_crash);
+    book::log() << "signal SIGSEV installed.";
     std::signal(SIGABRT, &application::sig_aborted);
+    book::log() << "signal SIGABRT installed.";
     std::signal(SIGINT, &application::sig_interrupted);
+    book::log() << "signal SIGINT installed.";
     std::signal(SIGWINCH, &application::sig_winch);
+    book::log() << "signal SIGWINCH installed.";
     // std::signal(SIGHUP, &application::sig_winch);
-    // std::signal(SIGKILL, &application::sig_winch);
+    std::signal(SIGKILL, &application::sig_interrupted);
+    book::log() << "signal SIGKILL installed.";
     std::signal(SIGTERM, &application::sig_interrupted);
-    //std::signal(SIG, &application::sig_winch);
+    book::log() << "signal SIGTERM installed.";
+
     return book::code::done;
 }
 
 book::code application::setup()
 {
     //...
-    // book::init();
+    book::init();
     install_signals();
     screen::start();
     // terminal::begin();
     //...
     return book::code::done;
+}
+
+
+book::code application::terminate()
+{
+    screen::end();
+    return book::code::implemented;
 }
 
 

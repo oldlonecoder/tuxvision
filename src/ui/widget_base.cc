@@ -9,7 +9,7 @@ if(!_bloc_)\
 {\
     throw book::exception() [\
         book::except() << book::fn::fun << book::code::null_ptr << " undefined backbuffer on: "\
-                       << color::blueviolet << class_name()\
+                       << color::lightsteelblue << class_name()\
                        << color::reset <<"::"\
                        << color::yellow << id()\
     ];\
@@ -50,7 +50,7 @@ book::code widget_base::set_geometry(const rectangle &r)
 TOPLVL:
         _bloc_ = std::make_shared<terminal::vchar::string>(_geometry_.dwh.area(), terminal::vchar(_colors_));
         _uiflags_ |= globals::wflags::TopLevel|globals::wflags::Floating;
-        book::out() << color::blueviolet <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, owns back_buffer";
+        book::out() << color::lightsteelblue <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, owns back_buffer";
         book::out() << color::yellow << id() << color::reset << " assisgned geometry:" << _geometry_;
     }
     //_bkcrs_ =
@@ -157,10 +157,16 @@ book::code widget_base::render()
     {
         peek_xy({0,y});
         terminal::cursor({_geometry_.a.x,_geometry_.a.y+y});
-        terminal::vchar::render_string(_iterator_, _iterator_ + *_geometry_.width());
+        terminal::vchar::render_string(_iterator_, _iterator_ + _geometry_.dwh.w);
     }
     std::cout  << std::flush;
     return book::code::done;
+}
+
+terminal::vchar *widget_base::vc()
+{
+    //.. Todo CHECK valid _iterator_...
+    return &(*_iterator_);
 }
 
 
