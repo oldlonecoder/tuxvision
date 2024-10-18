@@ -272,7 +272,8 @@ book::code screen::dirty_toplevel(widget_base *_toplvl)
         book::status() << book::fn::fun << book::code::oob << " :" << _toplvl->_dirty_area_ << " <> " << screen::me()->_geometry_.tolocal();
         return book::code::rejected;
     }
-    std::next(_toplvl->_tli_);
+    auto n = std::next(_toplvl->_tli_);
+
 
     expose(area);
 
