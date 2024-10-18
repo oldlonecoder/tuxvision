@@ -24,7 +24,7 @@ for(auto it = _toplevels_.begin(); it != _toplevels_.end(); it++)\
 
 
 screen* screen::_screen_{nullptr};
-
+terminal::vchar::back_buffer screen::_toplevels_bb_; ///< Prepared screen content buffer.
 screen *screen::me()
 {
     return screen::_screen_;

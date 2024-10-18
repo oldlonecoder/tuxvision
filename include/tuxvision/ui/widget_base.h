@@ -60,6 +60,9 @@ public:
         rectangle _geometry_{};
         widget_base* _parent_dc_{nullptr};
         color::pair _colors_{};
+        friend class widget_base;
+        friend class screen;
+        friend class window;
         //...
     public:
         painter_dc() = default;
@@ -89,7 +92,7 @@ public:
 
     virtual book::code draw();
     virtual book::code dirty(const rectangle& dirty_rect={});
-    widget_base::painter_dc begin_draw();
+    widget_base::painter_dc begin_draw(const rectangle& sub_area={});
     void end_draw(widget_base::painter_dc& edc);
     void clear();
 

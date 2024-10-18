@@ -122,7 +122,8 @@ terminal::vchar::string::iterator widget_base::operator*()
 
 book::code widget_base::draw()
 {
-    return book::code::notimplemented;
+    clear();
+    return book::code::done;
 }
 
 
@@ -140,6 +141,16 @@ book::code widget_base::dirty(const rectangle &dirty_rect)
     return book::code::accepted;
 }
 
+widget_base::painter_dc widget_base::begin_draw(const rectangle& sub_area)
+{
+    return {this, sub_area };
+}
+
+void widget_base::end_draw(painter_dc &edc)
+{
+    dirty(edc._geometry_);
+}
+
 
 
 
@@ -150,8 +161,9 @@ void widget_base::clear()
 }
 
 /*!
- * \brief widget_base::render
+ * \brief Instance public widget_base::render
  * \return  book::code::done or reject if not visible.
+ * \note IMPORTANT! This code is temporary. It live the duration of early dev.
  */
 book::code widget_base::render()
 {
