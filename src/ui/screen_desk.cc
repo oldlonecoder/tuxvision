@@ -234,7 +234,7 @@ void screen::commit_screen()
     if(!r)
         r = _geometry_;
 
-
+    render();
 }
 
 // -----------------------------------------------------
@@ -257,7 +257,7 @@ book::code screen::dirty(const rectangle &_r)
 
 book::code screen::render()
 {
-    return book::code::notimplemented;
+    return widget_base::render();
 }
 
 book::code screen::draw()
