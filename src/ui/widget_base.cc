@@ -137,7 +137,8 @@ book::code widget_base::dirty(const rectangle &dirty_rect)
     if(!_dirty_area_)
         _dirty_area_ = dirty_rect;
     else
-        _dirty_area_ = _dirty_area_ | dirty_rect;
+        _dirty_area_ |= dirty_rect;
+
     return book::code::accepted;
 }
 

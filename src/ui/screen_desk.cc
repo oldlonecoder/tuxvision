@@ -19,14 +19,22 @@ namespace tux::ui
 
 
 #define UPDATE_ZORDER \
-for(auto it = _toplevels_.begin(); it != _toplevels_.end(); it++)\
-    (*it)->_tli_ = it;
+for(auto it = _toplevels_.begin(); it != _toplevels_.end(); it++) (*it)->_tli_ = it;
+
 
 
 screen* screen::_screen_{nullptr};
-terminal::vchar::back_buffer screen::_toplevels_bb_; ///< Prepared screen content buffer.
+terminal::vchar::back_buffer screen::__back_buffer_; ///< Prepared screen content buffer.
+
+
+/*!
+ * \brief Static public screen::me
+ * \return  singleton instance of the app screen.
+ *
+ */
 screen *screen::me()
 {
+    // ... Handle idiot calls ...
     return screen::_screen_;
 }
 
@@ -97,7 +105,7 @@ book::code screen::start()
     new screen("screen ios");
     terminal::begin();
     screen::_screen_->set_geometry(terminal::geometry());
-    screen::_toplevels_bb_ = std::make_shared<terminal::vchar::string>(screen::_screen_->_geometry_.dwh.area(), terminal::vchar(screen::_screen_->_colors_));
+    screen::__back_buffer_ = std::make_shared<terminal::vchar::string>(screen::_screen_->_geometry_.dwh.area(), terminal::vchar(screen::_screen_->_colors_));
 
     book::out() << color::blueviolet <<  screen::_screen_->class_name() << color::grey100 << "::" << color::yellow << screen::_screen_->id() << color::reset << " double back_buffer setup complete.";
     //...
@@ -133,15 +141,16 @@ book::code screen::show_toplevel(widget_base* wb)
     return book::code::notimplemented;
 }
 
-book::code screen::draw_toplevel(widget_base* wb)
-{
+// book::code screen::draw_toplevel(widget_base* wb)
+// {
 
-    return book::code::notimplemented;
-}
+//     return book::code::notimplemented;
+// }
 
 book::code screen::hide_toplevel(widget_base* wb)
 {
-    pop_widget(wb);
+    //pop_widget(wb);
+    dirty_toplevel(wb);
 
     return book::code::notimplemented;
 }
@@ -192,10 +201,11 @@ book::code screen::push_back(widget_base *wb)
 /*!
  * \brief screen::push_front un nouvel arrivant chez les toplevels!
  * \param wb
- * \return
+ * \return  accepted if added, rejected if exists or not a toplevel widget(_base)
  */
 book::code screen::push_front(widget_base *wb)
 {
+    // Refresh
     UPDATE_ZORDER
 
     auto it = _toplevels_.end();
@@ -210,15 +220,80 @@ book::code screen::push_front(widget_base *wb)
     }
 
     _toplevels_.push_back(wb);
-    UPDATE_ZORDER
+    // --- todo: 'bitblit' wb onto __back_buffer.
+    _dirty_area_ = wb->_geometry_;
+    auto local = wb->_geometry_.tolocal();
+    _dirty_area_ = _dirty_area_ & _geometry_.tolocal();
+    if(!_dirty_area_)
+    {
+        book::message() << book::code::oob << wb->id() << "' is not visible, reject screen update";
+        return book::code::rejected;
+    }
+    local += ui::cxy{_dirty_area_.a};
+    local = _dirty_area_ & local;
+    local -= _dirty_area_.a;
 
+    for(int y = 0; y < local.dwh.h; y++)
+    {
+        wb->peek_xy(local.a+ui::cxy{0,y});
+        auto bbit = screen::__back_buffer_->begin() + _dirty_area_.a.x + _dirty_area_.a.y * _geometry_.dwh.w;
+        std::copy(wb->_iterator_, wb->_iterator_ + *local.width<size_t>(), bbit);
+    }
+    wb->_tli_ = --_toplevels_.end(); //expose(wb->_geometry_);
+
+    UPDATE_ZORDER
     return book::code::accepted;
 }
 
-rectangle screen::get_exposed(widget_base* wb)
+
+
+/*!
+ * \brief Instance protected (internal) virtual screen::dirty
+ * \param _toplvl Top level widget to refresh on the back buffer.
+ * \return  accepted or rejected if _toplvl is not visible within screen's geometry.
+ */
+book::code screen::dirty_toplevel(widget_base *_toplvl)
 {
-    return {};
+    // take the dirty area of the toplvl widget to expose :
+    UPDATE_ZORDER;
+
+    if(query(_toplvl) == _toplevels_.end())
+    {
+        return book::code::rejected;
+    }
+
+    //auto area = _toplvl->_dirty_area_ + _toplvl->_geometry_.a; // to screen scale.
+
+    // Un mixte de vieux et de nouveau code hihihihihih:
+    // Mixing old and new code:
+    rectangle area{};
+    if(area = _toplvl->_dirty_area_ + _toplvl->_geometry_.a; !(screen::me()->_geometry_.tolocal() & area))
+    {
+        book::status() << book::fn::fun << book::code::oob << " :" << _toplvl->_dirty_area_ << " <> " << screen::me()->_geometry_.tolocal();
+        return book::code::rejected;
+    }
+    std::next(_toplvl->_tli_);
+
+    expose(area);
+
+    return book::code::notimplemented;
 }
+
+book::code screen::expose(const rectangle &bb_subarea)
+{
+    book::debug() << book::fn::fun << color::yellow << id() << color::reset << "::expose() : width:" << (_iterator_ + *_geometry_.width())-_bloc_->begin();
+    //_dirty_area_ = {};
+    for(int y=0; y < _dirty_area_.dwh.h; y++)
+    {
+        auto bbit = screen::__back_buffer_->begin() + _dirty_area_.a.x + _dirty_area_.a.y * _geometry_.dwh.w;
+        terminal::cursor({_dirty_area_.a + ui::cxy{0,y}});
+        terminal::vchar::render_string(bbit, bbit + _dirty_area_.dwh.w);
+    }
+    std::cout  << std::flush;
+    _dirty_area_ = {};
+    return book::code::complete;
+}
+
 
 auto screen::query(widget_base *wb) -> std::list<widget_base*>::iterator
 {
@@ -240,19 +315,20 @@ void screen::commit_screen()
 // -----------------------------------------------------
 
 
-/*!
- * \brief Instance public screen::dirty
- * \param _r  validate boundaries before applying dirty_area union with _r.
- * \return rejected if _r is invalid; accepted and applied if valid and within _geometry_.
- */
-book::code screen::dirty(const rectangle &_r)
-{
-    auto r = _geometry_ & _r;
-    if(!r) return book::code::rejected;
-    _dirty_area_ |= r;
+// /*!
+//  * \brief Instance public screen::dirty
+//  * \param _r  validate boundaries before applying dirty_area union with _r.
+//  * \return rejected if _r is invalid; accepted and applied if valid and within _geometry_.
+//  */
+// book::code screen::dirty(const rectangle &_r)
+// {
+//     auto r = _geometry_ & _r;
+//     if(!r) return book::code::rejected;
+//     _dirty_area_ |= r;
 
-    return book::code::accepted;
-}
+
+//     return book::code::accepted;
+// }
 
 
 book::code screen::render()
@@ -264,6 +340,7 @@ book::code screen::draw()
 {
     auto writer = begin_draw();
     writer.clear();
+    end_draw(writer);
 
     return book::code::notimplemented;
 }

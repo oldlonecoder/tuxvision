@@ -16,28 +16,6 @@ class _TUXVISION_ widget_base : public object
 
     terminal::vchar::back_buffer _bloc_{nullptr};
 
-protected:
-    rectangle _geometry_{}; ///< Dimensions, internal cursor position
-    rectangle _dirty_area_{};
-
-    std::string _theme_id_{"Default"};
-    // --------- UI style and State----------------
-    color::pair                          _colors_{};
-    globals::colors::attr_db::components _style_{};
-    globals::colors::attr_db::elements   _theme_elements_{};
-    globals::wstate::Type                _state_{globals::wstate::Active};
-    globals::anchor::value               _ancre_{globals::anchor::fixed};
-    globals::uistyle::Type               _uistyle_{globals::uistyle::Unset};
-    globals::wflags::Type                _uiflags_{globals::wflags::Unset};
-
-    // --------------------------------------------
-
-    virtual book::code auto_fit(globals::anchor::value anchor_value=globals::anchor::fixed);
-    virtual book::code resize(ui::size new_sz);
-
-    //terminal::vchar* _bkcrs_{nullptr}; ///< pointer to vchar at the current rectangle::cursor position.
-    terminal::vchar::string::iterator _iterator_{}; ///< Normal std::vector iterator available for navigation and io.
-                                                    ///< It is safe to assign an iterator since read-write never invalidate the iterator.
 
 
 public:
@@ -91,14 +69,38 @@ public:
     };
 
     virtual book::code draw();
-    virtual book::code dirty(const rectangle& dirty_rect={});
     widget_base::painter_dc begin_draw(const rectangle& sub_area={});
     void end_draw(widget_base::painter_dc& edc);
     void clear();
 
-    virtual book::code render();
+
     bool is_toplevel() { return _uiflags_& (globals::wflags::TopLevel|globals::wflags::Floating); }
     terminal::vchar* vc();
+
+protected:
+    rectangle _geometry_{}; ///< Dimensions, internal cursor position
+    rectangle _dirty_area_{};
+
+    std::string _theme_id_{"Default"};
+    // --------- UI style and State----------------
+    color::pair                          _colors_{};
+    globals::colors::attr_db::components _style_{};
+    globals::colors::attr_db::elements   _theme_elements_{};
+    globals::wstate::Type                _state_{globals::wstate::Active};
+    globals::anchor::value               _ancre_{globals::anchor::fixed};
+    globals::uistyle::Type               _uistyle_{globals::uistyle::Unset};
+    globals::wflags::Type                _uiflags_{globals::wflags::Unset};
+
+    // --------------------------------------------
+
+    virtual book::code auto_fit(globals::anchor::value anchor_value=globals::anchor::fixed);
+    virtual book::code resize(ui::size new_sz);
+public: virtual book::code render(); protected:
+    virtual book::code dirty(const rectangle& dirty_rect={});
+    //terminal::vchar* _bkcrs_{nullptr}; ///< pointer to vchar at the current rectangle::cursor position.
+    terminal::vchar::string::iterator _iterator_{}; ///< Normal std::vector iterator available for navigation and io.
+        ///< It is safe to assign an iterator since read-write never invalidate the iterator.
+
 private:
     friend class screen;
 
