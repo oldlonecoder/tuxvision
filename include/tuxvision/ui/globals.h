@@ -40,15 +40,15 @@ namespace tux::globals
 namespace justify
 {
 using Type = U8;
-static constexpr U8 left = 0x01;
-static constexpr U8 right = 0x02;
-static constexpr U8 hcenter = 0x04;
-static constexpr U8 vcenter = 0x08;
-static constexpr U8 center = 0x0C;
-static constexpr U8 word_wrap = 0x10;
-static constexpr U8 prefix = 0x20;
-static constexpr U8 suffix = 0x40;
-static constexpr U8 auto_stretch = 0x80;
+static constexpr U8 left        = 0x01; ///< Justify left
+static constexpr U8 right       = 0x02; ///< Justify right
+static constexpr U8 hcenter     = 0x04; ///< Justify align horizontally at the center
+static constexpr U8 vcenter     = 0x08; ///< Justify Justify align vertically at the center
+static constexpr U8 center      = 0x0C; ///< Justify Vertical and Horizontal center
+static constexpr U8 word_wrap   = 0x10; ///< Justify word wrap
+static constexpr U8 prefix      = 0x20; ///< Justify prefix
+static constexpr U8 suffix      = 0x40; ///< Justify suffix
+static constexpr U8 auto_stretch = 0x80; ///< Justify auto-stretch
 }
 
 
@@ -59,10 +59,10 @@ static constexpr U8 auto_stretch = 0x80;
 namespace direction
 {
 using type = I8;
-static constexpr I8 left = -1;
-static constexpr I8 right = 1;
-static constexpr I8 up = 2;
-static constexpr I8 down = -2;
+static constexpr I8 left = -1; ///< to left
+static constexpr I8 right = 1; ///< to right
+static constexpr I8 up = 2;    ///< up
+static constexpr I8 down = -2; ///< down
 }
 
 /**
@@ -72,11 +72,11 @@ static constexpr I8 down = -2;
 namespace wflags
 {
 using Type = U16;
-static constexpr Type Unset = 0x0000;
-static constexpr Type TopLevel = 0x0001;
-static constexpr Type Floating = 0x0002;
-static constexpr Type Child = 0x0004;
-static constexpr Type Parent = 0x0008;
+static constexpr Type Unset = 0x0000;    ///< unset
+static constexpr Type TopLevel = 0x0001; ///< Object is a top level widget
+static constexpr Type Floating = 0x0002; ///< Floating widget ( and top level)
+static constexpr Type Child = 0x0004;    ///< Object/widget is a child widget
+static constexpr Type Parent = 0x0008;   ///< widget or object hasd a parent object
 //...
 }
 
@@ -84,15 +84,15 @@ static constexpr Type Parent = 0x0008;
 namespace uistyle
 {
 using Type = U16;
-static constexpr Type Unset     = 0x0000;
-static constexpr Type Frame     = 0x0001;
-static constexpr Type Caption   = 0x0002;
-static constexpr Type Input     = 0x0040;
-static constexpr Type MultiLine = 0x0080;
-static constexpr Type Glyph     = 0x0100;
-static constexpr Type statusbar = 0x0200;
-static constexpr Type hscroll   = 0x0400;
-static constexpr Type vscroll   = 0x0800;
+static constexpr Type Unset     = 0x0000; ///< Unset
+static constexpr Type Frame     = 0x0001; ///< Widget has a frame surrounding it (within geometry)
+static constexpr Type Caption   = 0x0002; ///< Widget has a Caption label
+static constexpr Type Input     = 0x0040; ///< Widget has or is an Input Field
+static constexpr Type MultiLine = 0x0080; ///< Multiline input field
+static constexpr Type Glyph     = 0x0100; ///< Glyph flag. Widget or widget's children components.
+static constexpr Type statusbar = 0x0200; ///< Is a statusbar and/or has a statusbar
+static constexpr Type hscroll   = 0x0400; ///< horizontally scrollable
+static constexpr Type vscroll   = 0x0800; ///< vertically scrollable
 }
 /**
  * @brief Widget ui state enums or'ed flags
@@ -140,6 +140,10 @@ static constexpr anchor::value fit_vcenter  = 0x0200;
 namespace colors
 {
 
+/*!
+ * \brief The attr_db class
+ * Databse set of the colors. Theme, components, then state
+ */
 struct attr_db
 {
     using components = std::map<wstate::Type,   color::pair>;
