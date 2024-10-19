@@ -1,9 +1,0 @@
-<map id="tux::cadre" name="tux::cadre">
-<area shape="rect" id="Node000001" title=" " alt="" coords="186,268,273,296"/>
-<area shape="rect" id="Node000002" href="$structtux_1_1color_1_1pair.html" title=" " alt="" coords="5,5,121,33"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,46,116,138,147,192,183,242,210,265,206,269,179,246,142,195,111,140,70,49"/>
-<area shape="rect" id="Node000003" href="$structtux_1_1cadre_1_1frame__data.html" title=" " alt="" coords="145,5,314,33"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,49,232,268,227,268,227,49"/>
-<area shape="rect" id="Node000004" href="$structtux_1_1cadre_1_1frame__matrix.html" title="1v x 4h matrix for addressing Frame components" alt="" coords="338,5,521,33"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="413,47,242,269,238,266,408,44"/>
-</map>

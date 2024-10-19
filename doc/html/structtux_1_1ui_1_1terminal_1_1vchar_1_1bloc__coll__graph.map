@@ -1,7 +1,0 @@
-<map id="tux::ui::terminal::vchar::bloc" name="tux::ui::terminal::vchar::bloc">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,208,139,252"/>
-<area shape="rect" id="Node000002" href="$structtux_1_1ui_1_1size.html" title=" " alt="" coords="24,115,120,143"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,158,75,207,69,207,69,158"/>
-<area shape="rect" id="Node000003" href="$structtux_1_1ui_1_1cxy.html" title=" " alt="" coords="25,5,119,33"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="75,48,75,115,69,115,69,48"/>
-</map>

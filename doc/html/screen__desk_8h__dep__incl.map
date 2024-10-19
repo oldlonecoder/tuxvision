@@ -1,7 +1,0 @@
-<map id="include/tuxvision/ui/screen_desk.h" name="include/tuxvision/ui/screen_desk.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="96,5,244,50"/>
-<area shape="rect" id="Node000002" href="$application_8cc.html" title=" " alt="" coords="5,98,156,126"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,63,97,99,93,95,133,59"/>
-<area shape="rect" id="Node000003" href="$screen__desk_8cc.html" title=" " alt="" coords="180,98,339,126"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,59,247,95,243,99,203,63"/>
-</map>

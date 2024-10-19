@@ -1,7 +1,0 @@
-<map id="include/tuxvision/ui/application.h" name="include/tuxvision/ui/application.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="82,5,231,50"/>
-<area shape="rect" id="Node000002" href="$application_8cc.html" title=" " alt="" coords="5,98,156,126"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,63,95,99,91,96,124,60"/>
-<area shape="rect" id="Node000003" href="$main_8cc.html" title=" " alt="" coords="180,98,285,126"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="189,60,222,96,218,99,185,63"/>
-</map>
