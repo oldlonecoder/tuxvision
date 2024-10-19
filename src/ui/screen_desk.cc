@@ -141,14 +141,53 @@ book::code screen::show_toplevel(widget_base* wb)
     return book::code::notimplemented;
 }
 
-// book::code screen::draw_toplevel(widget_base* wb)
-// {
 
-//     return book::code::notimplemented;
+
+/*!
+ * \brief Private[internal] instance screen::refresh_back_buffer
+ *
+ *  * Refresh area of screen widget back buffer onto the "desktop" back buffer.
+ * Iterates top-level widgets, z-ordered, in intersection with the affected area \c _area
+ *
+ * \param ui::rectnalge _area : affected area.
+ * \return complete.
+ */
+book::code screen::refresh_back_buffer(const rectangle& _area )
+{
+    peek_xy(_area.a);
+    //auto dest = screen::__back_buffer_->begin() + _area.a.x + *_area.width() * _area.a.y;
+    for(int y = 0; y < _area.height(); y++)
+    {
+        peek_xy(_area.a);
+        //auto dest = __back_buffer_->begin() + _area.a.x + *_area.width() * _area.a.y;
+        std::copy(_iterator_, _iterator_ + *_area.width(),  __back_buffer_->begin() + _area.a.x + *_area.width() * _area.a.y);
+    }
+
+    for(auto* tlw : screen::_toplevels_)
+    {
+        dirty_toplevel(tlw);
+    }
+
+    render();
+
+    return book::code::notimplemented;
+}
+
+
+// book::code refresh_area(terminal::vchar::string::iterator src, terminal::vchar::string::iterator dest, const rectangle& _a)
+// {
+//
 // }
 
 book::code screen::hide_toplevel(widget_base* wb)
 {
+    _dirty_area_ = _geometry_ & wb->_geometry_;
+    if(!_dirty_area_)
+        return book::code::rejected;
+
+    _toplevels_.erase(wb->_tli_);
+    // refresh_area(_dirty_area_);
+
     //pop_widget(wb);
     dirty_toplevel(wb);
 
@@ -272,26 +311,30 @@ book::code screen::dirty_toplevel(widget_base *_toplvl)
         book::status() << book::fn::fun << book::code::oob << " :" << _toplvl->_dirty_area_ << " <> " << screen::me()->_geometry_.tolocal();
         return book::code::rejected;
     }
-    auto n = std::next(_toplvl->_tli_);
-
-
+    //auto n = std::next(_toplvl->_tli_);
     expose(area);
-
-    return book::code::notimplemented;
+    //...
+    commit(area);
+    return book::code::complete;
 }
 
-book::code screen::expose(const rectangle &bb_subarea)
+/*!
+ * \brief Private instance screen::commit
+ * Commits given area of the back buffer array to the screen (console terminal)
+ * \param bb_subarea
+ * \return book::code::complete
+ */
+book::code screen::commit(const rectangle &bb_subarea)
 {
-    book::debug() << book::fn::fun << color::yellow << id() << color::reset << "::expose() : width:" << (_iterator_ + *_geometry_.width())-_bloc_->begin();
-    //_dirty_area_ = {};
-    for(int y=0; y < _dirty_area_.dwh.h; y++)
+    book::debug() << book::fn::fun << color::yellow << id() << color::reset << "::commit() area:" << color::lightsteelblue3 << bb_subarea;
+
+    for(int y=0; y < bb_subarea.dwh.h; y++)
     {
-        auto bbit = screen::__back_buffer_->begin() + _dirty_area_.a.x + _dirty_area_.a.y * _geometry_.dwh.w;
-        terminal::cursor({_dirty_area_.a + ui::cxy{0,y}});
-        terminal::vchar::render_string(bbit, bbit + _dirty_area_.dwh.w);
+        auto bbit = screen::__back_buffer_->begin() + bb_subarea.a.x + bb_subarea.a.y * _geometry_.dwh.w;
+        terminal::cursor({bb_subarea.a + ui::cxy{0,y}});
+        terminal::vchar::render_string(bbit, bbit + bb_subarea.dwh.w);
     }
     std::cout  << std::flush;
-    _dirty_area_ = {};
     return book::code::complete;
 }
 

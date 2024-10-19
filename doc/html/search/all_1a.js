@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['w_0',['w',['../structtux_1_1ui_1_1size.html#adc4834b1d0e80160fea71a5d2da4881f',1,'tux::ui::size']]],
+  ['warning_1',['warning',['../structtux_1_1glyph.html#a65c9e3ef111c76edec5d1cfac10ac850',1,'tux::glyph::warning'],['../classtux_1_1est_1_1node.html#a2a2f1f6aa46ba292454e36d0453355cc',1,'tux::est::node::warning()'],['../structbook_1_1logentry.html#afafb378c48fc642b28882f039e8ce4a4',1,'book::logentry::warning()'],['../classbook.html#a1d49c0933e5d1868aa6b0ec61b6f72e3',1,'book::warning(std::source_location src=std::source_location::current())'],['../classbook.html#a8bc7b8fdf5c26510130d7bf122f511e5a7b83d3f08fa392b79e3f553b585971cd',1,'book::warning']]],
+  ['way_20to_20experiment_20coding_20a_20poupourri_20stuff_20such_20as_20book_20logging_20application_20journal_20with_20other_20support_20goodies_2',['My personal c++ not modern way to experiment coding a poupourri stuff such as book/logging application journal with other support goodies.',['../md_README.html#autotoc_md1',1,'']]],
+  ['weekday_3',['weekday',['../classbook.html#a14650aca4e702ddfe0fc795f3410a905a953890fa54117bf74bdb65bbf12aeb84',1,'book']]],
+  ['what_4',['what',['../classbook_1_1exception.html#a1c238b8557694da66449350713a8d837',1,'book::exception']]],
+  ['wheat1_5',['wheat1',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a6fe7237db8d5e0e34c1813c0dc6b614d',1,'tux::color']]],
+  ['wheat4_6',['wheat4',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29aaa29a0ee6c7a57bc9e10f80ed8bb5255',1,'tux::color']]],
+  ['while_7',['While',['../namespacetux_1_1lex_1_1mnemonic.html#af6a9f5d7b5dc39e207c63c989e898c53',1,'tux::lex::mnemonic::While'],['../namespacetux_1_1lex_1_1lexem.html#a62f03e4383f4f135b77ce88eb2ad3520',1,'tux::lex::lexem::While']]],
+  ['white_8',['white',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29af3c79b3197f5867487a720d60e1dcfc6',1,'tux::color']]],
+  ['widget_5fbase_9',['widget_base',['../classtux_1_1ui_1_1widget__base.html',1,'tux::ui::widget_base'],['../classtux_1_1ui_1_1widget__base_1_1painter__dc.html#ace44991c271eefc2cd42355dee6de34a',1,'tux::ui::widget_base::painter_dc::widget_base'],['../classtux_1_1ui_1_1widget__base.html#a5cbc08799aa9b09b4854f047076422eb',1,'tux::ui::widget_base::widget_base()'],['../classtux_1_1ui_1_1widget__base.html#ae610b108e6885d3f299580c864231121',1,'tux::ui::widget_base::widget_base(object *_parent_obj, const std::string _id, globals::uistyle::Type _ui_style=globals::uistyle::Unset)']]],
+  ['widget_5fbase_2ecc_10',['widget_base.cc',['../widget__base_8cc.html',1,'']]],
+  ['widget_5fbase_2eh_11',['widget_base.h',['../widget__base_8h.html',1,'']]],
+  ['widget_5fpainter_2ecc_12',['widget_painter.cc',['../widget__painter_8cc.html',1,'']]],
+  ['width_13',['width',['../structtux_1_1ui_1_1rectangle.html#a3bd2a892885d0df74a47040ba235062f',1,'tux::ui::rectangle']]],
+  ['win_14',['win',['../structtux_1_1ui_1_1string2d.html#a738754329723726096e7a9a86d080efa',1,'tux::ui::string2d']]],
+  ['window_15',['window',['../classtux_1_1ui_1_1widget__base_1_1painter__dc.html#a4b01d44f6fa9d0aac31c5905d42c0404',1,'tux::ui::widget_base::painter_dc']]],
+  ['windows_16',['windows',['../structtux_1_1glyph.html#a968699d419042a38f41a401b211374cb',1,'tux::glyph']]],
+  ['with_20other_20api_20having_20the_20same_20class_20names_17',['The Master ( or Root ) namespace is &apos;::&lt;font color=&quot;#809020&quot;&gt;tux&lt;/font&gt;&apos; to prevent name clashing with other API having the same class names.',['../md_README.html#autotoc_md6',1,'']]],
+  ['with_20other_20support_20goodies_18',['My personal c++ not modern way to experiment coding a poupourri stuff such as book/logging application journal with other support goodies.',['../md_README.html#autotoc_md1',1,'']]],
+  ['with_20valgrind_19',['- ### TDDV ( using my own &apos;Test-Driven-Development&apos; cycles with &apos;Valgrind&apos;)',['../md_README.html#autotoc_md3',1,'']]],
+  ['word_20',['word',['../structtux_1_1string_1_1word.html',1,'tux::string']]],
+  ['words_21',['words',['../classtux_1_1string.html#af6f75cd42a5387f8a2291ab527fcfbd2',1,'tux::string']]],
+  ['world_22',['world',['../structtux_1_1glyph.html#abcf5f50662105e352532a7d23b63f621',1,'tux::glyph']]],
+  ['world_5fgrid_23',['world_grid',['../structtux_1_1glyph.html#a832e4a65bf672daad3705f0b419d52cd',1,'tux::glyph']]]
+];

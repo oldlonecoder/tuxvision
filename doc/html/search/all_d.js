@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['je_20n_20ai_20pas_20l_20intention_20de_20publier_20mon_20projet_20dans_20la_20nature_20pour_20reviews_20car_20il_20n_20y_20a_20pas_20assez_20de_20tests_20et_20il_20est_20loin_20d_20être_20conforme_20aux_20normes_20oss_0',['- Attention(fr.CA) ; Avertissement : std smart pointers presque inexistants ; (presque) tout est dangerusement et sauvagement brut ! Ce projet est destiné à mon apprentissage personnel des systèmes de bas niveau et à leurs exercices. Je n&apos;ai PAS l&apos;intention de publier mon projet dans la nature pour reviews car il n&apos;y a pas assez de tests et il est loin d&apos;être conforme aux normes OSS.',['../md_README.html#autotoc_md2',1,'']]],
+  ['journal_20with_20other_20support_20goodies_1',['My personal c++ not modern way to experiment coding a poupourri stuff such as book/logging application journal with other support goodies.',['../md_README.html#autotoc_md1',1,'']]],
+  ['jsr_2',['JSR',['../classtux_1_1est_1_1bloc.html#a040bfd3eff20d95909df865da3566d40',1,'tux::est::bloc::JSR()'],['../classtux_1_1est_1_1node.html#a3e1c4091a3ad8ec6953b0dd93a06d56a',1,'tux::est::node::JSR()'],['../classtux_1_1est_1_1variable.html#ae58c5cfb1bdd021be7aabdf2c4c0c8ab',1,'tux::est::variable::JSR()']]]
+];

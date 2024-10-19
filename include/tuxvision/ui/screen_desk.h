@@ -45,10 +45,10 @@ protected:
     book::code resize(ui::size new_sz) override;
     // --- Toplevel widget management. ( ANY widget can be a toplevel widget )
     book::code show_toplevel(widget_base* wb);
-    book::code hide_toplevel(widget_base* wb);
+    book::code hide_toplevel(widget_base* wb); //
     book::code toplevel_moved(widget_base* wb);
     book::code pop_widget(widget_base* wb);
-    book::code put_front(widget_base* wb);
+    book::code put_front(widget_base* wb); // FAIT,  À TESTER
     book::code push_back(widget_base* wb);
     book::code push_front(widget_base* wb);
     rectangle get_exposed(widget_base* wb);
@@ -61,7 +61,11 @@ private:
     void commit_screen();
     book::code render_widget(widget_base* wb);
     book::code dirty_toplevel(widget_base* _toplvl);
+    book::code commit(const rectangle& bb_subarea);
     book::code expose(const rectangle& bb_subarea);
+    book::code refresh_back_buffer(const rectangle& _area);
+
+
 
 };
 

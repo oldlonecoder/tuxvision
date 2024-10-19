@@ -24,7 +24,7 @@
 #include "tuxvision/journal/book.h"
 #include "tuxvision/tools/object.h"
 
-namespace tux::est 
+namespace tux::est
 {
 
 
@@ -43,11 +43,11 @@ protected:
     friend class variable;
     struct _TUXVISION_ storage_type
     {
-        integers::u8 lv    : 1; // 0 = rvalue non-assignable (such as const,leaf). 1= left value; assignable.
-        integers::u8 acc   : 1; // 1 = this node owns its acc storage - so will delete it in the destructor.
-        integers::u8 leave : 1; // 1 = leave flag because this node is a return/exit/exception/interrupt/break/continue node.
-        integers::u8 ss    : 1; // 1 = static storage.
-        integers::u8 ref   : 1; // 1 = cannot be deleted by the parent's destructor.
+        integers::u8 lv    : 1; ///< 0 = rvalue non-assignable (such as const,leaf). 1= left value; assignable.
+        integers::u8 acc   : 1; ///< 1 = this node owns its acc storage - so will delete it in the destructor.
+        integers::u8 leave : 1; ///< 1 = leave flag because this node is a return/exit/exception/interrupt/break/continue node.
+        integers::u8 ss    : 1; ///< 1 = static storage.
+        integers::u8 ref   : 1; ///< 1 = cannot be deleted by the parent's destructor.
         // ...
     }mem = { 0,0,0,0,0 }; ///< Storage types of this node.
 public:
@@ -112,7 +112,7 @@ private:
     static input_table_t input_tbl;
     static move_table_t move_tbl;
     static void build_move_table();
-    
+
     using operator_fn = alu(node::*)();
     using operators_table = std::map<lex::mnemonic::T, node::operator_fn>;
     static operators_table s_operator_table;

@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['palegreen1_0',['palegreen1',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a387a6eb22ac902d7dcf68fdc2494ecd8',1,'tux::color']]],
+  ['palegreen2_1',['palegreen2',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a382d2d6ac6a064933334602198b05e49',1,'tux::color']]],
+  ['palegreen3_2',['palegreen3',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29afbced68d8d08568f0fe61bdf4e1b6072',1,'tux::color']]],
+  ['palegreen4_3',['palegreen4',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29ab33f5902e7b04a8a586057931c131332',1,'tux::color']]],
+  ['paleturquoise1_4',['paleturquoise1',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a74ab57970a3aa8494afcb71a2012892e',1,'tux::color']]],
+  ['paleturquoise4_5',['paleturquoise4',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29ac6d1c72d473d0a0fd3ca097ff3c84e0f',1,'tux::color']]],
+  ['palevioletred1_6',['palevioletred1',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a752b07f41bfe33eef89b944ca9181bc0',1,'tux::color']]],
+  ['pgdown_7',['PgDown',['../structtux_1_1ui_1_1keyevent.html#a27d382d00f94cccde044baf87796514ba1d9f209c9f97369eca6cb65ffcec1f13',1,'tux::ui::keyevent']]],
+  ['pgup_8',['PgUp',['../structtux_1_1ui_1_1keyevent.html#a27d382d00f94cccde044baf87796514ba14f7e00695a7d48ea1f4f39694afe5f3',1,'tux::ui::keyevent']]],
+  ['pink1_9',['pink1',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a922565b025773d228aa8917f6d801f36',1,'tux::color']]],
+  ['pink3_10',['pink3',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a14e7b78d34b9857ab26ea2e577279507',1,'tux::color']]],
+  ['plum1_11',['plum1',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a6ca263b64f11e6a54a338a018a1affb4',1,'tux::color']]],
+  ['plum2_12',['plum2',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a3f19cddb0b84369c7195b75bfcae9765',1,'tux::color']]],
+  ['plum3_13',['plum3',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a02c89337423bdb8ddbea2c281072a011',1,'tux::color']]],
+  ['plum4_14',['plum4',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29aabf95b6c9d2c04b1eedc656cd8089341',1,'tux::color']]],
+  ['purple_15',['purple',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a5a3acb9fba1fbd72e050fa112138785a',1,'tux::color']]],
+  ['purple2_16',['purple2',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a60ec557007884d0612c09fde100f6b63',1,'tux::color']]],
+  ['purple3_17',['purple3',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29a9a05ff42238c2afe0c22956bf51eb53e',1,'tux::color']]],
+  ['purple4_18',['purple4',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29ab331e921da198ded2a7f166ec086e1b3',1,'tux::color']]],
+  ['purple5_19',['purple5',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29af727ea2b4d26b0d7227f3b3d8c7f2d88',1,'tux::color']]],
+  ['purple6_20',['purple6',['../structtux_1_1color.html#abd89b39911f23ba9e2fffc31a6cbbe29ac1d51f4a84ba22dc689067bc8e3a2f9e',1,'tux::color']]]
+];

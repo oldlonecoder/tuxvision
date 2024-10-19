@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['r_0',['R',['../structtux_1_1color_1_1data.html#ae641ddeb5bff718f9b1b73ad8cfe7b3f',1,'tux::color::data']]],
+  ['r_1',['r',['../structtux_1_1ui_1_1string2d.html#ab789c1f6d3e24d82ee338250e4e8d138',1,'tux::ui::string2d']]],
+  ['radical_2',['Radical',['../namespacetux_1_1lex_1_1mnemonic.html#a8ec731a7f1e273a613476e78aff2ffb7',1,'tux::lex::mnemonic::Radical'],['../namespacetux_1_1lex_1_1lexem.html#a84ffdd22da09fd0c316be331c32d6dc2',1,'tux::lex::lexem::Radical']]],
+  ['range_3',['Range',['../namespacetux_1_1lex_1_1mnemonic.html#aadce166a9dd6e43e34bebc3fccacc077',1,'tux::lex::mnemonic::Range'],['../namespacetux_1_1lex_1_1lexem.html#a88368a1b972865394906e1530296a057',1,'tux::lex::lexem::Range']]],
+  ['real_4',['real',['../structtux_1_1sscan_1_1numeric_1_1details.html#a459fcc5a2e042f2ecb7c02607c03ddb5',1,'tux::sscan::numeric::details::real'],['../structtux_1_1sscan_1_1numeric.html#a6d2609a09b59154e94aec337d7672fdb',1,'tux::sscan::numeric::real']]],
+  ['receive_5',['receive',['../structtux_1_1glyph.html#a3bebd263b15c16ec54b4d180de3bbe9b',1,'tux::glyph']]],
+  ['ref_6',['Ref',['../namespacetux_1_1lex_1_1type.html#a24f271d6242946fb4d4c3c6de90588c3',1,'tux::lex::type']]],
+  ['ref_7',['ref',['../structtux_1_1est_1_1node_1_1storage__type.html#aaab036818f95dc11633e3aae2d06a176',1,'tux::est::node::storage_type']]],
+  ['ref_5ftable_8',['ref_table',['../classtux_1_1token__table.html#a878b70721309c17f022b6334fd259ae1',1,'tux::token_table']]],
+  ['repeat_9',['Repeat',['../namespacetux_1_1lex_1_1mnemonic.html#a44a04f12416250a06a1c9d9a7b243f11',1,'tux::lex::mnemonic::Repeat'],['../namespacetux_1_1lex_1_1lexem.html#af001b61c8965c546d958eb790154d4b7',1,'tux::lex::lexem::Repeat']]],
+  ['required_10',['required',['../structtux_1_1cmd_1_1cmd__switch.html#a713d3d9389bc4398f0e95c2665af0dde',1,'tux::cmd::cmd_switch']]],
+  ['return_11',['Return',['../structtux_1_1sscan_1_1context.html#ad45cef8c98a2d4b3ff7cfcdd20f7fcf6',1,'tux::sscan::context::Return'],['../namespacetux_1_1lex_1_1mnemonic.html#a1d9dc162f70d8983ec08fc51ba6d8e47',1,'tux::lex::mnemonic::Return'],['../namespacetux_1_1lex_1_1lexem.html#a626a4ebec0e8c2c0d052f5b481769ede',1,'tux::lex::lexem::Return']]],
+  ['return_5fcodes_5fdictionary_12',['return_codes_dictionary',['../book_8cc.html#afc52227982f175c12b138c2097f7f1d0',1,'book.cc']]],
+  ['right_13',['Right',['../structtux_1_1cadre_1_1frame__matrix.html#a6dbac63f4fbca283850d75f5e2f79d40',1,'tux::cadre::frame_matrix']]],
+  ['right_14',['right',['../structtux_1_1ui_1_1mouse.html#a16b4bdbdc107efcdc7a8c134eb0e70fc',1,'tux::ui::mouse']]],
+  ['rightshift_15',['RightShift',['../namespacetux_1_1lex_1_1mnemonic.html#ae37865b9275723680b14048561a756c9',1,'tux::lex::mnemonic::RightShift'],['../namespacetux_1_1lex_1_1lexem.html#a9f24345b121b2520c9a8959ee9fd2ac9',1,'tux::lex::lexem::RightShift']]],
+  ['round_16',['Round',['../structtux_1_1cadre_1_1frame__matrix.html#a33920a5c41ba266ffebfc71ccb82e0f6',1,'tux::cadre::frame_matrix']]]
+];
