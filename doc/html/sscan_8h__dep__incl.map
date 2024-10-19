@@ -1,0 +1,38 @@
+<map id="include/tuxvision/tools/sscan.h" name="include/tuxvision/tools/sscan.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="496,5,664,50"/>
+<area shape="rect" id="Node000002" href="$lexer_8h.html" title=" " alt="" coords="45,283,214,328"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="500,58,438,82,370,112,299,149,234,193,184,239,147,284,143,281,180,236,230,189,297,145,367,108,436,77,498,53"/>
+<area shape="rect" id="Node000007" href="$token__data_8h.html" title=" " alt="" coords="434,98,603,143"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="559,64,535,99,531,96,555,61"/>
+<area shape="rect" id="Node000016" href="$token__data_8cc.html" title=" " alt="" coords="621,199,792,227"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="605,61,700,197,695,200,601,64"/>
+<area shape="rect" id="Node000017" href="$sscan_8cc.html" title=" " alt="" coords="679,106,814,134"/>
+<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="634,55,724,104,721,108,632,60"/>
+<area shape="rect" id="Node000003" href="$expression_8h.html" title=" " alt="" coords="83,469,240,513"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="128,343,127,381,132,420,140,445,151,467,146,469,135,447,127,421,122,381,123,343"/>
+<area shape="rect" id="Node000006" href="$lexer_8cc.html" title=" " alt="" coords="142,384,274,412"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="160,338,199,382,195,386,156,341"/>
+<area shape="rect" id="Node000004" href="$expression_8cc.html" title=" " alt="" coords="5,561,163,589"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="132,527,98,563,95,559,129,523"/>
+<area shape="rect" id="Node000005" href="$main_8cc.html" title=" " alt="" coords="187,561,293,589"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="194,523,229,559,225,563,190,526"/>
+<area shape="rect" id="Node000008" href="$node_8h.html" title=" " alt="" coords="440,191,597,235"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="521,158,521,190,516,190,516,158"/>
+<area shape="rect" id="Node000014" href="$tokens__table_8h.html" title=" " alt="" coords="245,191,414,235"/>
+<area shape="poly" id="edge14_Node000007_Node000014" title=" " alt="" coords="461,152,375,193,373,188,459,147"/>
+<area shape="poly" id="edge17_Node000007_Node000016" title=" " alt="" coords="578,147,681,196,678,201,576,152"/>
+<area shape="rect" id="Node000009" href="$variable_8h.html" title=" " alt="" coords="444,283,601,328"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="523,251,524,283,519,283,518,251"/>
+<area shape="rect" id="Node000013" href="$node_8cc.html" title=" " alt="" coords="625,292,743,320"/>
+<area shape="poly" id="edge13_Node000008_Node000013" title=" " alt="" coords="573,241,661,289,659,294,570,245"/>
+<area shape="rect" id="Node000010" href="$bloc_8h.html" title=" " alt="" coords="298,376,454,421"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="476,339,412,378,409,373,474,334"/>
+<area shape="rect" id="Node000012" href="$variable_8cc.html" title=" " alt="" coords="478,384,618,412"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="535,342,547,383,542,385,530,343"/>
+<area shape="poly" id="edge10_Node000010_Node000003" title=" " alt="" coords="312,430,214,471,212,466,310,425"/>
+<area shape="rect" id="Node000011" href="$bloc_8cc.html" title=" " alt="" coords="319,477,433,505"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="379,436,379,477,373,477,373,436"/>
+<area shape="poly" id="edge15_Node000014_Node000002" title=" " alt="" coords="269,245,178,285,176,280,267,240"/>
+<area shape="rect" id="Node000015" href="$tokens__table_8cc.html" title=" " alt="" coords="238,292,420,320"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="332,251,332,291,327,291,327,251"/>
+</map>

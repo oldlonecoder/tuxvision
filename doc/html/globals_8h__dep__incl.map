@@ -1,0 +1,27 @@
+<map id="include/tuxvision/ui/globals.h" name="include/tuxvision/ui/globals.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="636,5,784,50"/>
+<area shape="rect" id="Node000002" href="$terminal_8h.html" title=" " alt="" coords="636,98,784,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="713,66,713,98,708,98,708,66"/>
+<area shape="rect" id="Node000003" href="$widget__base_8h.html" title=" " alt="" coords="454,191,602,235"/>
+<area shape="poly" id="edge12_Node000001_Node000003" title=" " alt="" coords="670,62,626,100,581,148,546,192,542,188,577,145,622,96,667,58"/>
+<area shape="rect" id="Node000012" href="$globals_8cc.html" title=" " alt="" coords="809,106,934,134"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="764,56,850,104,847,108,761,60"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="654,152,572,193,570,188,652,148"/>
+<area shape="rect" id="Node000005" href="$application_8cc.html" title=" " alt="" coords="411,376,562,404"/>
+<area shape="poly" id="edge9_Node000002_Node000005" title=" " alt="" coords="720,158,723,197,721,243,710,289,700,310,687,330,661,353,629,370,596,381,562,388,561,382,594,376,627,365,658,349,683,326,696,308,705,287,715,242,717,197,714,159"/>
+<area shape="rect" id="Node000010" href="$terminal_8cc.html" title=" " alt="" coords="748,199,881,227"/>
+<area shape="poly" id="edge10_Node000002_Node000010" title=" " alt="" coords="748,151,801,197,797,201,745,155"/>
+<area shape="rect" id="Node000011" href="$terminal_8vchar_8cc.html" title=" " alt="" coords="905,199,1078,227"/>
+<area shape="poly" id="edge11_Node000002_Node000011" title=" " alt="" coords="793,145,951,196,950,201,792,150"/>
+<area shape="rect" id="Node000004" href="$screen__desk_8h.html" title=" " alt="" coords="11,283,159,328"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="439,233,172,286,160,289,159,283,171,281,438,228"/>
+<area shape="rect" id="Node000007" href="$widget__base_8cc.html" title=" " alt="" coords="184,292,344,320"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="451,243,303,294,301,289,450,238"/>
+<area shape="rect" id="Node000008" href="$widget__painter_8cc.html" title=" " alt="" coords="368,292,543,320"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="503,249,468,293,464,290,499,246"/>
+<area shape="rect" id="Node000009" href="$main_8cc.html" title=" " alt="" coords="567,292,672,320"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="562,244,608,289,604,293,558,248"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="175,326,414,373,412,378,174,331"/>
+<area shape="rect" id="Node000006" href="$screen__desk_8cc.html" title=" " alt="" coords="5,376,165,404"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="88,344,88,375,82,375,82,344"/>
+</map>

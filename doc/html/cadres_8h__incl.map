@@ -1,0 +1,22 @@
+<map id="include/tuxvision/tools/cadres.h" name="include/tuxvision/tools/cadres.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="242,5,410,50"/>
+<area shape="rect" id="Node000002" href="$colors_8h.html" title=" " alt="" coords="138,98,310,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,52,254,90,251,86,297,48"/>
+<area shape="rect" id="Node000007" href="$glyphes_8h.html" title=" " alt="" coords="335,98,519,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="354,48,401,86,397,90,351,52"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="153,174,288,201"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="226,126,225,158,219,158,221,126"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="312,174,374,201"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="247,124,311,163,308,168,244,128"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,174,129,201"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="197,129,110,169,107,164,195,124"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="398,174,456,201"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="261,124,384,168,383,173,260,129"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="391,129,273,171,271,165,389,124"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="414,128,371,165,368,161,410,124"/>
+<area shape="poly" id="edge10_Node000007_Node000006" title=" " alt="" coords="430,126,430,158,424,158,424,126"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="480,174,531,201"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="443,124,482,161,479,165,439,128"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="555,174,651,201"/>
+<area shape="poly" id="edge11_Node000007_Node000009" title=" " alt="" coords="459,124,559,165,557,170,457,129"/>
+</map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['┫_0',['┫',['../structtux_1_1cadre.html#aac704253cfdcab19d181b2bfc0afbf14',1,'tux::cadre']]]
+  ['┻_0',['┻',['../structtux_1_1cadre.html#a5f966c0f421ba730dd4890f513edd658',1,'tux::cadre']]]
 ];

@@ -25,11 +25,27 @@ widget_base::widget_base()
 
 }
 
+
+/*!
+ * \brief widget_base::widget_base
+ * Must be the only valid contructor used for instanciating any of the parent-childrend relational objects.
+ * \param _parent_obj
+ * \param _id
+ * \param _ui_style
+ */
 widget_base::widget_base(object *_parent_obj, const std::string _id, globals::uistyle::Type _ui_style):object(_parent_obj, _id),
     _uistyle_(_ui_style){}
 
 widget_base::~widget_base(){}
 
+
+
+/*!
+ * \brief widget_base::set_geometry
+ * Define the widget's geometry.
+ * \param r ui::rectangle : the requested geometry values.
+ * \return
+ */
 book::code widget_base::set_geometry(const rectangle &r)
 {
     book::info() << color::yellow << id() << color::reset << " requested geometry:" << r;
@@ -63,8 +79,10 @@ TOPLVL:
 
 /*!
  * \brief widget_base::set_theme
+ * Query the theme id from the colors::attr_db.
+ * Sets the internal _style_ and _colors_ from the query values.
  * \param theme_id
- * \return book::code value : rejected if the the is does not exist or accepted on succes
+ * \return accepted or rejected if the theme name does not exist.
  */
 book::code widget_base::set_theme(const std::string &theme_id)
 {
@@ -84,6 +102,12 @@ book::code widget_base::set_theme(const std::string &theme_id)
     return book::code::accepted;
 }
 
+/*!
+ * \brief widget_base::position
+ * Explicitely sets the internal iterator at the coordinates xy - _iterator_ is then ready for read/write operations.
+ * \param xy
+ * \return accepted or rejected if xy is pout of boundaries of local geometry.
+ */
 book::code widget_base::peek_xy(cxy xy)
 {
     CHECK_BLOC
@@ -100,6 +124,13 @@ book::code widget_base::peek_xy(cxy xy)
     return book::code::accepted;
 }
 
+
+/*!
+ * \brief widget_base::position
+ * Explicitely sets the internal iterator at the coordinates xy
+ * \param xy
+ * \return the value of _iterator_.
+ */
 terminal::vchar::string::iterator widget_base::position(cxy xy)
 {
     if(!_geometry_.goto_xy(xy))
@@ -120,6 +151,12 @@ terminal::vchar::string::iterator widget_base::operator*()
     return _iterator_;
 }
 
+/*!
+ * \brief widget_base::draw
+ * Self-draw or predefined draw() of the widget.
+ * At this area, the base class only clears and or reset the back buffer _bloc_ with the current colors
+ * \return
+ */
 book::code widget_base::draw()
 {
     clear();
@@ -127,6 +164,13 @@ book::code widget_base::draw()
 }
 
 
+/*!
+ * \brief widget_base::dirty
+ * Invalidating the sub-area defined by the dirty_rect rectangle. sub area is applied in Union operation [ui::rectangle::operator | (ui::rectangle rhs)]
+ *  between _dirty_area_ member attribute and the given dirty_rect argument.
+ * \param dirty_rect  mandatory valid rectangle.
+ * \return accepted or rejeted if dirty_rect is invlalid ( nul/unset rectangle )
+ */
 book::code widget_base::dirty(const rectangle &dirty_rect)
 {
     if(!dirty_rect)
@@ -142,11 +186,26 @@ book::code widget_base::dirty(const rectangle &dirty_rect)
     return book::code::accepted;
 }
 
+
+/*!
+ * \brief widget_base::begin_draw
+ *
+ * Creates an instance of widget_base::painter_dc object for different 'drawing' capabilities on the widget's back buffer _bloc_,
+ * drawing confined by the subarea.
+ *
+ * \param sub_area  confined rectangle within the back buffer geometry.
+ * \return new instance of widget_base::painter_dc.
+ */
 widget_base::painter_dc widget_base::begin_draw(const rectangle& sub_area)
 {
     return {this, sub_area };
 }
 
+/*!
+ * \brief widget_base::end_draw
+ * Triggers dirty call.
+ * \param edc
+ */
 void widget_base::end_draw(painter_dc &edc)
 {
     dirty(edc._geometry_);
@@ -154,7 +213,10 @@ void widget_base::end_draw(painter_dc &edc)
 
 
 
-
+/*!
+ * \brief widget_base::clear
+ * Just clears the widget's back buffer with the current colors
+ */
 void widget_base::clear()
 {
     CHECK_BLOC
@@ -164,7 +226,7 @@ void widget_base::clear()
 /*!
  * \brief Instance public widget_base::render
  * \return  book::code::done or reject if not visible.
- * \note IMPORTANT! This code is temporary. It live the duration of early dev.
+ * \note IMPORTANT! This code is temporary. It lives for the duration of early dev.
  */
 book::code widget_base::render()
 {
@@ -193,7 +255,13 @@ terminal::vchar *widget_base::vc()
 
 
 
-
+/*!
+ * \brief Protected instance widget_base::auto_fit
+ * Auto fit this widget into the parent widget according to the anchor value.
+ * \param anchor_value
+ * \return  accepted or rejected.
+ * \note As of Oct 2024, this method is not usable. It is actually in development and experimentation states.
+ */
 book::code widget_base::auto_fit(globals::anchor::value anchor_value)
 {
     if(anchor_value==anchor::fixed)
@@ -264,7 +332,7 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
         if(_ancre_ & anchor::fit_bottom)
         {
 
-            _geometry_.moveat({_geometry_.a.x, *area.height()-off.y*2});
+            _geometry_.moveat({_geometry_.a.x, *area.height()-off.y});
             book::out() << "fit bottom: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset;
         }
     }
@@ -275,6 +343,14 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
     return book::code::done;
 }
 
+
+/*!
+ * \brief widget_base::resize
+ * Resize the geometry of this widget.
+ * \param new_sz
+ * \return done.
+ * \note As of Oct. 2024, there is no size checking! tuxvision is in early dev/experiments/learning and R&D.
+ */
 book::code widget_base::resize(size new_sz)
 {
     CHECK_BLOC

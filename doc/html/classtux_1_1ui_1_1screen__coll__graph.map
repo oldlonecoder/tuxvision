@@ -1,0 +1,18 @@
+<map id="tux::ui::screen" name="tux::ui::screen">
+<area shape="rect" id="Node000001" title=" " alt="" coords="219,418,332,445"/>
+<area shape="poly" id="edge9_Node000001_Node000001" title=" " alt="" coords="350,424,359,431,351,439,333,441,333,436,349,434,354,432,347,428"/>
+<area shape="rect" id="Node000002" href="$classtux_1_1ui_1_1widget__base.html" title=" " alt="" coords="200,341,352,368"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="278,384,278,417,273,417,273,384"/>
+<area shape="rect" id="Node000003" href="$classtux_1_1object.html" title=" " alt="" coords="5,231,96,259"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,263,249,338,247,343,91,268"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="112,236,122,245,114,254,96,256,95,251,112,249,117,245,109,240"/>
+<area shape="rect" id="Node000004" href="$structtux_1_1ui_1_1rectangle.html" title="Rectangular Geometry object (inspired by the Qt project, many, many years ago)." alt="" coords="210,231,342,259"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="278,274,278,341,273,341,273,274"/>
+<area shape="rect" id="Node000005" href="$structtux_1_1ui_1_1cxy.html" title=" " alt="" coords="212,5,305,33"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="256,49,249,103,252,166,261,201,272,230,267,232,256,202,247,166,244,103,250,48"/>
+<area shape="rect" id="Node000006" href="$structtux_1_1ui_1_1size.html" title=" " alt="" coords="301,127,397,154"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="280,44,341,125,337,128,276,47"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="333,168,287,232,283,229,329,165"/>
+<area shape="rect" id="Node000007" href="$structtux_1_1color_1_1pair.html" title=" " alt="" coords="366,231,482,259"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="409,273,391,297,367,319,321,342,319,338,364,314,387,293,405,270"/>
+</map>

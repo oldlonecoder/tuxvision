@@ -1,0 +1,11 @@
+<map id="book::exception" name="book::exception">
+<area shape="rect" id="Node000001" title=" " alt="" coords="21,191,146,218"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,98,119,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,140,83,190,78,191,66,142"/>
+<area shape="rect" id="Node000003" href="$classbook.html" title=" " alt="" coords="143,98,197,126"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,139,98,192,94,188,145,135"/>
+<area shape="rect" id="Node000004" href="$classtux_1_1string.html" title="tux string for accumulating substring using std tools such as std::instrstram; ostringstream; std::fm..." alt="" coords="45,5,132,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="113,43,160,96,156,99,109,46"/>
+<area shape="rect" id="Node000005" href="$structbook_1_1header__component.html" title=" " alt="" coords="157,5,343,33"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="230,46,183,99,179,96,226,43"/>
+</map>

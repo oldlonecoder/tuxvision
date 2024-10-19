@@ -1,0 +1,21 @@
+<map id="tux::est::node" name="tux::est::node">
+<area shape="rect" id="Node000001" title=" " alt="" coords="667,126,777,154"/>
+<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="702,109,709,102,722,100,735,102,742,108,745,117,742,127,737,125,739,117,738,111,732,107,722,105,711,107,705,113"/>
+<area shape="rect" id="Node000002" href="$classtux_1_1object.html" title=" " alt="" coords="418,46,508,74"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="524,60,583,67,644,84,679,103,706,124,703,128,676,107,642,89,582,73,524,65"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="435,28,445,22,463,20,480,22,491,28,495,37,490,47,486,45,489,37,487,31,479,27,463,25,447,27,438,33"/>
+<area shape="rect" id="Node000003" href="$structtux_1_1est_1_1alu.html" title="Arithmetic Logical Unit." alt="" coords="414,98,512,126"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="528,116,667,132,666,137,528,122"/>
+<area shape="rect" id="Node000004" href="$uniontux_1_1est_1_1alu_1_1val.html" title=" " alt="" coords="47,60,173,87"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="189,79,414,104,414,110,188,85"/>
+<area shape="rect" id="Node000005" href="$structtux_1_1lex__token.html" title=" " alt="" coords="407,150,520,178"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="535,165,588,165,643,160,678,152,679,157,643,165,588,170,535,171"/>
+<area shape="rect" id="Node000006" href="$structtux_1_1sscan_1_1numeric_1_1details.html" title=" " alt="" coords="36,111,184,156"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="200,139,407,157,406,162,199,144"/>
+<area shape="rect" id="Node000007" href="$structtux_1_1lex__token_1_1location__data.html" title=" " alt="" coords="5,180,215,207"/>
+<area shape="poly" id="edge8_Node000005_Node000007" title=" " alt="" coords="230,185,337,177,406,169,407,175,338,182,230,190"/>
+<area shape="rect" id="Node000008" href="$structtux_1_1lex__token_1_1token__flags.html" title=" " alt="" coords="31,231,189,276"/>
+<area shape="poly" id="edge9_Node000005_Node000008" title=" " alt="" coords="204,242,270,229,336,207,348,198,360,188,406,172,407,177,363,193,351,202,339,212,272,234,205,248"/>
+<area shape="rect" id="Node000009" href="$structtux_1_1est_1_1node_1_1storage__type.html" title=" " alt="" coords="362,202,565,230"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="579,203,642,187,674,171,701,152,704,157,677,175,644,192,581,208"/>
+</map>

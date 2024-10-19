@@ -1,0 +1,14 @@
+<map id="tux::ui::event" name="tux::ui::event">
+<area shape="rect" id="Node000001" title=" " alt="" coords="337,242,444,269"/>
+<area shape="rect" id="Node000002" href="$structtux_1_1ui_1_1mouse.html" title=" " alt="" coords="5,132,120,160"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,166,139,192,189,215,265,236,337,247,336,252,264,241,187,220,136,197,92,171"/>
+<area shape="rect" id="Node000003" href="$structtux_1_1ui_1_1cxy.html" title=" " alt="" coords="16,5,109,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="65,48,65,132,60,132,60,48"/>
+<area shape="rect" id="Node000004" href="$structtux_1_1ui_1_1keyevent.html" title=" " alt="" coords="144,132,274,160"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="246,166,370,239,367,244,243,170"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="291,136,301,146,293,155,275,158,274,153,290,150,296,146,288,140"/>
+<area shape="rect" id="Node000005" href="$structtux_1_1ui_1_1commandevent.html" title=" " alt="" coords="366,132,538,160"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="439,174,400,243,395,240,435,172"/>
+<area shape="rect" id="Node000006" href="$structtux_1_1ui_1_1fileinputevent.html" title=" " alt="" coords="562,132,723,160"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="601,169,485,220,426,243,424,239,483,215,599,164"/>
+</map>

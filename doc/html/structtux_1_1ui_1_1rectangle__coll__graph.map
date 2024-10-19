@@ -1,0 +1,8 @@
+<map id="tux::ui::rectangle" name="tux::ui::rectangle">
+<area shape="rect" id="Node000001" title="Rectangular Geometry object (inspired by the Qt project, many, many years ago)." alt="" coords="5,231,137,259"/>
+<area shape="rect" id="Node000002" href="$structtux_1_1ui_1_1cxy.html" title=" " alt="" coords="24,5,118,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,49,65,103,64,166,72,230,66,231,59,166,59,103,65,48"/>
+<area shape="rect" id="Node000003" href="$structtux_1_1ui_1_1size.html" title=" " alt="" coords="114,127,210,154"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="92,44,154,125,150,128,88,47"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="142,168,85,232,81,229,138,164"/>
+</map>

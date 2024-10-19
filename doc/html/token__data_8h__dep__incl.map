@@ -1,0 +1,32 @@
+<map id="include/tuxvision/lexer/token_data.h" name="include/tuxvision/lexer/token_data.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="368,5,538,50"/>
+<area shape="rect" id="Node000002" href="$node_8h.html" title=" " alt="" coords="188,98,344,143"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="396,60,312,100,309,95,393,55"/>
+<area shape="rect" id="Node000011" href="$tokens__table_8h.html" title=" " alt="" coords="368,98,538,143"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="456,66,456,98,450,98,450,66"/>
+<area shape="rect" id="Node000015" href="$token__data_8cc.html" title=" " alt="" coords="562,106,733,134"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="514,54,620,104,618,108,512,59"/>
+<area shape="rect" id="Node000003" href="$variable_8h.html" title=" " alt="" coords="32,191,188,235"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="217,153,149,193,146,188,215,148"/>
+<area shape="rect" id="Node000010" href="$node_8cc.html" title=" " alt="" coords="212,199,331,227"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="271,158,273,198,268,199,266,158"/>
+<area shape="rect" id="Node000004" href="$bloc_8h.html" title=" " alt="" coords="5,283,162,328"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="102,251,92,284,87,282,97,249"/>
+<area shape="rect" id="Node000009" href="$variable_8cc.html" title=" " alt="" coords="186,292,325,320"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="159,242,236,289,233,294,157,246"/>
+<area shape="rect" id="Node000005" href="$expression_8h.html" title=" " alt="" coords="224,376,380,421"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="151,332,251,373,249,378,149,337"/>
+<area shape="rect" id="Node000008" href="$bloc_8cc.html" title=" " alt="" coords="27,384,140,412"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="86,344,86,384,81,384,81,344"/>
+<area shape="rect" id="Node000006" href="$expression_8cc.html" title=" " alt="" coords="145,469,302,496"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="273,434,238,470,234,466,269,430"/>
+<area shape="rect" id="Node000007" href="$main_8cc.html" title=" " alt="" coords="327,469,432,496"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="335,430,369,466,365,470,331,434"/>
+<area shape="rect" id="Node000012" href="$lexer_8h.html" title=" " alt="" coords="364,191,534,235"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="454,158,452,191,447,190,449,158"/>
+<area shape="rect" id="Node000014" href="$tokens__table_8cc.html" title=" " alt="" coords="558,199,740,227"/>
+<area shape="poly" id="edge14_Node000011_Node000014" title=" " alt="" coords="515,147,622,196,619,201,512,152"/>
+<area shape="poly" id="edge12_Node000012_Node000005" title=" " alt="" coords="421,249,390,285,320,377,315,374,385,282,417,245"/>
+<area shape="rect" id="Node000013" href="$lexer_8cc.html" title=" " alt="" coords="400,292,532,320"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="458,250,466,291,461,292,453,251"/>
+</map>

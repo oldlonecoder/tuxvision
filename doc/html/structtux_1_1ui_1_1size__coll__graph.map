@@ -1,0 +1,5 @@
+<map id="tux::ui::size" name="tux::ui::size">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,115,102,143"/>
+<area shape="rect" id="Node000002" href="$structtux_1_1ui_1_1cxy.html" title=" " alt="" coords="7,5,100,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,48,56,115,51,115,51,48"/>
+</map>
