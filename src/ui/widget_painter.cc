@@ -98,6 +98,13 @@ widget_base::painter_dc &widget_base::painter_dc::draw_frame(const rectangle &r)
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (ui::cxy new_xy)
 {
+    if(!_parent_dc_->peek_xy(new_xy + _geometry_.a))
+        throw book::exception()
+        [
+            book::except() << book::fn::fun << book::code::oob << color::red4 << new_xy << color::reset << " > " << color::yellow << _parent_dc_->_geometry_.tolocal()
+        ];
+
+
     return *this;
 }
 

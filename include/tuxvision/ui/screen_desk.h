@@ -38,6 +38,7 @@ public:
     static screen* me();
 
     book::code draw() override;
+    book::code update() override;
 
 protected:
     //friend class widget_base;

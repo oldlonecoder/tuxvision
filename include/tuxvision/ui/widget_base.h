@@ -72,7 +72,7 @@ public:
     widget_base::painter_dc begin_draw(const rectangle& sub_area={});
     void end_draw(widget_base::painter_dc& edc);
     void clear();
-
+    virtual book::code update();
 
     bool is_toplevel() { return _uiflags_& (globals::wflags::TopLevel|globals::wflags::Floating); }
 
