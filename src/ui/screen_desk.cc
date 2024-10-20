@@ -130,11 +130,20 @@ book::code screen::end()
 
 // --- Toplevel widget management. ( ANY widget can be a toplevel widget )
 
-
+/*!
+ * \brief screen::resize
+ * \param new_sz
+ * \return
+ */
 book::code screen::resize(ui::size new_sz)
 {
-    return book::code::notimplemented;
+    widget_base::resize(new_sz);
+    screen::__back_buffer_->resize(new_sz.area(), terminal::vchar(_colors_));
+    draw();
+    return book::code::done;
 }
+
+
 
 book::code screen::show_toplevel(widget_base* wb)
 {
@@ -174,6 +183,19 @@ book::code screen::refresh_back_buffer(const rectangle& _area )
 }
 
 
+/*!
+ * \brief screen::__iterate_toplevels
+ * For each toplevel widgets, call ffn with the exposing rectangle and the line number to expose within the exposed rectangle.
+ * \param r
+ * \param y
+ * \param ffn
+ */
+void screen::__iterate_toplevels(const rectangle &r, int y, std::function<void (widget_base *, const rectangle &, int)> ffn)
+{
+    for(auto *w: screen::_toplevels_) ffn(w,r,y);
+}
+
+
 // book::code refresh_area(terminal::vchar::string::iterator src, terminal::vchar::string::iterator dest, const rectangle& _a)
 // {
 //
@@ -189,30 +211,15 @@ book::code screen::hide_toplevel(widget_base* wb)
     // refresh_area(_dirty_area_);
 
     //pop_widget(wb);
+    UPDATE_ZORDER
     dirty_toplevel(wb);
 
     return book::code::notimplemented;
 }
 
-book::code screen::toplevel_moved(widget_base* wb)
-{
-    return book::code::notimplemented;
-}
-
-book::code screen::pop_widget(widget_base* wb)
-{
-    if(auto it = query(wb); it != _toplevels_.end())
-    {
-        _toplevels_.erase(it);
-        UPDATE_ZORDER
-        return book::code::complete;
-    }
-
-    return book::code::notexist;
-}
 
 
-book::code screen::put_front(widget_base* wb)
+book::code screen::to_front(widget_base* wb)
 {
     UPDATE_ZORDER
 
@@ -222,27 +229,19 @@ book::code screen::put_front(widget_base* wb)
         return book::code::notexist;
 
     if(wb == _toplevels_.back())
-        return book::code::implemented;
+        return book::code::done;
 
     _toplevels_.erase(it);
-    UPDATE_ZORDER
     _toplevels_.push_back(wb);
-    UPDATE_ZORDER
-
     return book::code::complete;
 }
 
-book::code screen::push_back(widget_base *wb)
-{
-    return book::code::notimplemented;
-}
-
 /*!
- * \brief screen::push_front un nouvel arrivant chez les toplevels!
+ * \brief screen::push_back un nouvel arrivant chez les toplevels!
  * \param wb
  * \return  accepted if added, rejected if exists or not a toplevel widget(_base)
  */
-book::code screen::push_front(widget_base *wb)
+book::code screen::push_back(widget_base *wb)
 {
     // Refresh
     UPDATE_ZORDER
@@ -336,6 +335,30 @@ book::code screen::commit(const rectangle &bb_subarea)
     }
     std::cout  << std::flush;
     return book::code::complete;
+}
+
+
+/*!
+ * \brief screen::expose
+ * Updates the back buffer iterating toplevel widgets intersecting bb_subarea.
+ * \param bb_subarea
+ * \return
+ */
+book::code screen::expose(const rectangle &bb_subarea)
+{
+    for(int y =0; y < bb_subarea.dwh.h; y++)
+    {
+        peek_xy(bb_subarea.a - _geometry_.a);
+        std::copy(_iterator_, _iterator_ + *bb_subarea.width(), screen::__back_buffer_->begin() + bb_subarea.a.x + (bb_subarea.a.y+y) * _geometry_.dwh.w);
+        for(auto* w : screen::_toplevels_)
+        {
+            auto warea = w->_geometry_ & bb_subarea;
+            if(!warea) continue;
+            warea -= w->_geometry_.a;
+            if(!warea[ui::cxy{warea.a.x,y}])continue;
+
+        }
+    }
 }
 
 
