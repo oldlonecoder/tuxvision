@@ -62,10 +62,9 @@ public:
         painter_dc& operator << (terminal::vchar::string strvch);
         painter_dc& set_background_color(color::code bgcol);
         painter_dc& draw_frame(const rectangle& r={});
-
-
-
-
+        painter_dc& operator*() { return *this; }
+        book::code operator ++();
+        book::code operator +=(size_t _offset);
     };
 
     virtual book::code draw();

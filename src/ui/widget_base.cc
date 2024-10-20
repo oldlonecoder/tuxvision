@@ -1,4 +1,4 @@
-#include <tuxvision/ui/widget_base.h>
+#include <tuxvision/ui/screen_desk.h>
 
 namespace tux::ui
 {
@@ -221,6 +221,19 @@ void widget_base::clear()
 {
     CHECK_BLOC
     std::fill(_bloc_->begin(), _bloc_->end(), terminal::vchar(_colors_));
+}
+
+book::code widget_base::update()
+{
+    auto p = parent<widget_base*>();
+    if(!p && screen::me() != this)
+    {
+        if(!is_toplevel())
+            throw book::exception()[book::except() << book::fn::fun << " non top-level widget cannot be orphan."];
+        //...
+    }
+    //... leave with no return value intentionally stop coding here.
+
 }
 
 

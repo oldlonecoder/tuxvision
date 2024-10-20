@@ -91,8 +91,27 @@ widget_base::painter_dc &widget_base::painter_dc::draw_frame(const rectangle &r)
         return *this;
     }
 
-
     return *this;
+}
+
+book::code widget_base::painter_dc::operator ++()
+{
+    if(_parent_dc_->_iterator_ == _parent_dc_->_bloc_->end())
+        return book::code::rejected;
+    ++_parent_dc_->_iterator_;
+    return book::code::accepted;
+}
+
+book::code widget_base::painter_dc::operator +=(size_t _offset)
+{
+    if(_parent_dc_->_iterator_ >= _parent_dc_->_bloc_->end())
+    {
+        _parent_dc_->_iterator_ = -- _parent_dc_->_bloc_->end();
+        return book::code::rejected;
+    }
+
+    _parent_dc_->_iterator_ += _offset;
+    return book::code::accepted;
 }
 
 
@@ -104,52 +123,75 @@ widget_base::painter_dc& widget_base::painter_dc::operator << (ui::cxy new_xy)
             book::except() << book::fn::fun << book::code::oob << color::red4 << new_xy << color::reset << " > " << color::yellow << _parent_dc_->_geometry_.tolocal()
         ];
 
-
     return *this;
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (char ch)
 {
+    (*_parent_dc_->_iterator_) << ch;
+    ++**this;
     return *this;
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (const char* str)
 {
+    auto z = std::strlen(str);
+    auto start = _parent_dc_->_iterator_;
+    auto it = start + z;
+
+    if(it >= _parent_dc_->_bloc_->end())
+        it = _parent_dc_->_bloc_->begin() + (it - (_parent_dc_->_bloc_->end()+1));
+
+    auto c = str;
+    for(; start <=it; start++)
+        (*start) << *c++;
+    **this += it-_parent_dc_->_bloc_->begin();
     return *this;
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (const std::string& str)
 {
-    return *this;
+    return **this << str.c_str();
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (const tux::string& str)
 {
-    return *this;
+    //return **this << str.c_str();
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (color::code fgcol)
 {
+    _colors_.fg = fgcol;
+    _parent_dc_->_iterator_->set_fg(fgcol);
+
     return *this;
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (color::pair colp)
 {
+    _colors_ = colp;
+    _parent_dc_->_iterator_->set_colors(colp);
     return *this;
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (cadre::index ci)
 {
+    (*_parent_dc_->_iterator_) << ci;
+    ++**this;
     return *this;
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (glyph::type ic)
 {
+    (*_parent_dc_->_iterator_) << ic;
+    ++**this;
     return *this;
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (accent_fr::type fr)
 {
+    (*_parent_dc_->_iterator_) << fr;
+    ++**this;
     return *this;
 }
 
