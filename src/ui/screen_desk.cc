@@ -14,12 +14,18 @@
 
 #include <tuxvision/ui/screen_desk.h>
 
+
+/*!
+ *  @defgroup dirty
+ *  \brief Refresh dirty area routines.
+ */
+
 namespace tux::ui
 {
 
 
 #define UPDATE_ZORDER \
-for(auto it = _toplevels_.begin(); it != _toplevels_.end(); it++) (*it)->_tli_ = it;
+for(auto it = _windows_.begin(); it != _windows_.end(); it++) (*it)->_tli_ = it;
 
 
 
@@ -28,8 +34,8 @@ terminal::vchar::back_buffer screen::__back_buffer_; ///< Prepared screen conten
 
 
 /*!
- * \brief Static public screen::me
- * \return  singleton instance of the app screen.
+ * @brief Static public screen::me
+ * @return  singleton instance of the app screen.
  *
  */
 screen *screen::me()
@@ -40,44 +46,12 @@ screen *screen::me()
 
 
 
-/*!
- * \brief Instance public screen::render_widget
- *     Renders the dirty_area of the given top-level widget's back buffer, into this screen's back buffer.
- * \param wb
- * \return rejected or accpeted;
- */
-book::code screen::render_widget(widget_base *wb)
-{
-    rectangle area = wb->_dirty_area_;
-    if(!area)
-        area = me()->_geometry_ & wb->_geometry_;
-    if(!area)
-    {
-        book::debug() << wb->id() << ": is not 'visible' on the screen's geometry - rendering rejected.";
-        return book::code::rejected;
-    }
-
-    for(int y = 0; y < area.dwh.h; y++)
-    {
-        me()->peek_xy(area.a + ui::cxy{0,y});
-        wb->peek_xy((area.a + ui::cxy{0,y}) - wb->_geometry_.a);
-        (void)std::copy(wb->_iterator_, wb->_iterator_ + area.dwh.w, me()->_iterator_);
-        // ignore result iterator (i.e.: the returned value of me()->_iterator_).
-        // Ignorer la nouvelle valeur de l'iterateur retourn&eacute;
-        // -------------------
-        //std::memcpy(&(me()->_iterator_),wb->vc(), area.dwh.w*sizeof(terminal::vchar));
-        //--------------------
-    }
-    me()->dirty(area); // or let's evaluate something like ' push_dirty(area) instead of growing the screen's dirty rectangle... ;)
-    return book::code::accepted;
-}
-
 
 
 
 /*!
- * \brief public instance constructor
- * \param scr_name
+ * @brief public instance constructor
+ * @param scr_name
  */
 screen::screen(const std::string &scr_name): widget_base(nullptr, scr_name)
 {
@@ -94,8 +68,8 @@ screen::~screen()
 }
 
 /*!
- * \brief static public screen::start
- * \return ready/rejected/failed/exist
+ * @brief static public screen::start
+ * @return ready/rejected/failed/exist
  */
 book::code screen::start()
 {
@@ -115,8 +89,8 @@ book::code screen::start()
 
 
 /*!
- * \brief static public screen::end
- * \return book::code::terminate
+ * @brief static public screen::end
+ * @return book::code::terminate
  */
 book::code screen::end()
 {
@@ -131,9 +105,9 @@ book::code screen::end()
 // --- Toplevel widget management. ( ANY widget can be a toplevel widget )
 
 /*!
- * \brief screen::resize
- * \param new_sz
- * \return
+ * @brief screen::resize
+ * @param new_sz
+ * @return
  */
 book::code screen::resize(ui::size new_sz)
 {
@@ -145,110 +119,98 @@ book::code screen::resize(ui::size new_sz)
 
 
 
-book::code screen::show_toplevel(widget_base* wb)
+book::code screen::show_window(widget_base* wb)
 {
     return book::code::notimplemented;
 }
 
 
 
-/*!
- * \brief Private[internal] instance screen::refresh_back_buffer
- *
- *  * Refresh area of screen widget back buffer onto the "desktop" back buffer.
- * Iterates top-level widgets, z-ordered, in intersection with the affected area \c _area
- *
- * \param ui::rectnalge _area : affected area.
- * \return complete.
- */
-book::code screen::refresh_back_buffer(const rectangle& _area )
-{
-    peek_xy(_area.a);
-    //auto dest = screen::__back_buffer_->begin() + _area.a.x + *_area.width() * _area.a.y;
-    for(int y = 0; y < _area.height(); y++)
-    {
-        peek_xy(_area.a);
-        //auto dest = __back_buffer_->begin() + _area.a.x + *_area.width() * _area.a.y;
-        std::copy(_iterator_, _iterator_ + *_area.width(),  __back_buffer_->begin() + _area.a.x + *_area.width() * _area.a.y);
-    }
-
-    for(auto* tlw : screen::_toplevels_)
-    {
-        dirty_toplevel(tlw);
-    }
-
-    render();
-
-    return book::code::notimplemented;
-}
 
 
 /*!
- * \brief screen::__iterate_toplevels
+ * @brief screen::__iterate_windows
  * For each toplevel widgets, call ffn with the exposing rectangle and the line number to expose within the exposed rectangle.
- * \param r
- * \param y
- * \param ffn
+ * @param r
+ * @param y
+ * @param ffn
  */
-void screen::__iterate_toplevels(const rectangle &r, int y, std::function<void (widget_base *, const rectangle &, int)> ffn)
+void screen::__iterate_windows(const rectangle &r, int y, std::function<void (widget_base *, const rectangle &, int)> ffn)
 {
-    for(auto *w: screen::_toplevels_) ffn(w,r,y);
+    for(auto *w: screen::_windows_) ffn(w,r,y);
+}
+
+terminal::vchar::iterator  screen::peek_bb(cxy xy)
+{
+    if(!_geometry_.tolocal()[xy])
+        return __back_buffer_->end();
+
+    return __back_buffer_->begin() + xy.x + *_geometry_.width() * xy.y;
 }
 
 
-// book::code refresh_area(terminal::vchar::string::iterator src, terminal::vchar::string::iterator dest, const rectangle& _a)
-// {
-//
-// }
 
-book::code screen::hide_toplevel(widget_base* wb)
+
+
+/*!
+ * \brief screen::hide_window
+ * \param wb
+ * \return
+ */
+book::code screen::hide_window(widget_base* wb)
 {
     _dirty_area_ = _geometry_ & wb->_geometry_;
     if(!_dirty_area_)
         return book::code::rejected;
 
-    _toplevels_.erase(wb->_tli_);
-    // refresh_area(_dirty_area_);
-
-    //pop_widget(wb);
+    _windows_.erase(wb->_tli_);
     UPDATE_ZORDER
-    dirty_toplevel(wb);
-
-    return book::code::notimplemented;
+    return refresh_back_buffer(_dirty_area_);
 }
 
 
-
-book::code screen::to_front(widget_base* wb)
+/*!
+ * @brief screen::to_back
+ *      Put window to the front of the windows list.
+ * @param wb
+ * @return accepted or rejected if wb id not in the windows list.
+ */
+book::code screen::to_back(widget_base* wb)
 {
     UPDATE_ZORDER
 
-    auto it = _toplevels_.end();
+    auto it = _windows_.end();
 
-    if(it = query(wb); it == _toplevels_.end())
+    if(it = query(wb); it == _windows_.end())
         return book::code::notexist;
 
-    if(wb == _toplevels_.back())
+    if(wb == _windows_.back())
         return book::code::done;
 
-    _toplevels_.erase(it);
-    _toplevels_.push_back(wb);
-    return book::code::complete;
+    _windows_.erase(it);
+    _windows_.push_back(wb);
+    UPDATE_ZORDER
+    // Setup window's _durty_area_ :
+    wb->_dirty_area_ = _geometry_ & wb->_geometry_;
+    if(!wb->_dirty_area_)
+        return book::code::rejected;
+
+    wb->_dirty_area_ -= wb->_geometry_.a;
+    expose_window_to_bb(wb);
+
+    return book::code::done;
 }
 
 /*!
- * \brief screen::push_back un nouvel arrivant chez les toplevels!
- * \param wb
- * \return  accepted if added, rejected if exists or not a toplevel widget(_base)
+ * @brief screen::push_back un nouvel arrivant chez les toplevels!
+ * @param wb
+ * @return  accepted if added, rejected if exists or not a toplevel widget(_base)
  */
 book::code screen::push_back(widget_base *wb)
 {
     // Refresh
-    UPDATE_ZORDER
 
-    auto it = _toplevels_.end();
-
-    if(it = query(wb); it != _toplevels_.end())
+    if(auto it = query(wb); it != _windows_.end())
         return book::code::exist;
 
     if(!wb->is_toplevel())
@@ -257,80 +219,101 @@ book::code screen::push_back(widget_base *wb)
         return book::code::cancel;
     }
 
-    _toplevels_.push_back(wb);
+    _windows_.push_back(wb);
     // --- todo: 'bitblit' wb onto __back_buffer.
-    _dirty_area_ = wb->_geometry_;
-    auto local = wb->_geometry_.tolocal();
-    _dirty_area_ = _dirty_area_ & _geometry_.tolocal();
-    if(!_dirty_area_)
-    {
-        book::message() << book::code::oob << wb->id() << "' is not visible, reject screen update";
-        return book::code::rejected;
-    }
-    local += ui::cxy{_dirty_area_.a};
-    local = _dirty_area_ & local;
-    local -= _dirty_area_.a;
-
-    for(int y = 0; y < local.dwh.h; y++)
-    {
-        wb->peek_xy(local.a+ui::cxy{0,y});
-        auto bbit = screen::__back_buffer_->begin() + _dirty_area_.a.x + _dirty_area_.a.y * _geometry_.dwh.w;
-        std::copy(wb->_iterator_, wb->_iterator_ + *local.width<size_t>(), bbit);
-    }
-    wb->_tli_ = --_toplevels_.end(); //expose(wb->_geometry_);
-
     UPDATE_ZORDER
-    return book::code::accepted;
+
+
+    wb->_dirty_area_ = _geometry_.tolocal();
+    expose_window_to_bb(wb);
+    return book::code::done;
 }
 
 
 
+// /*!
+//  * @brief Instance protected (internal) virtual screen::dirty routine
+//  * @param _toplvl Top level widget to refresh on the back buffer.
+//  * @note _toplvl->_dirty_area_ must be set prior to call this function/method.
+//  * @return  accepted or rejected if _toplvl is not visible within screen's geometry.
+//  */
+// book::code screen::dirty_window(widget_base *_toplvl)
+// {
+//     // take the dirty area of the toplvl widget to expose :
+
+//     if(query(_toplvl) == _windows_.end())
+//         return book::code::rejected;
+
+//     expose_window_to_bb(_toplvl);
+//     return book::code::complete;
+// }
+
+
 /*!
- * \brief Instance protected (internal) virtual screen::dirty
- * \param _toplvl Top level widget to refresh on the back buffer.
- * \return  accepted or rejected if _toplvl is not visible within screen's geometry.
+ * @brief screen::expose_window_to_bb
+ *      Expose onto screen::__back_buffer's sub _area,  the given toplevel widget_base*.
+ * @param w toplevel widget
+ * @param _area exposed area.
+ * @note Assuming that w->_dirty_are_ is valid.
  */
-book::code screen::dirty_toplevel(widget_base *_toplvl)
+void screen::expose_window_to_bb(widget_base *w)
 {
-    // take the dirty area of the toplvl widget to expose :
-    UPDATE_ZORDER;
 
-    if(query(_toplvl) == _toplevels_.end())
+    // to screen offset coords:
+    auto area = w->_dirty_area_ + w->_geometry_.a;
+
+    for(int y = 0; y < area.dwh.h; y++)
     {
-        return book::code::rejected;
+        w->peek_xy({w->_dirty_area_.a.x,w->_dirty_area_.a.y+y});
+        std::copy(w->_iterator_, w->_iterator_ + area.dwh.w, peek_bb(area.a + ui::cxy{0,y} ));
     }
-
-    //auto area = _toplvl->_dirty_area_ + _toplvl->_geometry_.a; // to screen scale.
-
-    // Un mixte de vieux et de nouveau code hihihihihih:
-    // Mixing old and new code:
-    rectangle area{};
-    if(area = _toplvl->_dirty_area_ + _toplvl->_geometry_.a; !(screen::me()->_geometry_.tolocal() & area))
-    {
-        book::status() << book::fn::fun << book::code::oob << " :" << _toplvl->_dirty_area_ << " <> " << screen::me()->_geometry_.tolocal();
-        return book::code::rejected;
-    }
-    //auto n = std::next(_toplvl->_tli_);
-    expose(area);
-    //...
-    commit(area);
-    return book::code::complete;
 }
 
 /*!
- * \brief Private instance screen::commit
- * Commits given area of the back buffer array to the screen (console terminal)
- * \param bb_subarea
- * \return book::code::complete
+ * @brief Private[internal] instance screen::refresh_back_buffer
+ *
+ *  * Refresh area of screen widget back buffer onto the "desktop" back buffer.
+ * Iterates top-level widgets, z-ordered, in intersection with the affected area \c _area
+ *
+ * @param ui::rectnalge _area : affected area.
+ * @return complete.
+ */
+book::code screen::refresh_back_buffer(const rectangle& _area )
+{
+    for(int y = 0; y < _area.height(); y++)
+    {
+        peek_xy(_area.a);
+        std::copy(_iterator_, _iterator_ + *_area.width(),  peek_bb(_area.a + ui::cxy{0,y}));
+    }
+
+    for(auto* tlw : screen::_windows_)
+    {
+        tlw->_dirty_area_ = tlw->_geometry_ & _area;
+        if(!tlw->_dirty_area_) continue;
+        tlw->_dirty_area_ -= tlw->_geometry_.a;
+        expose_window_to_bb(tlw);
+    }
+
+    return book::code::notimplemented;
+}
+
+
+/*!
+ * @brief Private instance screen::commit
+ *      Commits given area of the back buffer array to the screen (console terminal)
+ * @param bb_subarea ( must be pre-validatd ).
+ * @return book::code::complete
  */
 book::code screen::commit(const rectangle &bb_subarea)
 {
     book::debug() << book::fn::fun << color::yellow << id() << color::reset << "::commit() area:" << color::lightsteelblue3 << bb_subarea;
 
+    ui::cxy scr{};
     for(int y=0; y < bb_subarea.dwh.h; y++)
     {
-        auto bbit = screen::__back_buffer_->begin() + bb_subarea.a.x + bb_subarea.a.y * _geometry_.dwh.w;
-        terminal::cursor({bb_subarea.a + ui::cxy{0,y}});
+        scr = bb_subarea.a + ui::cxy{0,y} ;
+        auto bbit = peek_bb(scr); //screen::__back_buffer_->begin() + bb_subarea.a.x + bb_subarea.a.y * _geometry_.dwh.w;
+        terminal::cursor(scr);
         terminal::vchar::render_string(bbit, bbit + bb_subarea.dwh.w);
     }
     std::cout  << std::flush;
@@ -338,36 +321,36 @@ book::code screen::commit(const rectangle &bb_subarea)
 }
 
 
-/*!
- * \brief screen::expose
- * Updates the back buffer iterating toplevel widgets intersecting bb_subarea.
- * \param bb_subarea
- * \return
- */
-book::code screen::expose(const rectangle &bb_subarea)
-{
-    for(int y =0; y < bb_subarea.dwh.h; y++)
-    {
-        peek_xy(bb_subarea.a - _geometry_.a);
-        std::copy(_iterator_, _iterator_ + *bb_subarea.width(), screen::__back_buffer_->begin() + bb_subarea.a.x + (bb_subarea.a.y+y) * _geometry_.dwh.w);
-        for(auto* w : screen::_toplevels_)
-        {
-            auto warea = w->_geometry_ & bb_subarea;
-            if(!warea) continue;
-            warea -= w->_geometry_.a;
-            if(!warea[ui::cxy{warea.a.x,y}])continue;
+// /*!
+//  * @brief screen::expose
+//  * Updates the back buffer iterating toplevel widgets intersecting bb_subarea.
+//  * @param bb_subarea
+//  * @return
+//  */
+// book::code screen::expose(const rectangle &bb_subarea)
+// {
+//     for(int y =0; y < bb_subarea.dwh.h; y++)
+//     {
+//         peek_xy(bb_subarea.a - _geometry_.a);
+//         std::copy(_iterator_, _iterator_ + *bb_subarea.width(), screen::__back_buffer_->begin() + bb_subarea.a.x + (bb_subarea.a.y+y) * _geometry_.dwh.w);
+//         for(auto* w : screen::_windows_)
+//         {
+//             auto warea = w->_geometry_ & bb_subarea;
+//             if(!warea) continue;
+//             warea -= w->_geometry_.a;
+//             if(!warea[ui::cxy{warea.a.x,y}])continue;
 
-        }
-    }
-}
+//         }
+//     }
+// }
 
 
 auto screen::query(widget_base *wb) -> std::list<widget_base*>::iterator
 {
-    for(auto it = _toplevels_.begin(); it != _toplevels_.end(); it++)
+    for(auto it = _windows_.begin(); it != _windows_.end(); it++)
         if(*it == wb) return it;
 
-    return _toplevels_.end();
+    return _windows_.end();
 }
 
 void screen::commit_screen()
@@ -375,17 +358,15 @@ void screen::commit_screen()
     auto r = _dirty_area_;
     if(!r)
         r = _geometry_;
-
-    render();
 }
 
 // -----------------------------------------------------
 
 
 // /*!
-//  * \brief Instance public screen::dirty
-//  * \param _r  validate boundaries before applying dirty_area union with _r.
-//  * \return rejected if _r is invalid; accepted and applied if valid and within _geometry_.
+//  * @brief Instance public screen::dirty
+//  * @param _r  validate boundaries before applying dirty_area union with _r.
+//  * @return rejected if _r is invalid; accepted and applied if valid and within _geometry_.
 //  */
 // book::code screen::dirty(const rectangle &_r)
 // {
@@ -398,10 +379,6 @@ void screen::commit_screen()
 // }
 
 
-book::code screen::render()
-{
-    return widget_base::render();
-}
 
 book::code screen::draw()
 {

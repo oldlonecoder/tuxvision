@@ -68,7 +68,6 @@ book::code app::run()
     widget.set_geometry(terminal::geometry());
     //widget.dirty({});
     terminal::cursor({1,1});
-    widget.render();
 
 
     event ev;

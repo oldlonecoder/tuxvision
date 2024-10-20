@@ -84,7 +84,10 @@ signals::action<rectangle>& term_resize_signal();
 struct _TUXVISION_ vchar final
 {
     u32 d{0x8003A020};
+
     using string = std::vector<vchar>;
+    using iterator = string::iterator;
+
     using back_buffer = std::shared_ptr<terminal::vchar::string>;
 
 

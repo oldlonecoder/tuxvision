@@ -41,30 +41,30 @@ public:
 
 protected:
     //friend class widget_base;
-    book::code render() override;
     book::code resize(ui::size new_sz) override;
 
     // --- Toplevel widget management. ( ANY widget can be a toplevel widget )
-    book::code show_toplevel(widget_base* wb);
-    book::code hide_toplevel(widget_base* wb); //
-    //book::code toplevel_moved(widget_base* wb);
-    book::code to_front(widget_base* wb); // FAIT,  À TESTER
+    book::code show_window(widget_base* wb);
+    book::code hide_window(widget_base* wb); //
+
+    book::code to_back(widget_base* wb); // FAIT,  À TESTER
     book::code push_back(widget_base* wb);
     rectangle get_exposed(widget_base* wb);
 
     //...
     //--------------------------------------------------------------------------
 private:
-    std::list<widget_base*> _toplevels_{}; ///< toplevels storage in natural z-order
+    std::list<widget_base*> _windows_{}; ///< toplevels storage in natural z-order
     auto query(widget_base *wb) -> std::list<widget_base*>::iterator;
     void commit_screen();
-    book::code render_widget(widget_base* wb);
-    book::code dirty_toplevel(widget_base* _toplvl);
+
+    //book::code dirty_window(widget_base* _toplvl);
     book::code commit(const rectangle& bb_subarea);
     book::code expose(const rectangle& bb_subarea);
     book::code refresh_back_buffer(const rectangle& _area);
-    void __iterate_toplevels(const rectangle& r, int y, std::function<void(widget_base* wb, const rectangle& r, int line)> ffn);
-
+    void __iterate_windows(const rectangle& r, int y, std::function<void(widget_base* wb, const rectangle& r, int line)> ffn);
+    terminal::vchar::iterator peek_bb(ui::cxy xy);
+    void expose_window_to_bb(widget_base* w);
 
 
 };

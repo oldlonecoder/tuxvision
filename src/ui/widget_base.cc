@@ -223,35 +223,6 @@ void widget_base::clear()
     std::fill(_bloc_->begin(), _bloc_->end(), terminal::vchar(_colors_));
 }
 
-/*!
- * \brief Instance public widget_base::render
- * \return  book::code::done or reject if not visible.
- * \note IMPORTANT! This code is temporary. It lives for the duration of early dev.
- */
-book::code widget_base::render()
-{
-    book::debug() << book::fn::fun << color::yellow << id() << color::reset << "::render() : width:" << (_iterator_ + *_geometry_.width())-_bloc_->begin();
-    _dirty_area_ = {};
-    if(auto* p = parent<widget_base>(); p)
-        return p->dirty(_geometry_);
-
-    std::string out{};
-    terminal::cursor(_geometry_.a);
-    for(int y=0; y < *_geometry_.height(); y++)
-    {
-        peek_xy({0,y});
-        terminal::cursor({_geometry_.a.x,_geometry_.a.y+y});
-        terminal::vchar::render_string(_iterator_, _iterator_ + _geometry_.dwh.w);
-    }
-    std::cout  << std::flush;
-    return book::code::done;
-}
-
-terminal::vchar *widget_base::vc()
-{
-    //.. Todo CHECK valid _iterator_...
-    return &(*_iterator_);
-}
 
 
 

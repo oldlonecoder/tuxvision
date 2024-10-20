@@ -75,7 +75,6 @@ public:
 
 
     bool is_toplevel() { return _uiflags_& (globals::wflags::TopLevel|globals::wflags::Floating); }
-    terminal::vchar* vc();
 
 protected:
     rectangle _geometry_{}; ///< Dimensions, internal cursor position
@@ -95,7 +94,7 @@ protected:
 
     virtual book::code auto_fit(globals::anchor::value anchor_value=globals::anchor::fixed);
     virtual book::code resize(ui::size new_sz);
-public: virtual book::code render(); protected:
+protected:
     virtual book::code dirty(const rectangle& dirty_rect={});
     //terminal::vchar* _bkcrs_{nullptr}; ///< pointer to vchar at the current rectangle::cursor position.
     terminal::vchar::string::iterator _iterator_{}; ///< Normal std::vector iterator available for navigation and io.
