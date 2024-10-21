@@ -239,7 +239,13 @@ void widget_base::end_draw(painter_dc &edc)
     dirty(edc._geometry_);
 }
 
+widget_base::painter_dc& widget_base::painter_dc::home()
+{
+    _geometry_.home();
+    _parent_dc_->peek_xy(_geometry_.a);
 
+    return *this;
+}
 
 /*!
  * \brief widget_base::clear
@@ -265,8 +271,7 @@ book::code widget_base::update()
     if(!_dirty_area_) return book::code::ok;
 
     if(p) return p->update_child(this);
-
-
+    return book::code::ok;
 }
 
 

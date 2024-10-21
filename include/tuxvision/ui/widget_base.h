@@ -47,6 +47,7 @@ public:
         ~painter_dc() = default;
         painter_dc(widget_base* parent_widget, const rectangle& r);
 
+        painter_dc& home();
         painter_dc& clear(const rectangle& r={});
         painter_dc& operator << (ui::cxy new_xy);
         painter_dc& operator << (char ch);

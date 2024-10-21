@@ -404,7 +404,8 @@ book::code screen::draw()
  */
 book::code screen::update()
 {
-    return widget_base::update();
+    widget_base::update();
+    return refresh_back_buffer(_dirty_area_);
 }
 
 

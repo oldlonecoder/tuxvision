@@ -20,11 +20,6 @@ add_library(${BaseTarget} STATIC  #SHARED
             include/${BaseTarget}/tools/sscan.h src/tools/sscan.cc
             include/${BaseTarget}/tools/object.h src/tools/object.cc
             include/${BaseTarget}/tools/signals.h
-            include/${BaseTarget}/ui/globals.h src/ui/globals.cc
-            include/${BaseTarget}/ui/terminal.h src/ui/terminal.cc  src/ui/terminal.vchar.cc
-            # include/${BaseTarget}/ui/element.h src/tui/element.cc src/tui/element.painter.cc
-            include/${BaseTarget}/ui/events.h src/ui/events.cc
-            include/${BaseTarget}/ui/application.h src/ui/application.cc
             # include/${BaseTarget}/ui/input_track.h src/tui/input_track.cc
             # include/${BaseTarget}/ui/window.h src/tui/window.cc
             # include/${BaseTarget}/ui/desktop.h src/tui/desktop.cc
@@ -40,8 +35,13 @@ add_library(${BaseTarget} STATIC  #SHARED
             include/${BaseTarget}/est/variable.h src/est/variable.cc
             include/${BaseTarget}/est/bloc.h src/est/bloc.cc
             include/${BaseTarget}/est/expression.h src/est/expression.cc
+            include/${BaseTarget}/ui/globals.h src/ui/globals.cc
+            include/${BaseTarget}/ui/terminal.h src/ui/terminal.cc  src/ui/terminal.vchar.cc
+            include/${BaseTarget}/ui/events.h src/ui/events.cc
+            include/${BaseTarget}/ui/application.h src/ui/application.cc
             include/${BaseTarget}/ui/widget_base.h src/ui/widget_base.cc src/ui/widget_painter.cc
             include/${BaseTarget}/ui/screen_desk.h src/ui/screen_desk.cc
+            include/${BaseTarget}/ui/widget/label.h src/ui/widget/label.cc
 )
 
 target_compile_definitions(${BaseTarget} PUBLIC "${BaseTarget}_DEBUG=$<CONFIG:Debug>")
