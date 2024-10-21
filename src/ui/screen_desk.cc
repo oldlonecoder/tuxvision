@@ -59,6 +59,7 @@ screen::screen(const std::string &scr_name): widget_base(nullptr, scr_name)
         return;
 
     screen::_screen_ = this;
+    _uiflags_ = globals::wflags::TopLevel;
     //...
 }
 
@@ -261,6 +262,11 @@ void screen::expose_window_to_bb(widget_base *w)
 
     // to screen offset coords:
     auto area = w->_dirty_area_ + w->_geometry_.a;
+    if(w == this)
+    {
+        refresh_back_buffer(area);
+        return;
+    }
 
     for(int y = 0; y < area.dwh.h; y++)
     {
@@ -387,6 +393,18 @@ book::code screen::draw()
     end_draw(writer);
 
     return book::code::notimplemented;
+}
+
+
+
+/*!
+ * \brief screen::update
+ * For now there is no paticular role. Just calling the base class update. until more specific code is needed.
+ * \return widget_base::update() as of oct 2024...
+ */
+book::code screen::update()
+{
+    return widget_base::update();
 }
 
 

@@ -55,6 +55,8 @@ protected:
     //...
     //--------------------------------------------------------------------------
 private:
+
+    friend class widget_base;
     std::list<widget_base*> _windows_{}; ///< toplevels storage in natural z-order
     auto query(widget_base *wb) -> std::list<widget_base*>::iterator;
     void commit_screen();

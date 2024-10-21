@@ -98,7 +98,7 @@ protected:
     //terminal::vchar* _bkcrs_{nullptr}; ///< pointer to vchar at the current rectangle::cursor position.
     terminal::vchar::string::iterator _iterator_{}; ///< Normal std::vector iterator available for navigation and io.
         ///< It is safe to assign an iterator since read-write never invalidate the iterator.
-
+    book::code update_child(widget_base* w);
 private:
     friend class screen;
 

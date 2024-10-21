@@ -157,6 +157,7 @@ widget_base::painter_dc& widget_base::painter_dc::operator << (const std::string
 widget_base::painter_dc& widget_base::painter_dc::operator << (const tux::string& str)
 {
     //return **this << str.c_str();
+    return *this;
 }
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (color::code fgcol)

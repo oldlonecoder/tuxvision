@@ -186,6 +186,34 @@ book::code widget_base::dirty(const rectangle &dirty_rect)
     return book::code::accepted;
 }
 
+book::code widget_base::update_child(widget_base *w)
+{
+    if(!_dirty_area_)
+        _dirty_area_ = w->_dirty_area_ + w->_geometry_.a;
+    else
+        _dirty_area_ |= w->_dirty_area_ + w->_geometry_.a;
+
+    _dirty_area_ = _geometry_.tolocal() & _dirty_area_;
+    if(!_dirty_area_) return book::code::rejected;
+
+    auto p = parent<widget_base>();
+    if(p)
+        return p->update_child(this);
+    if(is_toplevel())
+    {
+        screen::me()->expose_window_to_bb(this);
+        return book::code::done;
+    }
+
+
+    throw book::exception()[
+        book::except() << book::fn::fun << class_name() << "::\"" << id() << "\": no parent but also not a top-level widget."
+    ];
+
+    //return book::code::done;
+
+}
+
 
 /*!
  * \brief widget_base::begin_draw
@@ -225,14 +253,19 @@ void widget_base::clear()
 
 book::code widget_base::update()
 {
-    auto p = parent<widget_base*>();
+    auto p = parent<widget_base>();
     if(!p && screen::me() != this)
     {
         if(!is_toplevel())
             throw book::exception()[book::except() << book::fn::fun << " non top-level widget cannot be orphan."];
         //...
     }
-    //... leave with no return value intentionally stop coding here.
+
+    // no dirty rect = this widget has nothing to update.
+    if(!_dirty_area_) return book::code::ok;
+
+    if(p) return p->update_child(this);
+
 
 }
 

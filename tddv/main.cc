@@ -5,7 +5,7 @@
 //#include <cstdint>
 #include <tuxvision/est/expression.h>
 #include <tuxvision/ui/events.h>
-#include <tuxvision/ui/widget_base.h>
+#include <tuxvision/ui/screen_desk.h>
 #include <tuxvision/ui/application.h>
 //=====================================
 
@@ -41,6 +41,7 @@ book::code app::setup()
 {
     application::setup();
     terminal::term_resize_signal().connect(this, &app::terminal_resize_signal);
+    return setup_ui();
     //...
     return book::code::done;
 }
@@ -63,16 +64,21 @@ book::code app::run()
     setup();
     auto r = expression();
     book::status() << book::fn::fun << "app:expression() test: " << r;
-    auto widget = widget_base{nullptr,"test with shared mem"};
-    widget.set_theme("C128");
-    widget.set_geometry(terminal::geometry());
+//    auto widget = widget_base{nullptr,"test with shared mem"};
+//    widget.set_theme("C128");
+//    widget.set_geometry(terminal::geometry());
     //widget.dirty({});
-    terminal::cursor({1,1});
+//    terminal::cursor({1,1});
 
 
     event ev;
     book::code c{};
-    while(!!(c = event::get_stdin_event(ev,{65000,0})) && c != book::code::cancel);
+    while(!!(c = event::get_stdin_event(ev,{65000,0})) && c != book::code::cancel)
+    {
+        if(ev.event_type == event::type::MOUSE)
+            book::info() << ev.data.mev.to_string();
+    }
+
     terminate();
     return book::code::terminate;
 }
@@ -87,7 +93,9 @@ book::code app::terminate()
 
 book::code app::setup_ui()
 {
-    return book::code::notimplemented;
+    //...
+    screen::me()->update();
+    return book::code::ready;
 }
 
 
