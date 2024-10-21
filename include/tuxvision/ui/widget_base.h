@@ -31,7 +31,7 @@ public:
     book::code peek_xy(ui::cxy xy);
     terminal::vchar::string::iterator position(ui::cxy xy);
     terminal::vchar::string::iterator operator*();
-
+    book::code set_anchor(globals::anchor::value _ank);
 
     class _TUXVISION_ painter_dc
     {

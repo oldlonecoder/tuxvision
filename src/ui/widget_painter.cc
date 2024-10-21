@@ -54,9 +54,19 @@ widget_base::painter_dc &widget_base::painter_dc::clear(const rectangle &r)
         auto it = _parent_dc_->position(area.a + ui::cxy{0,y});
         std::fill(it, it + area.dwh.w, terminal::vchar(_colors_));
     }
+    return home();
+
+}
+
+widget_base::painter_dc& widget_base::painter_dc::home()
+{
+    _geometry_.home();
+    _parent_dc_->peek_xy(_geometry_.a);
 
     return *this;
 }
+
+
 
 /*!
  * \brief Instance public widget_base::painter_dc::set_background_color
@@ -138,13 +148,24 @@ widget_base::painter_dc& widget_base::painter_dc::operator << (const char* str)
     auto z = std::strlen(str);
     auto start = _parent_dc_->_iterator_;
     auto it = start + z;
+    book::log() << book::fn::fun << "'" << str << "' : size[" << z << "]:";
 
     if(it >= _parent_dc_->_bloc_->end())
         it = _parent_dc_->_bloc_->begin() + (it - (_parent_dc_->_bloc_->end()+1));
 
+    book::out() << " iterator offset: " << it - _parent_dc_->_bloc_->begin();
     auto c = str;
-    for(; start <=it; start++)
+
+    book::debug() << book::fn::fun << " Check :";
+    for(; start <it; start++)
+    //{
         (*start) << *c++;
+    //    book::out()  << start->details();
+    //}
+
+    auto vstr = terminal::vchar::render(&(*_parent_dc_->_bloc_->begin()), _geometry_.dwh.w);
+    book::out() << "line: '" << vstr << "'";
+
     **this += it-_parent_dc_->_bloc_->begin();
     return *this;
 }
@@ -153,6 +174,10 @@ widget_base::painter_dc& widget_base::painter_dc::operator << (const std::string
 {
     return **this << str.c_str();
 }
+
+
+
+
 
 widget_base::painter_dc& widget_base::painter_dc::operator << (const tux::string& str)
 {

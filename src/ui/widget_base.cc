@@ -60,6 +60,7 @@ book::code widget_base::set_geometry(const rectangle &r)
         book::out() << "parent(" << color::yellow << p->id() << color::reset << ") bloc assigned to " << id() << ".";
         if(_uiflags_ & globals::wflags::TopLevel)  goto TOPLVL;
         _bloc_ = p->_bloc_;
+        auto_fit();
     }
     else
     {
@@ -71,9 +72,6 @@ TOPLVL:
     }
     //_bkcrs_ =
     _iterator_ = _bloc_.get()->begin();
-    auto& cell = _bloc_.get()[0][0];
-    cell << 'A';
-
     return book::code::done;
 }
 
@@ -151,6 +149,14 @@ terminal::vchar::string::iterator widget_base::operator*()
     return _iterator_;
 }
 
+book::code widget_base::set_anchor(globals::anchor::value _ank)
+{
+    _ancre_ = _ank;
+    //... We have to check confilcting and confusing bits.
+
+    return book::code::accepted;
+}
+
 /*!
  * \brief widget_base::draw
  * Self-draw or predefined draw() of the widget.
@@ -160,6 +166,11 @@ terminal::vchar::string::iterator widget_base::operator*()
 book::code widget_base::draw()
 {
     clear();
+    _dirty_area_ = _geometry_.tolocal();
+    for(auto* o: m_children)
+    {
+        if(auto* w = o->as<widget_base>(); w) w->draw();
+    }
     return book::code::done;
 }
 
@@ -182,12 +193,15 @@ book::code widget_base::dirty(const rectangle &dirty_rect)
         _dirty_area_ = dirty_rect;
     else
         _dirty_area_ |= dirty_rect;
-
+    book::debug() << book::fn::fun << color::red4 << id() << color::reset << " : dirty area :" <<  color::yellow << _dirty_area_ << color::reset;
     return book::code::accepted;
 }
 
 book::code widget_base::update_child(widget_base *w)
 {
+    book::log() << book::fn::fun << color::lime << class_name() << color::yellow << "::" << color::lightsteelblue3 << w->id() << color::reset;
+    book::out() << "dirty rect: " << w->_dirty_area_;
+
     if(!_dirty_area_)
         _dirty_area_ = w->_dirty_area_ + w->_geometry_.a;
     else
@@ -239,13 +253,6 @@ void widget_base::end_draw(painter_dc &edc)
     dirty(edc._geometry_);
 }
 
-widget_base::painter_dc& widget_base::painter_dc::home()
-{
-    _geometry_.home();
-    _parent_dc_->peek_xy(_geometry_.a);
-
-    return *this;
-}
 
 /*!
  * \brief widget_base::clear

@@ -261,6 +261,7 @@ void screen::expose_window_to_bb(widget_base *w)
 {
 
     // to screen offset coords:
+    book::log() << book::fn::fun << color::lime << class_name() << ":";
     auto area = w->_dirty_area_ + w->_geometry_.a;
     if(w == this)
     {
@@ -286,10 +287,13 @@ void screen::expose_window_to_bb(widget_base *w)
  */
 book::code screen::refresh_back_buffer(const rectangle& _area )
 {
+     book::log() << book::fn::fun << color::lime << class_name() << ": area to put onto the screen bb:"  << color::yellow << _area;
     for(int y = 0; y < _area.height(); y++)
     {
-        peek_xy(_area.a);
+         peek_xy(_area.a+ui::cxy{0,y});// {0,0}!!! NOT _area.a !!!!
         std::copy(_iterator_, _iterator_ + *_area.width(),  peek_bb(_area.a + ui::cxy{0,y}));
+        book::log() << "debug: " << book::fn::fun << "desktop: line #" << color::red4 << y << color::reset << ':';
+        book::out() << _iterator_->details();
     }
 
     for(auto* tlw : screen::_windows_)
@@ -299,8 +303,9 @@ book::code screen::refresh_back_buffer(const rectangle& _area )
         tlw->_dirty_area_ -= tlw->_geometry_.a;
         expose_window_to_bb(tlw);
     }
-
-    return book::code::notimplemented;
+    // testing : push now to the terminal console screen :
+    commit(_area);
+    return book::code::done;
 }
 
 
@@ -319,7 +324,7 @@ book::code screen::commit(const rectangle &bb_subarea)
     {
         scr = bb_subarea.a + ui::cxy{0,y} ;
         auto bbit = peek_bb(scr); //screen::__back_buffer_->begin() + bb_subarea.a.x + bb_subarea.a.y * _geometry_.dwh.w;
-        terminal::cursor(scr);
+        terminal::cursor(scr+ui::cxy{1,1}); // {1,1}
         terminal::vchar::render_string(bbit, bbit + bb_subarea.dwh.w);
     }
     std::cout  << std::flush;
@@ -388,11 +393,7 @@ void screen::commit_screen()
 
 book::code screen::draw()
 {
-    auto writer = begin_draw();
-    writer.clear();
-    end_draw(writer);
-
-    return book::code::notimplemented;
+    return widget_base::draw();
 }
 
 

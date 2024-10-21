@@ -6,6 +6,7 @@
 #include <tuxvision/est/expression.h>
 #include <tuxvision/ui/events.h>
 #include <tuxvision/ui/screen_desk.h>
+#include <tuxvision/ui/widget/label.h>
 #include <tuxvision/ui/application.h>
 //=====================================
 
@@ -17,7 +18,7 @@ namespace tux::ui
 {
 class app : public application
 {
-
+    label* lbl_foul{nullptr}    ;
     // intrack*        intrack_ptr{nullptr};
     // //ui::statusbar*  statusbar{nullptr};
     // desktop*         desk{nullptr};
@@ -62,15 +63,8 @@ book::code app::run()
 {
 
     setup();
-    auto r = expression();
-    book::status() << book::fn::fun << "app:expression() test: " << r;
-//    auto widget = widget_base{nullptr,"test with shared mem"};
-//    widget.set_theme("C128");
-//    widget.set_geometry(terminal::geometry());
-    //widget.dirty({});
-//    terminal::cursor({1,1});
-
-
+    //auto r = expression();
+    //book::status() << book::fn::fun << "app:expression() test: " << r;
     event ev;
     book::code c{};
     while(!!(c = event::get_stdin_event(ev,{65000,0})) && c != book::code::cancel)
@@ -78,7 +72,7 @@ book::code app::run()
         if(ev.event_type == event::type::MOUSE)
             book::info() << ev.data.mev.to_string();
     }
-
+    //delete lbl;
     terminate();
     return book::code::terminate;
 }
@@ -94,6 +88,14 @@ book::code app::terminate()
 book::code app::setup_ui()
 {
     //...
+    screen::me()->set_theme("C128");
+    screen::me()->clear();
+    lbl_foul = new label(screen::me(),"Label #1");
+    lbl_foul->set_anchor(globals::anchor::fit_right|globals::anchor::fit_bottom);
+    lbl_foul->set_geometry({{0,0},ui::size{40,1}});
+    lbl_foul->set_theme("C64");
+    lbl_foul->set_text("I, beautifoul label!");
+    screen::me()->draw();
     screen::me()->update();
     return book::code::ready;
 }

@@ -4,17 +4,23 @@
 
 
 
-namespace tux::ui 
+namespace tux::ui
 {
 
 label::label(object* _parent_widget, const std::string _id): widget_base(_parent_widget,_id){}
 
+label::~label()
+{
+    _text_.clear();
+}
+
 book::code label::draw()
 {
+    //auto_fit();
     clear();
     auto p = begin_draw();
-    p << _text_;
     p.home();
+    p << _text_;
     end_draw(p);
 
     return book::code::done;
@@ -24,8 +30,10 @@ book::code label::draw()
 
 book::code label::set_text(const std::string& _txt)
 {
+    book::log() << book::fn::fun;
     _text_ = _txt;
-    return draw();
+    book::out() << " text set to '" << _text_ << "';";
+    return book::code::ok;
 }
 
 }
