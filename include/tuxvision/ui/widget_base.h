@@ -86,13 +86,13 @@ protected:
     globals::colors::attr_db::components _style_{};
     globals::colors::attr_db::elements   _theme_elements_{};
     globals::wstate::Type                _state_{globals::wstate::Active};
-    globals::anchor::value               _ancre_{globals::anchor::fixed};
+    globals::anchor::value               _ancre_{globals::anchor::unset};
     globals::uistyle::Type               _uistyle_{globals::uistyle::Unset};
     globals::wflags::Type                _uiflags_{globals::wflags::Unset};
 
     // --------------------------------------------
 
-    virtual book::code auto_fit(globals::anchor::value anchor_value=globals::anchor::fixed);
+    virtual book::code auto_fit(globals::anchor::value anchor_value=globals::anchor::unset);
     virtual book::code resize(ui::size new_sz);
 protected:
     virtual book::code dirty(const rectangle& dirty_rect={});

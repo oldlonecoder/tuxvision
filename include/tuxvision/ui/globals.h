@@ -122,17 +122,18 @@ static constexpr Type Ditry = 0x400;
 namespace anchor
 {
 using value = U16;
-static constexpr anchor::value fixed        = 0x0000; ///< free fixed xy placement
-static constexpr anchor::value width_fit    = 0x0001; ///< Fits the entire width size
-static constexpr anchor::value height_fit   = 0x0002; ///< Fits the entire height size
-static constexpr anchor::value onframe_fit  = 0x0004; ///< Overlaps if wh size > 1, or sits on the frame.
-static constexpr anchor::value fit_right    = 0x0008;
-static constexpr anchor::value fit_left     = 0x0010;
-static constexpr anchor::value fit_top      = 0x0020;
-static constexpr anchor::value fit_bottom   = 0x0040;
-static constexpr anchor::value fit_center   = 0x0080; ///< Both fit_h&vcenter ...
-static constexpr anchor::value fit_hcenter  = 0x0100;
-static constexpr anchor::value fit_vcenter  = 0x0200;
+static constexpr anchor::value unset        = 0x0000; ///< free fixed xy placement
+static constexpr anchor::value fixed        = 0x0001; ///< free fixed xy placement
+static constexpr anchor::value width_fit    = 0x0002; ///< Fits the entire width size
+static constexpr anchor::value height_fit   = 0x0004; ///< Fits the entire height size
+static constexpr anchor::value onframe_fit  = 0x0008; ///< Overlaps if wh size > 1, or sits on the frame.
+static constexpr anchor::value fit_right    = 0x0010;
+static constexpr anchor::value fit_left     = 0x0020;
+static constexpr anchor::value fit_top      = 0x0040;
+static constexpr anchor::value fit_bottom   = 0x0080;
+static constexpr anchor::value fit_center   = 0x0100; ///< Both fit_h&vcenter ...
+static constexpr anchor::value fit_hcenter  = 0x0200;
+static constexpr anchor::value fit_vcenter  = 0x0400;
 
 //...
 }

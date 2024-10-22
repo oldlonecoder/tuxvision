@@ -79,7 +79,9 @@ book::code screen::start()
 
     new screen("screen ios");
     terminal::begin();
+    screen::_screen_->set_theme("C128");
     screen::_screen_->set_geometry(terminal::geometry());
+
     screen::__back_buffer_ = std::make_shared<terminal::vchar::string>(screen::_screen_->_geometry_.dwh.area(), terminal::vchar(screen::_screen_->_colors_));
 
     book::out() << color::blueviolet <<  screen::_screen_->class_name() << color::grey100 << "::" << color::yellow << screen::_screen_->id() << color::reset << " double back_buffer setup complete.";
@@ -287,12 +289,16 @@ void screen::expose_window_to_bb(widget_base *w)
  */
 book::code screen::refresh_back_buffer(const rectangle& _area )
 {
-     book::log() << book::fn::fun << color::lime << class_name() << ": area to put onto the screen bb:"  << color::yellow << _area;
+    book::log() << book::fn::fun << color::lime << class_name() << ": area to put onto the screen bb:"  << color::yellow << _area;
+    book::out() << "test the first line of the widget's back_buffer:" << book::fn::endl;
+    peek_xy(_area.a+ui::cxy{0,0});
+    book::out() << terminal::vchar::render(&(*_iterator_), _geometry_.dwh.w);
+
     for(int y = 0; y < _area.height(); y++)
     {
         peek_xy(_area.a+ui::cxy{0,y});// {0,0}!!! NOT _area.a !!!!
-        book::log() << "debug: " << book::fn::fun << "desktop: line #" << color::red4 << y << color::reset << ':';
-        book::out() << _iterator_->details();
+        //book::log() << "debug: " << book::fn::fun << "desktop: line #" << color::red4 << y << color::reset << ':';
+        //book::out() << _iterator_->details();
 
         std::copy(_iterator_, _iterator_ + *_area.width(),  peek_bb(_area.a + ui::cxy{0,y}));
     }
@@ -324,8 +330,8 @@ book::code screen::commit(const rectangle &bb_subarea)
     for(int y=0; y < bb_subarea.dwh.h; y++)
     {
         scr = bb_subarea.a + ui::cxy{0,y} ;
-        auto bbit = peek_bb(scr); //screen::__back_buffer_->begin() + bb_subarea.a.x + bb_subarea.a.y * _geometry_.dwh.w;
-        book::out() << "line#" << color::yellow6 << y << color::grey100 << ":" << bbit->details();
+        auto bbit = peek_bb(scr);
+        //book::out() << "line#" << color::yellow6 << y << color::grey100 << ":" << bbit->details();
         terminal::cursor(scr+ui::cxy{1,1}); // {1,1}
         terminal::vchar::render_string(bbit, bbit + bb_subarea.dwh.w);
     }

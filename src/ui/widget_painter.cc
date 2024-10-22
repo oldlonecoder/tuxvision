@@ -33,26 +33,30 @@ widget_base::painter_dc::painter_dc(widget_base *parent_widget, const rectangle 
 widget_base::painter_dc &widget_base::painter_dc::clear(const rectangle &r)
 {
     auto area = r;
+    book::debug() << book::fn::fun;
     if(!area)
-    {
-        _parent_dc_->clear(); // no need the line-by-line overhead here;
-        return *this;
-    }
+        area = _geometry_.tolocal();
 
-    if(area = _geometry_.tolocal() & r; !area)
-    {
-        book::error() << book::fn::fun << "'" << color::yellow << _parent_dc_->id()
-                      << color::reset << "': request clear "
-                      << color::lightsteelblue3 << r
-                      << color::reset << " is out of boundaries." ;
+    // if(area = _geometry_.tolocal() & r; !area)
+    // {
+    //     book::error() << book::fn::fun << "'" << color::yellow << _parent_dc_->id()
+    //                   << color::reset << "': request clear "
+    //                   << color::lightsteelblue3 << r
+    //                   << color::reset << " is out of boundaries." ;
 
-        return *this;
-    }
+    //     return *this;
+    // }
 
     for(int y = 0; y < area.dwh.h; y++)
     {
         auto it = _parent_dc_->position(area.a + ui::cxy{0,y});
         std::fill(it, it + area.dwh.w, terminal::vchar(_colors_));
+        book::out() << "check(first char on line #"
+                    << color::yellow
+                    << y<< color::reset << ":"
+                    << color::lime << _parent_dc_->class_name()
+                    << color::yellow << "::" << color::lightsteelblue3 << _parent_dc_->id() << color::reset
+                    << it->details();
     }
     return home();
 

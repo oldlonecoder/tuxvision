@@ -22,8 +22,9 @@
 namespace tux::ui
 {
 
-class label : public widget_base 
+class label : public widget_base
 {
+    CLASSNAME(label)
     std::string _text_{};
 public:
     label();
@@ -31,7 +32,7 @@ public:
     label(object* _parent_widget, const std::string _id);
     book::code set_text(const std::string& _txt);
 
-    book::code draw() override;    
+    book::code draw() override;
 
 };
 }

@@ -6,14 +6,11 @@ namespace tux::ui
 
 #define CHECK_BLOC \
 if(!_bloc_)\
-{\
-    throw book::exception() [\
-        book::except() << book::fn::fun << book::code::null_ptr << " undefined backbuffer on: "\
-                       << color::lightsteelblue << class_name()\
-                       << color::reset <<"::"\
-                       << color::yellow << id()\
-    ];\
-}
+    throw book::exception() [ book::except() << book::fn::fun << book::code::null_ptr << " undefined backbuffer on: "\
+   << color::lightsteelblue << class_name()\
+   << color::reset <<"::"\
+   << color::yellow << id()\
+];
 
 
 
@@ -48,10 +45,10 @@ widget_base::~widget_base(){}
  */
 book::code widget_base::set_geometry(const rectangle &r)
 {
-    book::info() << color::yellow << id() << color::reset << " requested geometry:" << r;
+    book::info() << color::yellow << id() << color::reset << " requested geometry:" << r << book::fn::endl;
     if(!r)
     {
-        book::error() << book::fn::fun << book::code::null_ptr << " - " << color::yellow << id() << " invalid rectangle!";
+        book::error() << book::fn::fun << book::code::null_ptr << " - " << color::yellow << id() << " invalid rectangle!" << book::fn::endl;
         return book::code::rejected;
     }
     _geometry_ = r;
@@ -60,18 +57,18 @@ book::code widget_base::set_geometry(const rectangle &r)
         book::out() << "parent(" << color::yellow << p->id() << color::reset << ") bloc assigned to " << id() << ".";
         if(_uiflags_ & globals::wflags::TopLevel)  goto TOPLVL;
         _bloc_ = p->_bloc_;
-        auto_fit();
     }
     else
     {
 TOPLVL:
         _bloc_ = std::make_shared<terminal::vchar::string>(_geometry_.dwh.area(), terminal::vchar(_colors_));
         _uiflags_ |= globals::wflags::TopLevel|globals::wflags::Floating;
-        book::out() << color::lightsteelblue <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, owns back_buffer";
-        book::out() << color::yellow << id() << color::reset << " assisgned geometry:" << _geometry_;
+        book::out() << color::lightsteelblue <<  class_name() << color::grey100 << "::" << color::yellow << id() << color::reset << " is toplevel widget, owns back_buffer" << book::fn::endl;
     }
     //_bkcrs_ =
     _iterator_ = _bloc_.get()->begin();
+    auto_fit();
+    book::out() << color::yellow << id() << color::reset << " assisgned geometry:" << _geometry_ << book::fn::endl;
     return book::code::done;
 }
 
@@ -152,6 +149,8 @@ terminal::vchar::string::iterator widget_base::operator*()
 book::code widget_base::set_anchor(globals::anchor::value _ank)
 {
     _ancre_ = _ank;
+    if(_bloc_ && _geometry_)
+        auto_fit();
     //... We have to check confilcting and confusing bits.
 
     return book::code::accepted;
@@ -206,8 +205,8 @@ book::code widget_base::update_child(widget_base *w)
         _dirty_area_ = w->_dirty_area_ + w->_geometry_.a;
     else
         _dirty_area_ |= w->_dirty_area_ + w->_geometry_.a;
-
     _dirty_area_ = _geometry_.tolocal() & _dirty_area_;
+    book::debug() << book::fn::fun << book::fn::endl << color::lime << id() << color::reset << " _dirty_area_::" << color::red4 << _dirty_area_;
     if(!_dirty_area_) return book::code::rejected;
 
     auto p = parent<widget_base>();
@@ -262,7 +261,8 @@ void widget_base::clear()
 {
     CHECK_BLOC
 
-    book::debug() << book::fn::fun << _colors_() << id() << " colors;";
+    book::debug() << book::fn::fun;
+    book::out() << color::grey100 << class_name() << color::lightcyan3 << '[' << color::lightsteelblue3 <<  id() << color::lightcyan3 << ']' << _colors_() << " >>colors<< ;" << color::reset;
     std::fill(_bloc_->begin(), _bloc_->end(), terminal::vchar(_colors_));
 
 }
@@ -296,13 +296,18 @@ book::code widget_base::update()
  */
 book::code widget_base::auto_fit(globals::anchor::value anchor_value)
 {
-    if(anchor_value==anchor::fixed)
+
+    if((!_ancre_ && !anchor_value) || !_geometry_)
     {
-        _ancre_ = anchor_value;
-        return book::code::done;
+        book::info() << book::fn::fun;
+        book::out() << class_name() << "->[" << color::lime << id() << color::reset << "] has no anchor, reject auto_fit()...";
+        return book::code::rejected;
     }
-    book::debug() << book::fn::fun << '\'' << color::yellow << id() << color::reset << "' :";
+
+    book::debug() << book::fn::fun << '\'' << color::yellow << id() << color::reset << "' anchor:" << std::format("{:<04X}", _ancre_);
     cxy off{0,0};
+    if(anchor_value)
+        _ancre_ = anchor_value;
 
     // need to separate and set a simple access to the rectangle coordinates and its components:
     auto par = parent<widget_base>();
@@ -321,34 +326,34 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
         if((par->_uistyle_ & uistyle::Frame) && !(par->_uistyle_ & anchor::onframe_fit))
             off={1,1};
 
-    book::out() << id() << " offset:" << off;
+    book::out() << id() << " offset:" << off << book::fn::endl;
     //
-    book::debug() << "placement is in this area :" << color::yellow << area << color::reset;
+    book::debug() << "placement is in this area :" << color::yellow << area << color::reset << book::fn::endl;
 
     auto [a,b,sz] = area.components();
     auto [ea,eb,esz] = _geometry_.components(); // this 'e'lement's geometry components
 
     if(_ancre_ & anchor::width_fit)
     {
-        book::out() << " Resize this " << id() <<  " Geometry:" << color::blue4 << _geometry_;
+        book::out() << " Resize this " << id() <<  " Geometry:" << color::blue4 << _geometry_ << book::fn::endl;;
         resize(ui::size{area.dwh.w - (off.x*2), *_geometry_.height()});
         _geometry_.moveat({off.x,0});
-        book::out() << "fit width: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset;
+        book::out() << "fit width: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset << book::fn::endl;
     }
     else
     {
         if(_ancre_ & anchor::fit_right)
         {
-            book::out() << color::yellow << id() << color::reset << " fit right:";
+            book::out() << color::yellow << id() << color::reset << " fit right:" << book::fn::endl;
             _geometry_.moveat(cxy{b.x - (esz.w + off.x), eb.y});
             book::out() << _geometry_;
         }
         else
             if(_ancre_ & anchor::fit_left)
             {
-                book::out() << color::yellow << id() << color::reset << " fit right:";
+                book::out() << color::yellow << id() << color::reset << " fit right:" << book::fn::endl;
                 _geometry_.moveat(cxy{a.x+off.x, eb.y});
-                book::out() << _geometry_;
+                book::out() << _geometry_ << book::fn::endl;
             }
         // else center....
     }
@@ -356,7 +361,7 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
     if(_ancre_ & anchor::height_fit)
     {
         resize(ui::size{_geometry_.dwh.w,*area.height()});
-        book::out() << "fit height: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset;
+        book::out() << "fit height: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset << book::fn::endl;
         _geometry_.moveat({a.x, off.y});
     }
     else
@@ -365,10 +370,10 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
         {
 
             _geometry_.moveat({_geometry_.a.x, *area.height()-off.y});
-            book::out() << "fit bottom: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset;
+            book::out() << "fit bottom: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset << book::fn::endl;
         }
     }
-    book::out() << "applied geometry (fit_width|fit_height only as of Oct 08 '24):" << color::yellow << id() << color::lime << _geometry_ << color::yellow;
+    book::out() << "applied geometry : " << color::yellow << id() << ' '  << color::lime << _geometry_ << color::yellow << book::fn::endl;
 
     //...
 

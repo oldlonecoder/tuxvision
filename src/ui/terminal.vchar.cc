@@ -25,7 +25,7 @@ namespace tux::ui::terminal
 
 [[maybe_unused]] vchar::vchar(U32 Ch) : d(Ch){}
 
-vchar::vchar(vchar* C): vchar(C->d){}
+vchar::vchar(vchar* C): d(C->d){}
 
 vchar::vchar(color::pair cc)
 {

@@ -344,9 +344,10 @@ book &book::out(std::source_location src)
     if(!book::current_section->contents.empty())
     {
         //@todo apply encoded newline : either ascii or html
-        book::current_section->contents.back().text | "\r\n"; // this way we make sure that we set new line for all oses.
+        auto& le = book::current_section->contents.back();
+        //le.text | "\r\n"; // this way we make sure that we set new line for all oses.
         book_guard.unlock();
-        return book::current_section->contents.back();
+        return le;
     }
     auto& r = **book::current_section << book{book::type::output, book::code::empty, src};
     book_guard.unlock();
@@ -550,7 +551,7 @@ void book::init_header()
         auto [gh, colors] = book::function_attributes(book::fn::line);
         text | colors | "line: " | std::format("{}", location.line()) | color::reset;
     }
-    text | ' ';
+    text | " \r\n";
 }
 
 
@@ -672,7 +673,7 @@ book &book::operator<<(book::fn fn)
         }
         case book::fn::fun:
             auto [gh, colors] = book::function_attributes(book::fn::fun);
-            text | "\n[" | colors | location.function_name() | color::reset | "]\n";
+            text | "[" | colors | location.function_name() | color::reset | "]\n";
             break;
 
         //default: break;
@@ -688,7 +689,7 @@ book::exception book::exception::operator[](book& el)
 }
 
 
-book::book(book::type in_type, book::code code, std::source_location src):_type_(in_type), _code_(code), location(std::move(src)){}
+book::book(book::type in_type, book::code code, std::source_location src):_type_(in_type), _code_(code), location(std::move(src)){text | "\r\n"; }
 
 
 const char* book::exception::what() const noexcept

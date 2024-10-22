@@ -18,7 +18,8 @@ namespace tux::ui
 {
 class app : public application
 {
-    label* lbl_foul{nullptr}    ;
+    label* lbl_foul{nullptr};
+    label* lbl_deux{nullptr};
     // intrack*        intrack_ptr{nullptr};
     // //ui::statusbar*  statusbar{nullptr};
     // desktop*         desk{nullptr};
@@ -88,16 +89,24 @@ book::code app::terminate()
 book::code app::setup_ui()
 {
     //...
+    //----------------tests
+    event e{};
+    //------------------------
     screen::me()->set_theme("C128");
     screen::me()->clear();
     lbl_foul = new label(screen::me(),"Label #1");
-    lbl_foul->set_anchor(globals::anchor::fit_right|globals::anchor::fit_bottom);
     lbl_foul->set_geometry({{3,3},ui::size{40,1}});
+    lbl_foul->set_anchor(globals::anchor::fit_right|globals::anchor::fit_bottom);
     lbl_foul->set_theme("C64");
     lbl_foul->set_text("I, beautifoul label!");
+
+    lbl_deux = new label(screen::me(),"Label #deux");
+    lbl_deux->set_geometry({{3,4},ui::size{40,1}});
+    lbl_deux->set_anchor(globals::anchor::fit_left|globals::anchor::fit_bottom);
+    lbl_deux->set_theme("C128");
+    lbl_deux->set_text("I, label deux!");
     screen::me()->draw();
     screen::me()->update();
-
     return book::code::ready;
 }
 
