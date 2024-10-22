@@ -261,7 +261,10 @@ void widget_base::end_draw(painter_dc &edc)
 void widget_base::clear()
 {
     CHECK_BLOC
+
+    book::debug() << book::fn::fun << _colors_() << id() << " colors;";
     std::fill(_bloc_->begin(), _bloc_->end(), terminal::vchar(_colors_));
+
 }
 
 book::code widget_base::update()
@@ -385,7 +388,7 @@ book::code widget_base::resize(size new_sz)
     CHECK_BLOC
     _geometry_.resize(new_sz);
     book::info() << book::fn::fun << "new geometry: " << color::yellow << _geometry_ << color::reset;
-    if(!parent<widget_base>())
+    if(is_toplevel())
     {
         _bloc_->resize(new_sz.area(), terminal::vchar(_colors_));
         book::out() << " bloc reallocation done.";

@@ -216,8 +216,7 @@ book::code vchar::render_string(vchar::string::iterator start, vchar::string::it
         else
             str += ch.ascii();
     }
-    str += _eol_;
-    std::cout << str;
+    std::cout << str <<  _eol_;
     return book::code::done;
 }
 

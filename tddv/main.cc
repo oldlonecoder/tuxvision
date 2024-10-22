@@ -92,11 +92,12 @@ book::code app::setup_ui()
     screen::me()->clear();
     lbl_foul = new label(screen::me(),"Label #1");
     lbl_foul->set_anchor(globals::anchor::fit_right|globals::anchor::fit_bottom);
-    lbl_foul->set_geometry({{0,0},ui::size{40,1}});
+    lbl_foul->set_geometry({{3,3},ui::size{40,1}});
     lbl_foul->set_theme("C64");
     lbl_foul->set_text("I, beautifoul label!");
     screen::me()->draw();
     screen::me()->update();
+
     return book::code::ready;
 }
 

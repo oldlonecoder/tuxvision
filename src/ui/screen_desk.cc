@@ -290,10 +290,11 @@ book::code screen::refresh_back_buffer(const rectangle& _area )
      book::log() << book::fn::fun << color::lime << class_name() << ": area to put onto the screen bb:"  << color::yellow << _area;
     for(int y = 0; y < _area.height(); y++)
     {
-         peek_xy(_area.a+ui::cxy{0,y});// {0,0}!!! NOT _area.a !!!!
-        std::copy(_iterator_, _iterator_ + *_area.width(),  peek_bb(_area.a + ui::cxy{0,y}));
+        peek_xy(_area.a+ui::cxy{0,y});// {0,0}!!! NOT _area.a !!!!
         book::log() << "debug: " << book::fn::fun << "desktop: line #" << color::red4 << y << color::reset << ':';
         book::out() << _iterator_->details();
+
+        std::copy(_iterator_, _iterator_ + *_area.width(),  peek_bb(_area.a + ui::cxy{0,y}));
     }
 
     for(auto* tlw : screen::_windows_)
@@ -324,6 +325,7 @@ book::code screen::commit(const rectangle &bb_subarea)
     {
         scr = bb_subarea.a + ui::cxy{0,y} ;
         auto bbit = peek_bb(scr); //screen::__back_buffer_->begin() + bb_subarea.a.x + bb_subarea.a.y * _geometry_.dwh.w;
+        book::out() << "line#" << color::yellow6 << y << color::grey100 << ":" << bbit->details();
         terminal::cursor(scr+ui::cxy{1,1}); // {1,1}
         terminal::vchar::render_string(bbit, bbit + bb_subarea.dwh.w);
     }
@@ -332,28 +334,6 @@ book::code screen::commit(const rectangle &bb_subarea)
 }
 
 
-// /*!
-//  * @brief screen::expose
-//  * Updates the back buffer iterating toplevel widgets intersecting bb_subarea.
-//  * @param bb_subarea
-//  * @return
-//  */
-// book::code screen::expose(const rectangle &bb_subarea)
-// {
-//     for(int y =0; y < bb_subarea.dwh.h; y++)
-//     {
-//         peek_xy(bb_subarea.a - _geometry_.a);
-//         std::copy(_iterator_, _iterator_ + *bb_subarea.width(), screen::__back_buffer_->begin() + bb_subarea.a.x + (bb_subarea.a.y+y) * _geometry_.dwh.w);
-//         for(auto* w : screen::_windows_)
-//         {
-//             auto warea = w->_geometry_ & bb_subarea;
-//             if(!warea) continue;
-//             warea -= w->_geometry_.a;
-//             if(!warea[ui::cxy{warea.a.x,y}])continue;
-
-//         }
-//     }
-// }
 
 
 auto screen::query(widget_base *wb) -> std::list<widget_base*>::iterator
