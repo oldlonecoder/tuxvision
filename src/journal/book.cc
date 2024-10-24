@@ -345,7 +345,7 @@ book &book::out(std::source_location src)
     {
         //@todo apply encoded newline : either ascii or html
         auto& le = book::current_section->contents.back();
-        //le.text | "\r\n"; // this way we make sure that we set new line for all oses.
+        le.text | "\r\n"; // this way we make sure that we set new line for all oses.
         book_guard.unlock();
         return le;
     }

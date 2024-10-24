@@ -67,7 +67,9 @@ TOPLVL:
     }
     //_bkcrs_ =
     _iterator_ = _bloc_.get()->begin();
-    auto_fit();
+    if(!(_ancre_ & globals::anchor::fixed) && (_ancre_!=0))
+       auto_fit();
+
     book::out() << color::yellow << id() << color::reset << " assisgned geometry:" << _geometry_ << book::fn::endl;
     return book::code::done;
 }
@@ -113,9 +115,16 @@ book::code widget_base::peek_xy(cxy xy)
         return book::code::oob;
     }
 
-    _iterator_ = _bloc_->begin() + xy.y * *_geometry_.width() + xy.x;
-    //book::log() << book::fn::fun << color::yellow << id() << color::reset << " assigned position : " << color::red4 << xy << color::reset << ":";
-    //book::out() << _iterator_->details();
+    if(auto p = parent<widget_base>(); p)
+    {
+        auto pxy = xy + _geometry_.a;
+        book::debug() << book::fn::fun;
+        book::out() << color::yellow << id() << color::yellow3 << " peek at topleft: " << color::red4 << _geometry_.top_left() << color::reset << " + xy: " << color::red4 << pxy;
+        return p->peek_xy(pxy);
+    }
+    else
+        _iterator_ = _bloc_->begin() + xy.y * *_geometry_.width() + xy.x;
+    book::debug() << color::lime << id() << color::grey100 << "::" << color::lightsteelblue3 << "peek_xy" << color::grey100 << "(" << color::red4 << xy << color::grey100 << ").";
     return book::code::accepted;
 }
 
@@ -126,7 +135,7 @@ book::code widget_base::peek_xy(cxy xy)
  * \param xy
  * \return the value of _iterator_.
  */
-terminal::vchar::string::iterator widget_base::position(cxy xy)
+terminal::vchar::string::iterator widget_base::at(cxy xy)
 {
     if(!_geometry_.goto_xy(xy))
         return {};
@@ -135,16 +144,9 @@ terminal::vchar::string::iterator widget_base::position(cxy xy)
     return _iterator_;
 }
 
+terminal::vchar::string::iterator widget_base::operator[](cxy xy){ return at(xy); }
 
-/*!
- * \brief widget_base::operator *
- * \return the pointer to the  current cell address at the internal cursor position.
- */
-terminal::vchar::string::iterator widget_base::operator*()
-{
-    //...
-    return _iterator_;
-}
+
 
 book::code widget_base::set_anchor(globals::anchor::value _ank)
 {
@@ -167,64 +169,72 @@ book::code widget_base::draw()
     clear();
     _dirty_area_ = _geometry_.tolocal();
     for(auto* o: m_children)
-    {
-        if(auto* w = o->as<widget_base>(); w) w->draw();
-    }
+        if(auto* w = o->as<widget_base>(); w)
+            w->draw();
+
     return book::code::done;
 }
 
 
 /*!
  * \brief widget_base::dirty
- * Invalidating the sub-area defined by the dirty_rect rectangle. sub area is applied in Union operation [ui::rectangle::operator | (ui::rectangle rhs)]
+ * Invalidating the sub-area defined by the dirty_area rectangle. 'sub' area is applied using Union operation (ui::rectangle::operator | (ui::rectangle rhs))
  *  between _dirty_area_ member attribute and the given dirty_rect argument.
  * \param dirty_rect  mandatory valid rectangle.
  * \return accepted or rejeted if dirty_rect is invlalid ( nul/unset rectangle )
  */
 book::code widget_base::dirty(const rectangle &dirty_rect)
 {
+    book::debug() << book::fn::fun;
+    book::out() << color::lime << class_name() << "::" << id() << color::reset
+                << " dirty_rect" << color::yellow  << dirty_rect;
+
     if(!dirty_rect)
     {
-        book::warning() << book::fn::fun << "attempt to merge dirty area with invalid rectangle on " << color::yellow << id() << color::reset <<book::fn::endl << "- rejected";
+        book::error() << book::fn::fun << "(internal) attempt to merge invalidate an area with invalid rectangle on " << color::yellow << id() << color::reset <<book::fn::endl << "- rejected";
         return book::code::rejected;
     }
+
     if(!_dirty_area_)
         _dirty_area_ = dirty_rect;
     else
-        _dirty_area_ |= dirty_rect;
-    book::debug() << book::fn::fun << color::red4 << id() << color::reset << " : dirty area :" <<  color::yellow << _dirty_area_ << color::reset;
+        _dirty_area_ |= dirty_rect; // merge/update this _dirty_area_ rectangle with our child 's _dirty_area_.
+
+    if(_dirty_area_ = _dirty_area_ & _geometry_.tolocal(); !_dirty_area_)
+        return book::code::rejected;
+
+
+    book::debug() << book::fn::fun << color::red4 << class_name() << "::" << id() << color::reset << " computed dirty area: " <<  color::yellow << _dirty_area_ << color::reset;
+
+    if(auto p = parent<widget_base>(); p != nullptr)
+    {
+        book::out() << color::yellow << "signal parent widget '" << color::lime << p->id() << color::reset << "' :";
+        return p->dirty(_dirty_area_+_geometry_.a);
+    }
+
+    book::warning() << color::red4 << id() << " --> I don't know what to do from here..." << color::reset;
+    // No prent widget :
+    // 1- We are the screen's desktop root widget. -> this method addresses the screen's widget back buffer.
+    //                                                 - We must signal (to self) that the screen's back buffer ( 2nd back buffer) needs to be updated with the root widget's dirty back buffer.
+    //                                                 - Be ready to 'flush'/commit to the terminal console screen, with the screen's dirty area
+
+    // 2- We are a top-level widget ( window )     -> we simply accept and leave here.
+
     return book::code::accepted;
 }
 
+
+
+/*!
+ * \brief widget_base::update_child
+ *      Updates merging child widget dirty area with this dirty area..
+ * \param w
+ * \return rejected if invalid computed rectangle ( requested area not visible within this geometry, or child widget has no current dirty area to update.).
+ */
 book::code widget_base::update_child(widget_base *w)
 {
-    book::log() << book::fn::fun << color::lime << class_name() << color::yellow << "::" << color::lightsteelblue3 << w->id() << color::reset;
-    book::out() << "dirty rect: " << w->_dirty_area_;
-
-    if(!_dirty_area_)
-        _dirty_area_ = w->_dirty_area_ + w->_geometry_.a;
-    else
-        _dirty_area_ |= w->_dirty_area_ + w->_geometry_.a;
-    _dirty_area_ = _geometry_.tolocal() & _dirty_area_;
-    book::debug() << book::fn::fun << book::fn::endl << color::lime << id() << color::reset << " _dirty_area_::" << color::red4 << _dirty_area_;
-    if(!_dirty_area_) return book::code::rejected;
-
-    auto p = parent<widget_base>();
-    if(p)
-        return p->update_child(this);
-    if(is_toplevel())
-    {
-        screen::me()->expose_window_to_bb(this);
-        return book::code::done;
-    }
-
-
-    throw book::exception()[
-        book::except() << book::fn::fun << class_name() << "::\"" << id() << "\": no parent but also not a top-level widget."
-    ];
-
-    //return book::code::done;
-
+    if(!w->_dirty_area_) return book::code::rejected;
+    return dirty(w->_dirty_area_);
 }
 
 
@@ -345,7 +355,7 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
         if(_ancre_ & anchor::fit_right)
         {
             book::out() << color::yellow << id() << color::reset << " fit right:" << book::fn::endl;
-            _geometry_.moveat(cxy{b.x - (esz.w + off.x), eb.y});
+            _geometry_.moveat(cxy{b.x - (esz.w + off.x + 1), eb.y-1});
             book::out() << _geometry_;
         }
         else
@@ -369,7 +379,7 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
         if(_ancre_ & anchor::fit_bottom)
         {
 
-            _geometry_.moveat({_geometry_.a.x, *area.height()-off.y});
+            _geometry_.moveat({_geometry_.a.x, *area.height()-off.y-1});
             book::out() << "fit bottom: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset << book::fn::endl;
         }
     }

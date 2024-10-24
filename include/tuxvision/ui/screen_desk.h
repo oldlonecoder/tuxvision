@@ -39,7 +39,8 @@ public:
 
     book::code draw() override;
     book::code update() override;
-
+    book::code invalidate(widget_base* wb);
+    bool       need_refresh() { return !!_dirty_area_; }
 protected:
     //friend class widget_base;
     book::code resize(ui::size new_sz) override;

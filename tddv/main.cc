@@ -72,7 +72,11 @@ book::code app::run()
     {
         if(ev.event_type == event::type::MOUSE)
             book::info() << ev.data.mev.to_string();
+
+        if(screen::me()->need_refresh())
+            screen::me()->update();
     }
+
     //delete lbl;
     terminate();
     return book::code::terminate;
@@ -97,26 +101,24 @@ book::code app::setup_ui()
     lbl_foul = new label(screen::me(),"Label #1");
     lbl_foul->set_geometry({{3,3},ui::size{40,1}});
     lbl_foul->set_anchor(globals::anchor::fit_right|globals::anchor::fit_bottom);
-    lbl_foul->set_theme("C64");
-    lbl_foul->set_text("I, beautifoul label!");
+    lbl_foul->set_theme("C128");
+    lbl_foul->set_text("I am #one The beautifoul label!");
 
     lbl_deux = new label(screen::me(),"Label #deux");
     lbl_deux->set_geometry({{3,4},ui::size{40,1}});
     lbl_deux->set_anchor(globals::anchor::fit_left|globals::anchor::fit_bottom);
-    lbl_deux->set_theme("C128");
-    lbl_deux->set_text("I, label deux!");
+    lbl_deux->set_theme("C64");
+    lbl_deux->set_text("I am label #deux!");
     screen::me()->draw();
     screen::me()->update();
     return book::code::ready;
 }
 
 
-
-
 book::code app::expression()
 {
 
-    tux::est::expr e("est - Expression Syntax Tree");
+    tux::est::expr e("est: Expression Syntax Tree");
     e = "a = 0.02 / ( 0.02 - 42);";
     //tux::est::alu aa =e.exec("a = 0.02 / ( 0.02 - 42);");
     tux::est::alu val =e.exec( );

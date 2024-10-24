@@ -312,6 +312,7 @@ book::code screen::refresh_back_buffer(const rectangle& _area )
     }
     // testing : push now to the terminal console screen :
     commit(_area);
+    _dirty_area_ = {};
     return book::code::done;
 }
 
@@ -360,21 +361,6 @@ void screen::commit_screen()
 // -----------------------------------------------------
 
 
-// /*!
-//  * @brief Instance public screen::dirty
-//  * @param _r  validate boundaries before applying dirty_area union with _r.
-//  * @return rejected if _r is invalid; accepted and applied if valid and within _geometry_.
-//  */
-// book::code screen::dirty(const rectangle &_r)
-// {
-//     auto r = _geometry_ & _r;
-//     if(!r) return book::code::rejected;
-//     _dirty_area_ |= r;
-
-
-//     return book::code::accepted;
-// }
-
 
 
 book::code screen::draw()
@@ -391,8 +377,23 @@ book::code screen::draw()
  */
 book::code screen::update()
 {
-    widget_base::update();
     return refresh_back_buffer(_dirty_area_);
+}
+
+
+/*!
+ * \brief Public screen::invalidate
+ *     Remove the drawing of the widget on the screen's widget backbuffer.
+ * \param wb
+ * \return done or rejected if no visible within the screen's geometry.
+ */
+book::code screen::invalidate(widget_base *wb)
+{
+    auto p = begin_draw(wb->_geometry_);
+    p.clear();
+    end_draw(p);
+
+    return book::code::done;
 }
 
 

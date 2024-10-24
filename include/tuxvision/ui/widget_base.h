@@ -29,8 +29,9 @@ public:
     std::string theme_name(){ return _theme_id_; };
 
     book::code peek_xy(ui::cxy xy);
-    terminal::vchar::string::iterator position(ui::cxy xy);
-    terminal::vchar::string::iterator operator*();
+    terminal::vchar::string::iterator at(ui::cxy xy);
+    terminal::vchar::string::iterator operator[](ui::cxy xy);
+    widget_base& operator*() { return *this; }
     book::code set_anchor(globals::anchor::value _ank);
 
     class _TUXVISION_ painter_dc

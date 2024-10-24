@@ -186,12 +186,10 @@ book::code vchar::render_string(vchar::string::iterator start, vchar::string::it
     std::string str;
     auto it = start;
     str = start->colors()();
+    color::pair curcolors = it->colors();
     while(it != end)
     {
-        color::pair curcolors = it->colors();
-        vchar ch;
-        ch = *it++;
-        auto check = ch.colors();
+        auto check = it->colors();
         if(curcolors.bg != check.bg)
         {
             curcolors.bg = check.bg;
@@ -202,19 +200,19 @@ book::code vchar::render_string(vchar::string::iterator start, vchar::string::it
             curcolors.fg = check.fg;
             str += color::render(curcolors.fg);
         }
-        if(ch.d& UTFBITS)
+        if(it->d& UTFBITS)
         {
-            if(ch.d & Frame)
-                str += cadre()[ch.frame_id()];
+            if(it->d & Frame)
+                str += cadre()[it->frame_id()];
             else
-                if(ch.d & Accent)
-                    str += accent_fr::data[ch.accent_id()];
+                if(it->d & Accent)
+                    str += accent_fr::data[it->accent_id()];
                 else
-                    if(ch.d & UGlyph)
-                        str += glyph::data[ch.icon_id()];
+                    if(it->d & UGlyph)
+                        str += glyph::data[it->icon_id()];
         }
         else
-            str += ch.ascii();
+            str += (it++)->ascii();
     }
     std::cout << str <<  _eol_;
     return book::code::done;
