@@ -2,10 +2,7 @@
 ## tuxvisdion :  classic and raw pointers c++ personal ansi 256 colors console ui and tools; a DOS conio/TurboVision memories.
 
 ### My personal c++ not modern way to experiment coding a poupourri stuff such as book/logging application journal with other support goodies.
-- Be aware!!; Unusable code yet.
-- Disclaimer!! 
-- Inexistent smart pointers; - Or gently introducing them here and here during the roadmap...
-                               Because I'm getting old and lazy (...) 
+- I am gently introducing smart pointers here and here during the roadmap...Because I'm getting old and lazy (...)
 - This project is in very early development and heavy experimentation. Almost everythings will evolve and change drastically during the experiments.
 ---
 - ### TDDV ( using my own 'Test-Driven-Development' cycles with 'Valgrind')
@@ -16,7 +13,6 @@
     * Ansi TUI True color, using XTerm extensions;
     * Application Journal;
     * Est (arithmetic) Expression Syntax Tree and a Lexer
-      (three-point links tree)
     * Simple script interpreter for the ui ...or not
 
 ### This project is not usable yet (not intersting at all as of october 2024). 
