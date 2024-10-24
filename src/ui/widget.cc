@@ -1,4 +1,4 @@
-#include <tuxvision/ui/screen_desk.h>
+#include <tuxvision/ui/widget.h>
 
 namespace tux::ui
 {
@@ -17,33 +17,33 @@ if(!_bloc_)\
 using namespace globals;
 
 
-widget_base::widget_base()
+widget::widget()
 {
 
 }
 
 
 /*!
- * \brief widget_base::widget_base
+ * \brief widget::widget
  * Must be the only valid contructor used for instanciating any of the parent-childrend relational objects.
  * \param _parent_obj
  * \param _id
  * \param _ui_style
  */
-widget_base::widget_base(object *_parent_obj, const std::string _id, globals::uistyle::Type _ui_style):object(_parent_obj, _id),
+widget::widget(object *_parent_obj, const std::string _id, globals::uistyle::Type _ui_style):object(_parent_obj, _id),
     _uistyle_(_ui_style){}
 
-widget_base::~widget_base(){}
+widget::~widget(){}
 
 
 
 /*!
- * \brief widget_base::set_geometry
+ * \brief widget::set_geometry
  * Define the widget's geometry.
  * \param r ui::rectangle : the requested geometry values.
  * \return
  */
-book::code widget_base::set_geometry(const rectangle &r)
+book::code widget::set_geometry(const rectangle &r)
 {
     book::info() << color::yellow << id() << color::reset << " requested geometry:" << r << book::fn::endl;
     if(!r)
@@ -52,7 +52,7 @@ book::code widget_base::set_geometry(const rectangle &r)
         return book::code::rejected;
     }
     _geometry_ = r;
-    if(auto p = parent<widget_base>(); p)
+    if(auto p = parent<widget>(); p)
     {
         book::out() << "parent(" << color::yellow << p->id() << color::reset << ") bloc assigned to " << id() << ".";
         if(_uiflags_ & globals::wflags::TopLevel)  goto TOPLVL;
@@ -75,13 +75,13 @@ TOPLVL:
 }
 
 /*!
- * \brief widget_base::set_theme
+ * \brief widget::set_theme
  * Query the theme id from the colors::attr_db.
  * Sets the internal _style_ and _colors_ from the query values.
  * \param theme_id
  * \return accepted or rejected if the theme name does not exist.
  */
-book::code widget_base::set_theme(const std::string &theme_id)
+book::code widget::set_theme(const std::string &theme_id)
 {
     _theme_id_ = theme_id;
     auto const& comp = globals::colors::attr_db::theme().find(_theme_id_);
@@ -100,12 +100,12 @@ book::code widget_base::set_theme(const std::string &theme_id)
 }
 
 /*!
- * \brief widget_base::position
+ * \brief widget::position
  * Explicitely sets the internal iterator at the coordinates xy - _iterator_ is then ready for read/write operations.
  * \param xy
  * \return accepted or rejected if xy is pout of boundaries of local geometry.
  */
-book::code widget_base::peek_xy(cxy xy)
+book::code widget::peek_xy(cxy xy)
 {
     CHECK_BLOC
 
@@ -115,7 +115,7 @@ book::code widget_base::peek_xy(cxy xy)
         return book::code::oob;
     }
 
-    if(auto p = parent<widget_base>(); p)
+    if(auto p = parent<widget>(); p)
     {
         auto pxy = xy + _geometry_.a;
         book::debug() << book::fn::fun;
@@ -130,12 +130,12 @@ book::code widget_base::peek_xy(cxy xy)
 
 
 /*!
- * \brief widget_base::position
+ * \brief widget::position
  * Explicitely sets the internal iterator at the coordinates xy
  * \param xy
  * \return the value of _iterator_.
  */
-terminal::vchar::string::iterator widget_base::at(cxy xy)
+terminal::vchar::string::iterator widget::at(cxy xy)
 {
     if(!_geometry_.goto_xy(xy))
         return {};
@@ -144,11 +144,11 @@ terminal::vchar::string::iterator widget_base::at(cxy xy)
     return _iterator_;
 }
 
-terminal::vchar::string::iterator widget_base::operator[](cxy xy){ return at(xy); }
+terminal::vchar::string::iterator widget::operator[](cxy xy){ return at(xy); }
 
 
 
-book::code widget_base::set_anchor(globals::anchor::value _ank)
+book::code widget::set_anchor(globals::anchor::value _ank)
 {
     _ancre_ = _ank;
     if(_bloc_ && _geometry_)
@@ -159,17 +159,17 @@ book::code widget_base::set_anchor(globals::anchor::value _ank)
 }
 
 /*!
- * \brief widget_base::draw
+ * \brief widget::draw
  * Self-draw or predefined draw() of the widget.
  * At this area, the base class only clears and or reset the back buffer _bloc_ with the current colors
  * \return
  */
-book::code widget_base::draw()
+book::code widget::draw()
 {
     clear();
     _dirty_area_ = _geometry_.tolocal();
     for(auto* o: m_children)
-        if(auto* w = o->as<widget_base>(); w)
+        if(auto* w = o->as<widget>(); w)
             w->draw();
 
     return book::code::done;
@@ -177,13 +177,13 @@ book::code widget_base::draw()
 
 
 /*!
- * \brief widget_base::dirty
+ * \brief widget::dirty
  * Invalidating the sub-area defined by the dirty_area rectangle. 'sub' area is applied using Union operation (ui::rectangle::operator | (ui::rectangle rhs))
  *  between _dirty_area_ member attribute and the given dirty_rect argument.
  * \param dirty_rect  mandatory valid rectangle.
  * \return accepted or rejeted if dirty_rect is invlalid ( nul/unset rectangle )
  */
-book::code widget_base::dirty(const rectangle &dirty_rect)
+book::code widget::dirty(const rectangle &dirty_rect)
 {
     book::debug() << book::fn::fun;
     book::out() << color::lime << class_name() << "::" << id() << color::reset
@@ -206,13 +206,13 @@ book::code widget_base::dirty(const rectangle &dirty_rect)
 
     book::debug() << book::fn::fun << color::red4 << class_name() << "::" << id() << color::reset << " computed dirty area: " <<  color::yellow << _dirty_area_ << color::reset;
 
-    if(auto p = parent<widget_base>(); p != nullptr)
+    if(auto p = parent<widget>(); p != nullptr)
     {
         book::out() << color::yellow << "signal parent widget '" << color::lime << p->id() << color::reset << "' :";
         return p->dirty(_dirty_area_+_geometry_.a);
     }
 
-    book::warning() << color::red4 << id() << " --> I don't know what to do from here..." << color::reset;
+   // book::warning() << color::red4 << id() << " --> I don't know what to do from here..." << color::reset;
     // No prent widget :
     // 1- We are the screen's desktop root widget. -> this method addresses the screen's widget back buffer.
     //                                                 - We must signal (to self) that the screen's back buffer ( 2nd back buffer) needs to be updated with the root widget's dirty back buffer.
@@ -226,12 +226,12 @@ book::code widget_base::dirty(const rectangle &dirty_rect)
 
 
 /*!
- * \brief widget_base::update_child
+ * \brief widget::update_child
  *      Updates merging child widget dirty area with this dirty area..
  * \param w
  * \return rejected if invalid computed rectangle ( requested area not visible within this geometry, or child widget has no current dirty area to update.).
  */
-book::code widget_base::update_child(widget_base *w)
+book::code widget::update_child(widget *w)
 {
     if(!w->_dirty_area_) return book::code::rejected;
     return dirty(w->_dirty_area_);
@@ -239,35 +239,35 @@ book::code widget_base::update_child(widget_base *w)
 
 
 /*!
- * \brief widget_base::begin_draw
+ * \brief widget::begin_draw
  *
- * Creates an instance of widget_base::painter_dc object for different 'drawing' capabilities on the widget's back buffer _bloc_,
+ * Creates an instance of widget::painter_dc object for different 'drawing' capabilities on the widget's back buffer _bloc_,
  * drawing confined by the subarea.
  *
  * \param sub_area  confined rectangle within the back buffer geometry.
- * \return new instance of widget_base::painter_dc.
+ * \return new instance of widget::painter_dc.
  */
-widget_base::painter_dc widget_base::begin_draw(const rectangle& sub_area)
+widget::painter_dc widget::begin_draw(const rectangle& sub_area)
 {
     return {this, sub_area };
 }
 
 /*!
- * \brief widget_base::end_draw
+ * \brief widget::end_draw
  * Triggers dirty call.
  * \param edc
  */
-void widget_base::end_draw(painter_dc &edc)
+void widget::end_draw(painter_dc &edc)
 {
     dirty(edc._geometry_);
 }
 
 
 /*!
- * \brief widget_base::clear
+ * \brief widget::clear
  * Just clears the widget's back buffer with the current colors
  */
-void widget_base::clear()
+void widget::clear()
 {
     CHECK_BLOC
 
@@ -277,15 +277,9 @@ void widget_base::clear()
 
 }
 
-book::code widget_base::update()
+book::code widget::update()
 {
-    auto p = parent<widget_base>();
-    if(!p && screen::me() != this)
-    {
-        if(!is_toplevel())
-            throw book::exception()[book::except() << book::fn::fun << " non top-level widget cannot be orphan."];
-        //...
-    }
+    auto p = parent<widget>();
 
     // no dirty rect = this widget has nothing to update.
     if(!_dirty_area_) return book::code::ok;
@@ -298,13 +292,13 @@ book::code widget_base::update()
 
 
 /*!
- * \brief Protected instance widget_base::auto_fit
+ * \brief Protected instance widget::auto_fit
  * Auto fit this widget into the parent widget according to the anchor value.
  * \param anchor_value
  * \return  accepted or rejected.
  * \note As of Oct 2024, this method is not usable. It is actually in development and experimentation states.
  */
-book::code widget_base::auto_fit(globals::anchor::value anchor_value)
+book::code widget::auto_fit(globals::anchor::value anchor_value)
 {
 
     if((!_ancre_ && !anchor_value) || !_geometry_)
@@ -320,7 +314,7 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
         _ancre_ = anchor_value;
 
     // need to separate and set a simple access to the rectangle coordinates and its components:
-    auto par = parent<widget_base>();
+    auto par = parent<widget>();
     rectangle area; // The geometry on which this element is positionning.
     if(par)
     {
@@ -392,13 +386,13 @@ book::code widget_base::auto_fit(globals::anchor::value anchor_value)
 
 
 /*!
- * \brief widget_base::resize
+ * \brief widget::resize
  * Resize the geometry of this widget.
  * \param new_sz
  * \return done.
  * \note As of Oct. 2024, there is no size checking! tuxvision is in early dev/experiments/learning and R&D.
  */
-book::code widget_base::resize(size new_sz)
+book::code widget::resize(size new_sz)
 {
     CHECK_BLOC
     _geometry_.resize(new_sz);

@@ -1,4 +1,4 @@
-#include <tuxvision/ui/widget_base.h>
+#include <tuxvision/ui/widget.h>
 
 
 
@@ -9,11 +9,11 @@ namespace tux::ui
 {
 
 /*!
- * \brief Instance public constructor widget_base::painter_dc::painter_dc
+ * \brief Instance public constructor widget::painter_dc::painter_dc
  * \param parent_widget
  * \param r
  */
-widget_base::painter_dc::painter_dc(widget_base *parent_widget, const rectangle &r):_parent_dc_(parent_widget), _geometry_(r)
+widget::painter_dc::painter_dc(widget *parent_widget, const rectangle &r):_parent_dc_(parent_widget), _geometry_(r)
 {
     _colors_ = _parent_dc_->_colors_;
     if(!r)
@@ -25,13 +25,13 @@ widget_base::painter_dc::painter_dc(widget_base *parent_widget, const rectangle 
 
 
 /*!
- * \brief Instance public widget_base::painter_dc::clear
+ * \brief Instance public widget::painter_dc::clear
     clears the (sub-)area \c r with the current colors attributes.
  * \param r
  * \return ref to self.
  * \note r must be local coordinates (offset from {0,0}).
  */
-widget_base::painter_dc &widget_base::painter_dc::clear(const rectangle &r)
+widget::painter_dc &widget::painter_dc::clear(const rectangle &r)
 {
     auto area = r;
     book::debug() << book::fn::fun;
@@ -65,7 +65,7 @@ widget_base::painter_dc &widget_base::painter_dc::clear(const rectangle &r)
 
 }
 
-widget_base::painter_dc& widget_base::painter_dc::home()
+widget::painter_dc& widget::painter_dc::home()
 {
     _geometry_.home();
     _parent_dc_->peek_xy(_geometry_.a);
@@ -76,22 +76,22 @@ widget_base::painter_dc& widget_base::painter_dc::home()
 
 
 /*!
- * \brief Instance public widget_base::painter_dc::set_background_color
+ * \brief Instance public widget::painter_dc::set_background_color
  * \param bgcol ...
  * \return ref to self.
  */
-widget_base::painter_dc &widget_base::painter_dc::set_background_color(color::code bgcol)
+widget::painter_dc &widget::painter_dc::set_background_color(color::code bgcol)
 {
     _colors_.bg = bgcol;
     return *this;
 }
 
 /*!
- * \brief Instance public widget_base::painter_dc::draw_frame
+ * \brief Instance public widget::painter_dc::draw_frame
  * \param r ...
  * \return ref to self
  */
-widget_base::painter_dc &widget_base::painter_dc::draw_frame(const rectangle &r)
+widget::painter_dc &widget::painter_dc::draw_frame(const rectangle &r)
 {
     auto area = r;
     if(!area)
@@ -111,7 +111,7 @@ widget_base::painter_dc &widget_base::painter_dc::draw_frame(const rectangle &r)
     return *this;
 }
 
-book::code widget_base::painter_dc::operator ++()
+book::code widget::painter_dc::operator ++()
 {
     if(_parent_dc_->_iterator_ == _parent_dc_->_bloc_->end())
         return book::code::rejected;
@@ -119,7 +119,7 @@ book::code widget_base::painter_dc::operator ++()
     return book::code::accepted;
 }
 
-book::code widget_base::painter_dc::operator +=(size_t _offset)
+book::code widget::painter_dc::operator +=(size_t _offset)
 {
     if(_parent_dc_->_iterator_ >= _parent_dc_->_bloc_->end())
     {
@@ -132,7 +132,7 @@ book::code widget_base::painter_dc::operator +=(size_t _offset)
 }
 
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (ui::cxy new_xy)
+widget::painter_dc& widget::painter_dc::operator << (ui::cxy new_xy)
 {
     if(!_parent_dc_->peek_xy(new_xy + _geometry_.a))
         throw book::exception()
@@ -143,14 +143,14 @@ widget_base::painter_dc& widget_base::painter_dc::operator << (ui::cxy new_xy)
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (char ch)
+widget::painter_dc& widget::painter_dc::operator << (char ch)
 {
     (*_parent_dc_->_iterator_) << ch;
     ++**this;
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (const char* str)
+widget::painter_dc& widget::painter_dc::operator << (const char* str)
 {
     auto z = std::strlen(str);
     auto start = _parent_dc_->_iterator_;
@@ -177,7 +177,7 @@ widget_base::painter_dc& widget_base::painter_dc::operator << (const char* str)
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (const std::string& str)
+widget::painter_dc& widget::painter_dc::operator << (const std::string& str)
 {
     return **this << str.c_str();
 }
@@ -186,13 +186,13 @@ widget_base::painter_dc& widget_base::painter_dc::operator << (const std::string
 
 
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (const tux::string& str)
+widget::painter_dc& widget::painter_dc::operator << (const tux::string& str)
 {
     //return **this << str.c_str();
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (color::code fgcol)
+widget::painter_dc& widget::painter_dc::operator << (color::code fgcol)
 {
     _colors_.fg = fgcol;
     _parent_dc_->_iterator_->set_fg(fgcol);
@@ -200,40 +200,40 @@ widget_base::painter_dc& widget_base::painter_dc::operator << (color::code fgcol
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (color::pair colp)
+widget::painter_dc& widget::painter_dc::operator << (color::pair colp)
 {
     _colors_ = colp;
     _parent_dc_->_iterator_->set_colors(colp);
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (cadre::index ci)
+widget::painter_dc& widget::painter_dc::operator << (cadre::index ci)
 {
     (*_parent_dc_->_iterator_) << ci;
     ++**this;
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (glyph::type ic)
+widget::painter_dc& widget::painter_dc::operator << (glyph::type ic)
 {
     (*_parent_dc_->_iterator_) << ic;
     ++**this;
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (accent_fr::type fr)
+widget::painter_dc& widget::painter_dc::operator << (accent_fr::type fr)
 {
     (*_parent_dc_->_iterator_) << fr;
     ++**this;
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (terminal::vchar vch)
+widget::painter_dc& widget::painter_dc::operator << (terminal::vchar vch)
 {
     return *this;
 }
 
-widget_base::painter_dc& widget_base::painter_dc::operator << (terminal::vchar::string strvch)
+widget::painter_dc& widget::painter_dc::operator << (terminal::vchar::string strvch)
 {
     return *this;
 }

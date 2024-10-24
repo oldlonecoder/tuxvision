@@ -3,7 +3,7 @@
 #include "tuxvision/ui/application.h"
 #include "tuxvision/ui/terminal.h"
 #include <csignal>
-#include <tuxvision/ui/screen_desk.h>
+
 
 //#include <memory>
 
@@ -113,17 +113,15 @@ book::code application::setup()
     //...
     book::init();
     install_signals();
-    screen::start();
-    // terminal::begin();
-    //...
+    terminal::begin();
     return book::code::done;
 }
 
 
 book::code application::terminate()
 {
-    screen::end();
-    return book::code::implemented;
+    terminal::end();
+    return book::code::reimplement;
 }
 
 

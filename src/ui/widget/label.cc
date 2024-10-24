@@ -7,7 +7,7 @@
 namespace tux::ui
 {
 
-label::label(object* _parent_widget, const std::string _id): widget_base(_parent_widget,_id){}
+label::label(object* _parent_widget, const std::string _id): widget(_parent_widget,_id){}
 
 label::~label()
 {

@@ -16,13 +16,13 @@
 #pragma once
 
 
-#include <tuxvision/ui/widget_base.h>
+#include <tuxvision/ui/widget.h>
 
 
 namespace tux::ui
 {
 
-class label : public widget_base
+class label : public widget
 {
     CLASSNAME(label)
     std::string _text_{};

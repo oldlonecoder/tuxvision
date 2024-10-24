@@ -39,8 +39,7 @@ add_library(${BaseTarget} STATIC  #SHARED
             include/${BaseTarget}/ui/terminal.h src/ui/terminal.cc  src/ui/terminal.vchar.cc
             include/${BaseTarget}/ui/events.h src/ui/events.cc
             include/${BaseTarget}/ui/application.h src/ui/application.cc
-            include/${BaseTarget}/ui/widget_base.h src/ui/widget_base.cc src/ui/widget_painter.cc
-            include/${BaseTarget}/ui/screen_desk.h src/ui/screen_desk.cc
+            include/${BaseTarget}/ui/widget.h src/ui/widget.cc src/ui/widget_painter.cc
             include/${BaseTarget}/ui/widget/label.h src/ui/widget/label.cc
 )
 
