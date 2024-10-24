@@ -1,10 +1,11 @@
 
-# tuxvisdion :  classic and raw pointers c++ personal ansi 256 colors console ui and tools; a DOS conio/TurboVision memories.
+## tuxvisdion :  classic and raw pointers c++ personal ansi 256 colors console ui and tools; a DOS conio/TurboVision memories.
 
 ### My personal c++ not modern way to experiment coding a poupourri stuff such as book/logging application journal with other support goodies.
 - Be aware!!; Unusable code yet.
 - Disclaimer!! 
-- Inexistent smart pointers; 
+- Inexistent smart pointers; - Or gently introducing them here and here during the roadmap...
+-                              Because I'm getting old and lazy (...) 
 - This project is in very early development and heavy experimentation. Almost everythings will evolve and change drastically during the experiments.
 ---
 - ### TDDV ( using my own 'Test-Driven-Development' cycles with 'Valgrind')
