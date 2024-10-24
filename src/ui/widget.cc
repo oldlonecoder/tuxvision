@@ -158,6 +158,16 @@ book::code widget::set_anchor(globals::anchor::value _ank)
     return book::code::accepted;
 }
 
+book::code widget::show(globals::wstate::Type st)
+{
+    _state_ |= st;
+
+    book::debug() << book::fn::fun;
+    book::out() << id() << " [" << _geometry_.a << "]";
+    render();
+    return book::code::ok;
+}
+
 /*!
  * \brief widget::draw
  * Self-draw or predefined draw() of the widget.
@@ -235,6 +245,32 @@ book::code widget::update_child(widget *w)
 {
     if(!w->_dirty_area_) return book::code::rejected;
     return dirty(w->_dirty_area_);
+}
+
+
+
+/*!
+ * \brief widget::render
+ *          Temporary function to render this widget on the screen console.
+ * \return
+ */
+book::code widget::render()
+{
+    if(!(_state_ & globals::wstate::Visible))
+    {
+        book::info() << book::fn::fun << id() << " is not visible.. - rendering request rejected";
+        return book::code::rejected;
+    }
+
+    for(int y = 0; y < _geometry_.height(); y++)
+    {
+        peek_xy({0,y});
+        terminal::cursor(_geometry_.a + cxy{0,y});
+        terminal::vchar::render_string(_iterator_, _iterator_ + *_geometry_.width());
+    }
+    std::cout << std::flush;
+
+    return book::code::done;
 }
 
 
@@ -332,7 +368,7 @@ book::code widget::auto_fit(globals::anchor::value anchor_value)
 
     book::out() << id() << " offset:" << off << book::fn::endl;
     //
-    book::debug() << "placement is in this area :" << color::yellow << area << color::reset << book::fn::endl;
+    book::debug() << "placement is within this area :" << color::yellow << area << color::reset << book::fn::endl;
 
     auto [a,b,sz] = area.components();
     auto [ea,eb,esz] = _geometry_.components(); // this 'e'lement's geometry components
@@ -340,7 +376,7 @@ book::code widget::auto_fit(globals::anchor::value anchor_value)
     if(_ancre_ & anchor::width_fit)
     {
         book::out() << " Resize this " << id() <<  " Geometry:" << color::blue4 << _geometry_ << book::fn::endl;;
-        resize(ui::size{area.dwh.w - (off.x*2), *_geometry_.height()});
+        resize(ui::size{sz.w - (off.x*2), *_geometry_.height()});
         _geometry_.moveat({off.x,0});
         book::out() << "fit width: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset << book::fn::endl;
     }
@@ -349,7 +385,7 @@ book::code widget::auto_fit(globals::anchor::value anchor_value)
         if(_ancre_ & anchor::fit_right)
         {
             book::out() << color::yellow << id() << color::reset << " fit right:" << book::fn::endl;
-            _geometry_.moveat(cxy{b.x - (esz.w + off.x + 1), eb.y-1});
+            _geometry_.moveat(cxy{sz.w - (esz.w-1 + off.x), eb.y});
             book::out() << _geometry_;
         }
         else
@@ -373,7 +409,7 @@ book::code widget::auto_fit(globals::anchor::value anchor_value)
         if(_ancre_ & anchor::fit_bottom)
         {
 
-            _geometry_.moveat({_geometry_.a.x, *area.height()-off.y-1});
+            _geometry_.moveat({_geometry_.a.x, *area.height()-off.y});
             book::out() << "fit bottom: " << color::yellow << id() << color::reset <<"::_geometry_: " << color::hotpink4 << _geometry_ << color::reset << book::fn::endl;
         }
     }

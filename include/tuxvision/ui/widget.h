@@ -33,6 +33,8 @@ public:
     terminal::vchar::string::iterator operator[](ui::cxy xy);
     widget& operator*() { return *this; }
     book::code set_anchor(globals::anchor::value _ank);
+    book::code show(globals::wstate::Type st=globals::wstate::Normal);
+
 
     class _TUXVISION_ painter_dc
     {
@@ -91,6 +93,7 @@ protected:
     globals::uistyle::Type               _uistyle_{globals::uistyle::Unset};
     globals::wflags::Type                _uiflags_{globals::wflags::Unset};
 
+
     // --------------------------------------------
 
     virtual book::code auto_fit(globals::anchor::value anchor_value=globals::anchor::unset);
@@ -103,6 +106,8 @@ protected:
     book::code update_child(widget* w);
 private:
     friend class screen;
+
+    book::code render();
 
     std::list<widget*>::iterator _tli_{};
 };
