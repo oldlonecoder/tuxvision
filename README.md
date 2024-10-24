@@ -5,7 +5,7 @@
 - Be aware!!; Unusable code yet.
 - Disclaimer!! 
 - Inexistent smart pointers; - Or gently introducing them here and here during the roadmap...
--                              Because I'm getting old and lazy (...) 
+                               Because I'm getting old and lazy (...) 
 - This project is in very early development and heavy experimentation. Almost everythings will evolve and change drastically during the experiments.
 ---
 - ### TDDV ( using my own 'Test-Driven-Development' cycles with 'Valgrind')
