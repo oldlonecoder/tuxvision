@@ -6,7 +6,7 @@
 
 #include <tuxvision/lexer/tokens_table.h>
 #include <tuxvision/journal/logger.h>
-namespace oom
+namespace tux
 {
 
     using ui::color;

@@ -5,7 +5,7 @@
 #include <tuxvision/lexer/lexer.h>
 #include <tuxvision/journal/logger.h>
 
-namespace oom
+namespace tux
 {
 
 

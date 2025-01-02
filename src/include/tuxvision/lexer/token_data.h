@@ -19,9 +19,9 @@
 
 
 #include <tuxvision/lexer/lexer_types.h>
-#include <tuxvision/sscan.h>
+#include <tuxvision/io/sscan.h>
 
-namespace oom
+namespace tux
 {
 
 

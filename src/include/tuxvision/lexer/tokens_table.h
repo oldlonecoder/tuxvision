@@ -19,7 +19,7 @@
 #pragma once
 #include <tuxvision/lexer/token_data.h>
 
-namespace oom
+namespace tux
 {
 
 class OOM_API  token_table

@@ -2,9 +2,10 @@
 message (${Work} ":  ** Building the framework ")
 
 
-OPTION(CORE "Build the tuxvision's core library" ON)
-OPTION(LEXER "Build the tuxvision's lexer library" OFF)
-OPTION(EST "Build the tuxvision's EST (Expression [abstract] Syntax Tree) library" OFF)
+OPTION(CORE      "Build the tuxvision's core library" ON)
+OPTION(IO        "Build the tuxvision's io library" ON)
+OPTION(LEXER     "Build the tuxvision's lexer library" ON)
+OPTION(EST       "Build the tuxvision's EST (Expression [abstract] Syntax Tree) library" OFF)
 OPTION(TUXVISION "Build the tuxvision's TUI (Text User Interface) library" OFF)
 
 
@@ -14,14 +15,15 @@ IF(CORE)
     include(core.cmake)
 ENDIF()
 
-IF(OOMIO)
-    message ("******* Building the oom::io basic support library *******")
-    include(oomio.cmake)
+IF(IO)
+    message ("******* Building the io high end support library *******")
+    include(io.cmake)
 ENDIF()
+
 
 IF(LEXER)
     message ("******* Building the lexer library *******")
-    include(lexer.cmake)
+   include(lexer.cmake)
 ENDIF()
 
 

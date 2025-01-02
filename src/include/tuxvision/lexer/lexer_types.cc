@@ -5,7 +5,7 @@
 #include <tuxvision/lexer/lexer_types.h>
 #include <tuxvision/string.h>
 
-namespace oom
+namespace tux
 {
 
 

@@ -25,7 +25,7 @@
 #include <tuxvision/_start_.h>
 
 
-namespace oom
+namespace tux
 {
 
 using namespace integers;

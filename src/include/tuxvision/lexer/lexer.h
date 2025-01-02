@@ -19,12 +19,12 @@
 #pragma once
 
 #include <tuxvision/lexer/tokens_table.h>
-#include <tuxvision/sscan.h>
+#include <tuxvision/io/sscan.h>
 
 //#ifndef LEXER_LEXER_H
 //#define LEXER_LEXER_H
 
-namespace oom
+namespace tux
 {
 
 class OOM_API lexer

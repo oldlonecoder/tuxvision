@@ -3,7 +3,7 @@
 //
 
 #include <tuxvision/lexer/tokens_table.h>
-#include <tuxvision/sscan.h>
+#include <tuxvision/io/sscan.h>
 #include <tuxvision/geometry.h>
 #include <tuxvision/journal/logger.h>
 
@@ -12,7 +12,7 @@
 static std::string_view NullMsg { "No String" };
 
 
-namespace oom
+namespace tux
 {
 
 
