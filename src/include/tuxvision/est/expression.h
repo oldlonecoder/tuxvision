@@ -26,7 +26,7 @@
 namespace tux::est 
 {
 
-class OOM_API expr : public bloc
+class TUXVISION_API expr : public bloc
 {
     lexer       _lexer_;
     token_table _token_table_;

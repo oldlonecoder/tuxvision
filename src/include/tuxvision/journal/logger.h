@@ -45,7 +45,7 @@ namespace tux
 
 class object;
 
-class OOM_API log
+class TUXVISION_API log
 {
 public:
     struct header_component
@@ -115,7 +115,7 @@ public:
     void init_header();
     static void purge(const std::function<void(log &)>& f);
 
-    struct OOM_API section
+    struct TUXVISION_API section
     {
         std::string id;   ///< Section ID which is also the base name of the output file.
         std::ofstream ofs;
@@ -140,7 +140,7 @@ public:
     static rem::code end();
     //static rem::code endl();
 
-    class OOM_API exception :  public std::exception
+    class TUXVISION_API exception :  public std::exception
     {
     public:
 

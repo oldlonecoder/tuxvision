@@ -20,7 +20,7 @@ namespace tux::ui
 {
 
 
-struct OOM_API cxy {
+struct TUXVISION_API cxy {
 
     int x = -1;
     int y = -1;
@@ -62,7 +62,7 @@ struct OOM_API cxy {
 };
 
 
-struct OOM_API size {
+struct TUXVISION_API size {
     int w{0};
     int h{0};
      
@@ -143,7 +143,7 @@ struct OOM_API size {
  * @author oldlonecoder (lussier.serge@gmail.com)
  *
  */
-struct OOM_API rectangle {
+struct TUXVISION_API rectangle {
 
     cxy a{0, 0};
     cxy b{0, 0};
@@ -270,7 +270,7 @@ struct OOM_API rectangle {
 };
 
 
-struct OOM_API string2d
+struct TUXVISION_API string2d
 {
     tux::string win{};
     rectangle r;

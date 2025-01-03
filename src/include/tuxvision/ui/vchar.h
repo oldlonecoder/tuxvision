@@ -21,7 +21,7 @@
 namespace tux::ui::terminal
 {
 
-struct OOM_API vchar final
+struct TUXVISION_API vchar final
 {
     u32 d{0x8003A020};
 
@@ -31,7 +31,7 @@ struct OOM_API vchar final
     using back_buffer = std::shared_ptr<terminal::vchar::string>;
 
 
-    struct OOM_API bloc final
+    struct TUXVISION_API bloc final
     {
         ui::size                geometry{};
         terminal::vchar::string  buffer{};

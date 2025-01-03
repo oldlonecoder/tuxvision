@@ -29,7 +29,7 @@ namespace tux::ui
  * @brief This widget is used to display the keyboard and mouse events.
  * 
  */
-class OOM_API intrack : public widget
+class TUXVISION_API intrack : public widget
 {
 
     CLASSNAME(intrack)

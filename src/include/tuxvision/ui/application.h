@@ -20,19 +20,19 @@
 #pragma once
 
 
-#include <tuxvision/tui/events.h>
+#include <tuxvision/ui/events.h>
 #include <csignal>
 //#include <memory>
 #include <tuxvision//cadres.h>
-#include <tuxvision/tui/widgets/screen.h>
-#include <tuxvision/tui/io/ipoll.h>
-#include <tuxvision/tui/io/ansi_parser.h>
-#include <tuxvision/tui/io/ansi_colours_parser.h>
+#include <tuxvision/ui/widgets/screen.h>
+#include <tuxvision/ui/io/ipoll.h>
+#include <tuxvision/ui/io/ansi_parser.h>
+#include <tuxvision/ui/io/ansi_colours_parser.h>
 
 namespace tux::ui
 {
 
-class OOM_API application
+class TUXVISION_API application
 {
 
     CLASSNAME_START(application)
@@ -47,7 +47,7 @@ class OOM_API application
     static application* _app_;
 
     events_stream _events_q{"tuxvision application global events queue"};
-    io::polling _polling{"tuxvision application io polling"};
+    io::ipoll _polling{"tuxvision application io polling"};
 
     terminal::screen* _terminal_screen_{nullptr};
 

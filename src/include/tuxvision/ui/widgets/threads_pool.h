@@ -31,7 +31,7 @@ namespace tux::ui
 {
 
 
-class OOM_API ansi_parser_worker
+class TUXVISION_API ansi_parser_worker
 {
 public:
     ansi_parser_worker();
@@ -58,7 +58,7 @@ private:
 };
 
 
-class OOM_API threads_pool
+class TUXVISION_API threads_pool
 {
 
     using threads_list = std::vector<std::thread>;

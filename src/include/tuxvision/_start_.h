@@ -30,10 +30,10 @@
 #   define _CRT_SECURE_NO_WARNINGS
 #   define _SCL_SECURE_NO_WARNINGS
 #   define NOMINMAX
-#   ifdef OSL_EXPORTS
-#       define OOM_API __declspec(dllexport)
+#   ifdef TUXVISION_EXPORTS
+#       define TUXVISION_API __declspec(dllexport)
 #   else
-#       define OOM_API __declspec(dllimport)
+#       define TUXVISION_API __declspec(dllimport)
 #   endif
 
 #   include <Windows.H> // Must be included before anything else
@@ -43,7 +43,7 @@
 
 #   define __PRETTY_FUNCTION__ __FUNCSIG__
 #else
-#       define OOM_API
+#       define TUXVISION_API
 #endif
 
 //---------------------------------------------

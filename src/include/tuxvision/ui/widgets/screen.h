@@ -32,7 +32,7 @@ namespace tux::ui::terminal
 /*!
  * @brief screen's double back-buffer to be studied...
  */
-class OOM_API screen : public widget
+class TUXVISION_API screen : public widget
 {
     CLASSNAME(screen)
 

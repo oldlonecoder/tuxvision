@@ -25,7 +25,7 @@
 namespace tux::ui
 {
 
-class OOM_API status_bar : public widget
+class TUXVISION_API status_bar : public widget
 {
     CLASSNAME(statubar)
 

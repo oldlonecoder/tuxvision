@@ -27,11 +27,11 @@
 namespace tux
 {
 
-class OOM_API lexer
+class TUXVISION_API lexer
 {
 public:
 
-    struct OOM_API config_data
+    struct TUXVISION_API config_data
     {
         std::string_view text{};
         token_table*      production{nullptr};

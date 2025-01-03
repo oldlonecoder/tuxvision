@@ -28,7 +28,7 @@
 namespace tux::io
 {
 
-class OOM_API ansi_colours_parser
+class TUXVISION_API ansi_colours_parser
 {
     CLASSNAME_START(ansi_colours_parser)
     tux::ui::terminal::vchar::back_buffer _product_{nullptr};

@@ -1,4 +1,4 @@
-set(Target "io")
+set(Target "est")
 set(CMAKE_CXX_STANDARD 20)
 
 message("Entering tools lib configuration:")
@@ -7,20 +7,25 @@ message("Entering tools lib configuration:")
 message("Current SourceDir:" ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-set(IO_HFILES
-    src/include/${Work}/${Target}/iofd.h
-    src/include/${Work}/${Target}/ipoll.h
-    src/include/${Work}/${Target}/sscan.h
+set(EST_HFILES
+    src/include/${Work}/${Target}/alu.h
+    src/include/${Work}/${Target}/node.h
+    src/include/${Work}/${Target}/variable.h
+    src/include/${Work}/${Target}/bloc.h
+    src/include/${Work}/${Target}/expression.h
 )
 
 
 add_library("${Work}.${Target}" SHARED
 
-            #-----------CORE:
-            ${IO_HFILES}
-            src/include/${Work}/${Target}/iofd.cc
-            src/include/${Work}/${Target}/ipoll.cc
-            src/include/${Work}/${Target}/sscan.cc
+            #-----------TOOLS:
+            ${LEXER_HFILES}
+            src/include/${Work}/${Target}/alu.cc
+            src/include/${Work}/${Target}/node.cc
+            src/include/${Work}/${Target}/variable.cc
+            src/include/${Work}/${Target}/bloc.cc
+            src/include/${Work}/${Target}/expression.cc
+
 )
 
 
@@ -40,7 +45,7 @@ IF (EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json")
 ENDIF ()
 
 
-target_link_libraries("${Work}.${Target}" ${CMAKE_DL_LIBS} tuxvision.core) # and other system dependencies...
+target_link_libraries("${Work}.${Target}" ${CMAKE_DL_LIBS} tuxvision.lexer  ) # and other system dependencies...
 
 
 # add_executable(lus++.app
@@ -57,4 +62,4 @@ install(TARGETS "${Work}.${Target}"
         RUNTIME DESTINATION bin
         )
 
-INSTALL(FILES ${IO_HFILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/${Work}/${Target}")
+INSTALL(FILES ${EST_HFILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/${Work}/${Target}")

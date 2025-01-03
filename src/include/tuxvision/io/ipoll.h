@@ -21,24 +21,24 @@
 #include <tuxvision/string.h>
 #include <tuxvision/journal/logger.h>
 #include <poll.h>
-#include <tuxvision/oomio/iobloc.h>
+#include <tuxvision/io/iofd.h>
 
 #include <utility>
 
 
 namespace tux::io
 {
-class OOM_API ipoll
+class TUXVISION_API ipoll
 {
     CLASSNAME_(ipoll)
 
-    iobloc::list _blocs_{};
-    pollfd* _fds_{nullptr};
+    iofd::list _iofd_list_{};
+    pollfd* _sys_fd_{nullptr};
 
 
     // Sous reserve
-    tux::action_delegator<tux::io::iobloc&> _polling_started_{};
-    tux::action_delegator<tux::io::iobloc&> _polling_ended_{};
+    tux::action_delegator<tux::io::iofd&> _polling_started_{};
+    tux::action_delegator<tux::io::iofd&> _polling_ended_{};
     // --------------------------------------------------------------
 
 public:
@@ -55,13 +55,13 @@ private:
     std::string _id_{};
 public:
 
-    void update_fd_state(iobloc& _fd, rem::action _action);
-    void reset_pollfds();
+    void update_fd_state(iofd& _fd, rem::action _action);
+    void reset_fd_list();
     ipoll() = default;
     explicit ipoll(std::string  _id):_id_(std::move(_id)){}
     ~ipoll();
 
-    iobloc::list& blocs(){ return _blocs_; }
+    iofd::list& fds(){ return _iofd_list_; }
     const std::string& id(){ return _id_; }
     rem::code start_polling();
     rem::code run();
@@ -73,8 +73,9 @@ public:
     rem::code set_state(ipoll::state _state);
     void terminate();
 
-    iobloc& add_fd(int fd=-1);
+    iofd&     add_fd(int _fd, u8 _poll_opt, u64 _poll_mask);
     rem::code remove_fd(int _fd_id);
+
 };
 
 

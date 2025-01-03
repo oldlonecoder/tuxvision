@@ -1,7 +1,7 @@
 
 
-#include <tuxvision/tui/application.h>
-#include <tuxvision/tui/terminal.h>
+#include <tuxvision/ui/application.h>
+#include <tuxvision/ui/terminal.h>
 #include <csignal>
 #include <utility>
 
@@ -148,11 +148,7 @@ rem::code application::install_signals()
  */
 rem::code application::start_events_listening()
 {
-    auto& fd = _polling.add_descriptor(STDIN_FILENO);
-    fd.config() = {
-        .poll_bits = POLLIN | POLLPRI | POLLHUP,
-        .max_length = 1024
-    };
+    auto& fd = _poll.add_fd(STDIN_FILENO, iofd::IMM|iofd::NOBLOCK, POLLIN|POLLHUP|POLLERR, 1024);
 
     fd.init();
     log::debug() << "link descriptor handle [" << fd.config().fd << "] to tddv::std_input() delegate/slot/handler..." << log::endl;

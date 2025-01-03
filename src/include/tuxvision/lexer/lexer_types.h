@@ -358,7 +358,7 @@ constexpr Index Noop_      = 21;
 
 } // namespace operand
 
-struct OOM_API lexer_component
+struct TUXVISION_API lexer_component
 {
 
     static std::map<lex::type::T,     const char*> type_enums;

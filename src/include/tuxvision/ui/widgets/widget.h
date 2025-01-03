@@ -32,7 +32,7 @@ class screen;
 }
 
 
-class OOM_API widget : public object
+class TUXVISION_API widget : public object
 {
     CLASSNAME(widget)
 
@@ -73,7 +73,7 @@ public:
     [[nodiscard]] bool is_window() const { return _uistyle_& ui::uistyle::Window; }
 
 
-    class OOM_API painter_dc
+    class TUXVISION_API painter_dc
     {
         rectangle _geometry_{};
         widget* _widget_{nullptr};

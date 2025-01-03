@@ -45,7 +45,7 @@ using namespace integers;
 
 
 
-struct OOM_API key_event
+struct TUXVISION_API key_event
 {
         /**
      * @brief Key mnemonics.
@@ -172,12 +172,12 @@ struct OOM_API key_event
 };
 
 
-struct OOM_API commandevent
+struct TUXVISION_API commandevent
 {
 
 };
 
-struct OOM_API fileinputevent{};
+struct TUXVISION_API fileinputevent{};
 
 
 // Special handling is required for HMTM which is not described in this document. In order to highlight terminals should support shift-mouseclick while mouse tracking is enabled for the user to copy and paste.
@@ -195,7 +195,7 @@ struct OOM_API fileinputevent{};
 // 64	MWU	Mouse Wheel Up
 // 65	MWD	Mouse Wheel Down
 // 128	MB8	Mouse Button 8 pressed
-struct OOM_API mouse
+struct TUXVISION_API mouse
 {
 
 
@@ -226,7 +226,7 @@ struct OOM_API mouse
 
 
 
-struct  OOM_API event
+struct  TUXVISION_API event
 {
 
     static rem::code get_stdin_event(event& _event_, timeval tv={0xffffffffff,0});
@@ -298,7 +298,7 @@ struct  OOM_API event
 };
 
 
-class OOM_API events_stream final
+class TUXVISION_API events_stream final
 {
 
     event::events_q _events_q{};

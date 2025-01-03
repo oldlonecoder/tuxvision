@@ -23,7 +23,7 @@
 namespace tux
 {
 
-struct OOM_API glyph
+struct TUXVISION_API glyph
 {
 
     using T = const char*;
@@ -371,7 +371,7 @@ For anyone interested, here'Code the fixed version (I hope you don't mind, I'll 
 
 
 
-struct OOM_API accent_fr
+struct TUXVISION_API accent_fr
 {
     using T = const char*;
 

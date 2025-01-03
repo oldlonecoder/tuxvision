@@ -24,49 +24,65 @@
 #include <tuxvision/delegator.h>
 #include <arpa/inet.h>
 
+
+
+using namespace tux::integers;
+
 namespace tux::io
 {
 
 
 
-class OOM_API iobloc final
+class TUXVISION_API iofd final
 {
 
-    integers::i64 _bloc_size_{-1};
+    i64 _bloc_size_{-1};
     std::string _buffer_{};
     std::string::iterator _cursor_{};
+    u16  _poll_bits_{0};
     int _fd_{-1};
-    integers::u64 _opt_{0};
+    u8 _opt_{0};
+
     friend class ipoll;
 
 public:
 
-    using list   = std::vector<iobloc>;
-    using array  = iobloc::list;
 
-    iobloc() = default;
-    iobloc(const iobloc&) = default;
-    iobloc(iobloc&&) noexcept = default;
+    static constexpr u8 IMM    = 1;
+    static constexpr u8 NOBLOCK= 2;
+    static constexpr u8 READ   = 4;
+    static constexpr u8 WRITE  = 8;
+    static constexpr u8 EXEC   = 0x10;
 
-    iobloc(int _fd, integers::u64 _options, integers::u16 _bfs);
 
-    iobloc& operator=(const iobloc&) = default;
-    iobloc& operator=(iobloc&&)noexcept = default;
+    using list   = std::vector<iofd>;
+    using array  = iofd::list;
 
-    ~iobloc() = default;
+    iofd() = default;
+    iofd(const iofd&) = default;
+    iofd(iofd&&) noexcept = default;
+
+    iofd(int _fd, integers::u8 _options, integers::u16 _poll_bits, integers::u64 _bfs);
+
+    iofd& operator=(const iofd&) = default;
+    iofd& operator=(iofd&&)noexcept = default;
+
+    ~iofd() = default;
     rem::code init();
+    iofd&     set_poll_bits(u16 _bits);
+    void      terminate();
     // -----------------------------------------------------------------------------------------
 
     [[nodiscard]] std::string buffer() const { return _buffer_; }
-    template<typename T> integers::i16 set_input_ready_delegate(T* _c_, rem::action(T::*_fn_ptr)(iobloc&))
+    template<typename T> integers::i16 set_input_ready_delegate(T* _c_, rem::action(T::*_fn_ptr)(iofd&))
     {
-        _input_ready_signal_._id_ = "iobloc::input_signal for FD=" + std::to_string(_fd_);
+        _input_ready_signal_._id_ = "iofd::input_signal for FD=" + std::to_string(_fd_);
         return _input_ready_signal_.connect(_c_, _fn_ptr);
     }
 
-    template<typename T> integers::i16 set_output_ready_delegate(T* _c_, rem::action(T::*_fn_ptr)(iobloc&))
+    template<typename T> integers::i16 set_output_ready_delegate(T* _c_, rem::action(T::*_fn_ptr)(iofd&))
     {
-        _output_ready_signal_._id_ = "iobloc::output_signal for FD=" + std::to_string(_fd_);
+        _output_ready_signal_._id_ = "iofd::output_signal for FD=" + std::to_string(_fd_);
         return _output_ready_signal_.connect(_c_, _fn_ptr);
     }
 
@@ -74,7 +90,7 @@ public:
     std::string::iterator operator ++(int);
     std::string::iterator operator --();
     std::string::iterator operator --(int);
-    iobloc& operator << (std::string _str);
+    iofd& operator << (std::string _str);
     char& operator *();
 
     void reset();
@@ -98,17 +114,17 @@ public:
 private:
     struct flags
     {
-        u8 active :1; ///< This iobloc is active and monitored. - If not active then it is not monitored...Obviously ;)
-        u8 del    :1; ///< This iobloc is inactive , set to be removed and deleted.
-        u8 pause  :1; ///< This iobloc is set to pause, stopping its polling activity until resumed by setting its active bit on.
+        u8 active :1; ///< This iofd is active and monitored. - If not active then it is not monitored...Obviously ;)
+        u8 del    :1; ///< This iofd is inactive , set to be removed and deleted.
+        u8 pause  :1; ///< This iofd is set to pause, stopping its polling activity until resumed by setting its active bit on.
     }_flags_ = {0,0,0};
     
     rem::action input_();
     rem::action output_();
 
 
-    action_delegator<iobloc&>  _input_ready_signal_{"iobloc::input_signal for FD=-1"};
-    action_delegator<iobloc&>  _output_ready_signal_{"iobloc::input_signal for FD=-1"};
+    action_delegator<iofd&>  _input_ready_signal_{"iofd::input_signal for FD=-1"};
+    action_delegator<iofd&>  _output_ready_signal_{"iofd::input_signal for FD=-1"};
 
 };
 

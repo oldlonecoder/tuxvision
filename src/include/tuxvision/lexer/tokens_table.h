@@ -22,7 +22,7 @@
 namespace tux
 {
 
-class OOM_API  token_table
+class TUXVISION_API  token_table
 {
     
 protected:

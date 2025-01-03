@@ -27,7 +27,7 @@ namespace tux::ui
  * \brief Public window class.
  *      Toplevel widgets
  */
-class OOM_API window : public widget
+class TUXVISION_API window : public widget
 {
     CLASSNAME(window)
 

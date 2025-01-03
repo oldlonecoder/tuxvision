@@ -31,7 +31,7 @@ namespace tux::est
 
 
 
-class OOM_API node : public tux::object
+class TUXVISION_API node : public tux::object
 {
 protected:
     alu*    _a_ {nullptr};  ///< alu / playing the role of accumulator for this node.
@@ -42,7 +42,7 @@ protected:
     friend class bloc;
     friend class expr;
     friend class variable;
-    struct OOM_API storage_type
+    struct TUXVISION_API storage_type
     {
         integers::u8 lv    : 1; ///< 0 = rvalue non-assignable (such as const,leaf). 1= left value; assignable.
         integers::u8 acc   : 1; ///< 1 = this node owns its acc storage - so will delete it in the destructor.

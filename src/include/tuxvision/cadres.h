@@ -30,7 +30,7 @@ namespace tux
 
 using namespace integers;
 using ui::color;
-struct OOM_API cadre
+struct TUXVISION_API cadre
 {
     color::pair colors;     ///< colours of the box::frame
 
@@ -39,7 +39,7 @@ struct OOM_API cadre
  * @brief 1v x 4h matrix for addressing Frame components
  * @note  : Source : https://github.com/ArthurSonzogni/FTXUI/blob/main/src/ftxui/screen/string.cpp
  */
-    struct OOM_API frame_matrix
+    struct TUXVISION_API frame_matrix
     {
         uint8_t Left : 2;
         uint8_t Top  : 2;
@@ -50,7 +50,7 @@ struct OOM_API cadre
         bool operator < (cadre::frame_matrix RHS) const;
     };
 
-    struct OOM_API frame_data
+    struct TUXVISION_API frame_data
     {
         glyph::T TL; ///< Top Left
         glyph::T TR; ///< Top Right

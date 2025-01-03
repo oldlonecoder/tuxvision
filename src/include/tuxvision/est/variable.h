@@ -23,7 +23,7 @@
 
 namespace tux::est {
 
-class OOM_API variable : public node
+class TUXVISION_API variable : public node
 {
     std::stack<alu> _stack_{};
 

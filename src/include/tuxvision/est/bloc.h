@@ -23,7 +23,7 @@
 namespace tux::est
 {
 
-class OOM_API bloc : public node
+class TUXVISION_API bloc : public node
 {
 
 public:

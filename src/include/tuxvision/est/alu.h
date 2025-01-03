@@ -36,7 +36,7 @@ namespace tux::est
  *
  */
 
-struct OOM_API alu
+struct TUXVISION_API alu
 {
 
     static std::string mNil;

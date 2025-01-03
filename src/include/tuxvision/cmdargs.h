@@ -23,7 +23,7 @@ namespace tux::cmd
 {
 
 
-struct OOM_API cmd_switch
+struct TUXVISION_API cmd_switch
 {
     using data = std::vector<std::string_view>;
     using shared = std::shared_ptr<cmd_switch>;
@@ -57,7 +57,7 @@ struct OOM_API cmd_switch
 };
 
 
-class OOM_API line
+class TUXVISION_API line
 {
 
     cmd_switch::array arguments;

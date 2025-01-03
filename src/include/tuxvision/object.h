@@ -23,7 +23,7 @@ namespace tux
 
 using namespace integers;
 
-class  OOM_API object
+class  TUXVISION_API object
 {
     CLASSNAME_START(object)
 protected:

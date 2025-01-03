@@ -24,7 +24,7 @@
  namespace tux::ui
  {
 
-struct OOM_API color {
+struct TUXVISION_API color {
     enum code : integers::U16 {
         /*0   */ black = 0,         //#000000	rgb(128,0,0)	hsl(0,100%,25%)
         /*1   */ maroon,            //#800000	rgb(128,0,0)	hsl(0,100%,25%)
@@ -284,7 +284,7 @@ struct OOM_API color {
         /*255 */ reset
     };
 
-    struct OOM_API pair
+    struct TUXVISION_API pair
     {
         color::code fg = color::white;
         color::code bg = color::grey11;
@@ -293,7 +293,7 @@ struct OOM_API color {
         color::pair &operator>>(std::string &out);
     };
 
-    struct OOM_API data
+    struct TUXVISION_API data
     {
         color::code Enum = color::reset;
         std::string_view color_name = " ";
@@ -318,7 +318,7 @@ struct OOM_API color {
     static std::string render_html(color::pair a_pair);
     static color::data query_data(color::code a_code);
 
-    // struct OOM_API Item {
+    // struct TUXVISION_API Item {
     //     std::string Id;
     //     Color::Pair Data;
     //     using array = std::vector<Color::Item>;
@@ -327,7 +327,7 @@ struct OOM_API color {
     // };
 
 
-    // struct OOM_API array {
+    // struct TUXVISION_API array {
     //     using Dictionary = std::unordered_map<std::string, Color::array>;
     //     std::string Id;
     //     Color::Item::array Items;

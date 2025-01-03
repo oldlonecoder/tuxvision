@@ -159,7 +159,7 @@ namespace colors
  * \brief The attr_db class
  * Database set of the colors. Theme, components, then state
  */
-struct OOM_API attr_db
+struct TUXVISION_API attr_db
 {
     using components = std::map<uistate::Type,   color::pair>;
     using elements = std::map<std::string_view, attr_db::components>;

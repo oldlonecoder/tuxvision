@@ -22,7 +22,7 @@
 namespace tux::ui
 {
 
-class OOM_API icon : public widget
+class TUXVISION_API icon : public widget
 {
     CLASSNAME(icon)
     glyph::type _icon_{glyph::alien};

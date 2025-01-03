@@ -28,7 +28,7 @@ namespace tux::ui::io
 
 
 
-class OOM_API ansi_parser
+class TUXVISION_API ansi_parser
 {
 
 public:
